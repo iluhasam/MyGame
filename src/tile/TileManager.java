@@ -29,15 +29,18 @@ try {
 
     tile[1] = new Tile();
     tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+    tile[1].collission = true;
 
     tile[2] = new Tile();
     tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+    tile[2].collission = true;
 
     tile[3] = new Tile();
     tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
 
     tile[4] = new Tile();
     tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+    tile[4].collission = true;
 
     tile[5] = new Tile();
     tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
@@ -90,9 +93,10 @@ try {
 
        // прортсовка карты
         if(worldX > gp.player.screenX - gp.player.screenX &&
-                worldX < gp.player.screenX + gp.player.screenX &&
-                worldY > gp.player.screenY - gp.player.screenY &&
-                worldY < gp.player.screenY + gp.player.screenY){
+           worldX < gp.player.screenX + gp.player.screenX &&
+           worldY > gp.player.screenY - gp.player.screenY &&
+           worldY < gp.player.screenY + gp.player.screenY){
+
             g2.drawImage(tile[tileNum].image,screenX,screenY,gp.tileSize,gp.tileSize,null);
         }
 
