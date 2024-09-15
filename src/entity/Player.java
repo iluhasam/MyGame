@@ -23,6 +23,12 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2;
         screenY = gp.screenHeight/2;
 
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         setDefaultValues();
         getPlayerImage();
 
@@ -83,6 +89,10 @@ public class Player extends Entity {
                 worldX += speed;
             }
         }
+
+        collisionOn = false;
+        gp.cCheker.checkTile(this);
+
         spriteCounter++;
         if(spriteCounter > 15) {
             if(spriteNum == 1) {
@@ -94,6 +104,7 @@ public class Player extends Entity {
             spriteCounter = 0;
         }
     }
+
     public void draw(Graphics2D g2){
 //        g2.setColor(Color.WHITE);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize );
