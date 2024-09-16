@@ -1,6 +1,7 @@
 package Main;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -31,7 +32,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHabdler keyH = new KeyHabdler();
     Thread gameThread;
     public CollisionCheker cCheker = new CollisionCheker(this);
+    public Assets assets = new Assets(this);
     public Player player = new Player(this,keyH);
+    public SuperObject obj[] = new SuperObject[10];
 
 
 
@@ -47,6 +50,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
+    }
+
+    public void setupGame(){
+        assets.setObject();
     }
 
     public void startGameTread() {
