@@ -5,14 +5,13 @@ import javax.imageio.ImageIO;
 public class OBJ_Key extends SuperObject{
 
     public OBJ_Key(){
-        name = "Key";
-
+        name = "key";
         try{
-            ImageIO.read(getClass().getResourceAsStream("res/objects/key.png"));
+           image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
         }catch (Exception e){
             e.printStackTrace();
         }
 
-    }
 
+    }
 }

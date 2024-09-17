@@ -23,6 +23,8 @@ public class GamePanel extends JPanel implements Runnable {
     //Nastroyki world
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
+//    public final int maxWorldCol = 6;
+//    public final int maxWorldRow = 6;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
@@ -88,43 +90,39 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount++;
             }
             if (timer >= 1000000000) {
-                System.out.println("FPS:" + drawCount);
+
                 timer = 0;
                 drawCount = 0;
             }
         }
     }
 
-    public void update(){
+    public void update() {
 
         player.update();
-
-//        if(keyH.upPressed == true) {
-//            playerY -= playerSpeed;
-//            playerY = playerY - playerSpeed;
-//        }
-//        else if(keyH.downPressed == true) {
-//            playerY += playerSpeed;
-//        }
-//        else if(keyH.leftPressed == true) {
-//            playerX -= playerSpeed;
-//        }
-//        else if(keyH.rightPressed == true) {
-//            playerX += playerSpeed;
-//        }
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
 
+
+        //tile
         tileM.draw(g2);
+        for( int i = 0; i < obj.length; i++){
+            if(obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
 
+        //player
         player.draw(g2);
-
-//        g2d.setColor(Color.WHITE); белый кв
-//        g2d.fillRect(playerX, playerY, tileSize, tileSize );
+        //object
+//        for( int i = 0; i < obj.length; i++){
+//            if(obj[i] != null) {
+//                obj[i].draw(g2, this);
+//            }
+//        }
         g2.dispose();
     }
 }
