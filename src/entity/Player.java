@@ -2,6 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHabdler;
+import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -58,11 +59,23 @@ public class Player extends Entity {
             right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
 
-        }catch (IOException e){
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public BufferedImage setup(String imageName){
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image =  ImageIO.read(getClass().getResourceAsStream("/player/" + imageName +".png"));
+            image = uTool.scaleImage(image,gp.tileSize, gp.tileSize);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return image;
+    }
     public void update() {
 
         // Проверка нажатия клавиш

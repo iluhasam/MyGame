@@ -113,6 +113,14 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        //DEBUG
+        long drawStart = 0;
+        if(keyH.checkDrawTime ==true){
+            drawStart = System.nanoTime();
+        }
+
+
+
         //tile
         tileM.draw(g2);
         for( int i = 0; i < obj.length; i++){
@@ -123,8 +131,23 @@ public class GamePanel extends JPanel implements Runnable {
 
         //player
         player.draw(g2);
+
+
         //ui
         ui.draw(g2);
+
+
+        //debug
+        if(keyH.checkDrawTime ==true){
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            g2.setColor(Color.white);
+            g2.drawString("Время отрисовки " + passed, 10,400);
+            System.out.println("Время отрисоки " + passed);
+        }
+
+
+
         g2.dispose();
     }
     public void playMusic(int i){
