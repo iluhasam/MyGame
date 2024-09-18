@@ -12,10 +12,10 @@ public class Player extends Entity {
 
     GamePanel gp;
     KeyHabdler keyH;
-    public int hasKey = 0; // ключей у плеера в данный момент
-
     public final int screenX;
     public final int screenY;
+    public int hasKey = 0; // ключей у плеера в данный момент
+    public int standCounter = 0;
 
     public Player(GamePanel gp, KeyHabdler keyH) {
         this.gp = gp;
@@ -63,66 +63,60 @@ public class Player extends Entity {
         }
     }
 
-//    public void setDefaultValues() {
-//         worldX = gp.tileSize * 23;
-//         worldY = gp.tileSize * 21;
-//         speed = 4;
-//         direction = "down";
-//    }
+    public void update() {
 
-    public void update(){
-
-        if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true)
-            {
-            if(keyH.upPressed == true) {
+        // Проверка нажатия клавиш
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            if (keyH.upPressed) {
                 direction = "up";
-
-            }
-            else if(keyH.downPressed == true) {
+            } else if (keyH.downPressed) {
                 direction = "down";
-//                worldY += speed;
-            }
-            else if(keyH.leftPressed == true) {
+            } else if (keyH.leftPressed) {
                 direction = "left";
-//                worldX -= speed;
-            }
-            else if(keyH.rightPressed == true) {
+            } else if (keyH.rightPressed) {
                 direction = "right";
-//                worldX += speed;
+            }
+
+            // Проверка на коллизию
+            collisionOn = false;
+            gp.cCheker.checkTile(this);
+            int objIndex = gp.cCheker.checkObject(this, true);
+            pickUpObject(objIndex);
+
+            // Если нет коллизии, персонаж может двигаться
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
             }
         }
 
-        //check tile collision
-        collisionOn = false;
-        gp.cCheker.checkTile(this);
-        // check obj collision
-        int objIndex = gp.cCheker.checkObject(this, true);
-        pickUpObject(objIndex);
-
-        //IF COLLISION FALSE, Player can move
-        if(collisionOn == false) {
-            switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
+        // Если все клавиши отпущены, персонаж стоит на месте
+        if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
+            standCounter++;
+            if (standCounter > 20) { // можно настроить время простоя
+                spriteNum = 1; // возвращаем персонажа в начальное положение
+                standCounter = 0;
             }
         }
 
+        // Обновление анимации
         spriteCounter++;
-        if(spriteCounter > 15) {
-            if(spriteNum == 1) {
+        if (spriteCounter > 12) {
+            if (spriteNum == 1) {
                 spriteNum = 2;
-            }
-            else if(spriteNum == 2) {
+            } else if (spriteNum == 2) {
                 spriteNum = 1;
             }
             spriteCounter = 0;
@@ -211,5 +205,9 @@ default:
 
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+        // Прорисовка коллизии
+//        g2.setColor(Color.red);
+//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 }
