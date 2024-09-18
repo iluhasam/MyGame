@@ -37,7 +37,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public CollisionCheker cCheker = new CollisionCheker(this);
     public Assets assets = new Assets(this);
+    public UI ui = new UI(this);
     Thread gameThread;
+
     //entity and obj
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
@@ -122,12 +124,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         //player
         player.draw(g2);
-        //object
-//        for( int i = 0; i < obj.length; i++){
-//            if(obj[i] != null) {
-//                obj[i].draw(g2, this);
-//            }
-//        }
+        //ui
+        ui.draw(g2);
         g2.dispose();
     }
     public void playMusic(int i){

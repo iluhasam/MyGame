@@ -12,7 +12,7 @@ public class Player extends Entity {
 
     GamePanel gp;
     KeyHabdler keyH;
-    int hasKey = 0; // ключей у плеера в данный момент
+    public int hasKey = 0; // ключей у плеера в данный момент
 
     public final int screenX;
     public final int screenY;
@@ -137,20 +137,27 @@ public class Player extends Entity {
                     gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;
-                    System.out.println("key" + hasKey);
+                    gp.ui.showMessage("Ключик!!!");
                     break;
                 case "Door":
                     if(hasKey > 0){
                         gp.playSE(3);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("Ты дверь?-_-");
                         hasKey--;
-                    }
-                    System.out.println("key" + hasKey);
+                    }else
+                        gp.ui.showMessage("Ключ забыл!");
                     break;
                 case "Boots":
                     gp.playSE(2);
-                    speed += 1.01;
+                    speed += 1.1;
                     gp.obj[i] = null;
+                    gp.ui.showMessage("Тапок скорости");
+                    break;
+                case "Chest":
+                    gp.ui.gameOver = true;
+                    gp.stopMusic();
+                    gp.playSE(4);
                     break;
             }
         }

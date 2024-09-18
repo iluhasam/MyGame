@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 
 public class OBJ_Chest extends SuperObject {
     public OBJ_Chest() {
-        name = "key";
+        name = "Chest";
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/objects/chest.png"));
         }catch (Exception e){
