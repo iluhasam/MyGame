@@ -93,10 +93,10 @@ public class TileManager {
            worldY > gp.player.screenY - gp.player.screenY &&
            worldY < gp.player.screenY + gp.player.screenY){
 
-            g2.drawImage(tile[tileNum].image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+            g2.drawImage(tile[tileNum].image,screenX,screenY,null);
         }
-
-        g2.drawImage(tile[tileNum].image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+        // из-за этой гниды накрывается весь визуал(НЕ ТРОГАТЬ!!!)
+        g2.drawImage(tile[tileNum].image,screenX,screenY,null);
         worldCol++;
 
         if(worldCol == gp.maxWorldCol){
