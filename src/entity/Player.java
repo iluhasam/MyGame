@@ -15,7 +15,7 @@ public class Player extends Entity {
     KeyHabdler keyH;
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0; // ключей у плеера в данный момент
+  //  public int hasKey = 0; // ключей у плеера в данный момент
     public int standCounter = 0;
 
     public Player(GamePanel gp, KeyHabdler keyH) {
@@ -133,36 +133,7 @@ public class Player extends Entity {
     }
     public void pickUpObject (int i){
         if(i != 999){
-            String objectName = gp.obj[i].name;
 
-            switch(objectName){
-                case "key":
-                    gp.playSE(1);
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Ключик!!!");
-                    break;
-                case "Door":
-                    if(hasKey > 0){
-                        gp.playSE(3);
-                        gp.obj[i] = null;
-                        gp.ui.showMessage("Ты дверь?-_-");
-                        hasKey--;
-                    }else
-                        gp.ui.showMessage("Ключ забыл!");
-                    break;
-                case "Boots":
-                    gp.playSE(2);
-                    speed += 1.1;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Тапок скорости");
-                    break;
-                case "Chest":
-                    gp.ui.gameOver = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-                    break;
-            }
         }
     }
     public void draw(Graphics2D g2){

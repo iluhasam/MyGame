@@ -15,22 +15,20 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;// 66x66 плитка
-    public final int maxScreenCol = 20;
-    public final int maxScreenRow = 16;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol;  //1792px
     public final int screenHeight = tileSize * maxScreenRow;    // 1064 px
 
-    //Nastroyki world
+    //Settings world
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-//    public final int maxWorldCol = 6;
-//    public final int maxWorldRow = 6;
 
 
     //FPS
 
     TileManager tileM = new TileManager(this);
-    KeyHabdler keyH = new KeyHabdler();
+    KeyHabdler keyH = new KeyHabdler(this);
     //sound
     Sound music = new Sound();
     Sound se = new Sound();
@@ -44,12 +42,10 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
 
-
-
-    // set res/player default position
-//    int x = 100;
-//    int y = 100;
-//    int speed = 10;
+    //game state
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -63,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         assets.setObject();
         playMusic(0);
+        gameState = playState;
     }
 
     public void startGameTread() {
@@ -106,7 +103,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        player.update();
+        if(gameState == playState) {
+            player.update();
+        }
+        if(gameState == pauseState) {
+            //nothing
+        }
+
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
