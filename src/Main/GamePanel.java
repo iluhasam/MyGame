@@ -12,12 +12,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     private static final int FPS = 60;
     //Настройки экрана
-    final int originalTileSize = 16;  // плитка 22x22
-    final int scale = 3;
+    final int originalTileSize = 32;  // плитка 22x22
+    final int scale = 2;
 
     public final int tileSize = originalTileSize * scale;// 66x66 плитка
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12;
+    public final int maxScreenCol = 32;
+    public final int maxScreenRow = 15;
     public final int screenWidth = tileSize * maxScreenCol;  //1792px
     public final int screenHeight = tileSize * maxScreenRow;    // 1064 px
 
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
 
     TileManager tileM = new TileManager(this);
-    KeyHabdler keyH = new KeyHabdler(this);
+    public KeyHabdler keyH = new KeyHabdler(this);
     //sound
     Sound music = new Sound();
     Sound se = new Sound();
@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dialogueState = 3;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

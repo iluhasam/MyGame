@@ -12,6 +12,7 @@ public class NPC_OldMan extends Entity {
         direction = "down";
         speed = 1;
         getImage();
+        setDialogue();
     }
     public void getImage(){
         up1 = setup("/npc/oldman_up_1");
@@ -22,6 +23,18 @@ public class NPC_OldMan extends Entity {
         left2 = setup("/npc/oldman_left_2");
         right1 = setup("/npc/oldman_right_1");
         right2 = setup("/npc/oldman_right_2");
+    }
+    public void setDialogue(){
+
+        dialogues[0] = " Привет Путник ";
+        dialogues[1] = " Ты пришел на этот остров, чтобы найти сокровища?";
+        dialogues[2] = " Не хочу тебя огорчать но \n - эти сокровища уже давно утеряны в глубинах этого острова";
+        dialogues[3] = " Но поспешу тебя предупредить. \n Последний кто видел эти сокровища давно перестал быть человеком";
+        dialogues[4] = " В чертогах своего разума я помню нашу с ним битву...";
+        dialogues[5] = " Наши битвы были легендарны. \n О нас слагали легенды";
+        dialogues[6] = " Но увы время берет свое. \n Я уже слишком стар! \n Но могу тебя кое чему научить";
+        dialogues[7] = " Ладно, удачи тебе в твоем путешествии ";
+
     }
     public void setAction(){
 
@@ -46,7 +59,9 @@ public class NPC_OldMan extends Entity {
             }
             actionLockCounter = 0;
         }
-
-
+    }
+    public void speak(){
+        //Мб дополнить(принести дроп)
+        super.speak();
     }
 }
