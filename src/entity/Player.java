@@ -2,24 +2,21 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHabdler;
-import Main.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Player extends Entity {
 
-    GamePanel gp;
     KeyHabdler keyH;
     public final int screenX;
     public final int screenY;
-  //  public int hasKey = 0; // ключей у плеера в данный момент
     public int standCounter = 0;
 
     public Player(GamePanel gp, KeyHabdler keyH) {
-        this.gp = gp;
+
+        super(gp);
+
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2;
@@ -39,39 +36,26 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 26 - (gp.tileSize/2   );
-        worldY = gp.tileSize * 21 - (gp.tileSize/2 );
+        worldX = gp.tileSize * 23 - (gp.tileSize/2);
+        worldY = gp.tileSize * 21 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
     }
 
     public void getPlayerImage(){
 
-        up1 = setup("boy_up_1");
-        up2 = setup("boy_up_2");
-        up3 = setup("boy_up_3");
-        down1 = setup("boy_down_1");
-        down2 = setup("boy_down_2");
-        down3 = setup("boy_down_3");
-        left1 = setup("boy_left_1");
-        left2 = setup("boy_left_2");
-        right1 = setup("boy_right_1");
-        right2 = setup("boy_right_2");
+        up1 = setup("/player/boy_up_1");
+        up2 = setup("/player/boy_up_2");
+        up3 = setup("/player/boy_up_3");
+        down1 = setup("/player/boy_down_1");
+        down2 = setup("/player/boy_down_2");
+        down3 = setup("/player/boy_down_3");
+        left1 = setup("/player/boy_left_1");
+        left2 = setup("/player/boy_left_2");
+        right1 = setup("/player/boy_right_1");
+        right2 = setup("/player/boy_right_2");
     }
 
-
-    public BufferedImage setup(String imageName){
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try{
-            image =  ImageIO.read(getClass().getResourceAsStream("/player/" + imageName +".png"));
-            image = uTool.scaleImage(image,gp.tileSize, gp.tileSize);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return image;
-    }
     public void update() {
 
         // Проверка нажатия клавиш
@@ -86,39 +70,24 @@ public class Player extends Entity {
                 direction = "right";
             }
 
+
             // Проверка на коллизию
             collisionOn = false;
             gp.cCheker.checkTile(this);
-            int objIndex = gp.cCheker.checkObject(this, true);
-            pickUpObject(objIndex);
 
-            // Если нет коллизии, персонаж может двигаться
-            if (!collisionOn) {
+            //check npc collision
+            int npcIndex = gp.cCheker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
+
+            if(collisionOn == false){
                 switch (direction) {
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
+                case "up":worldY -= speed;break;
+                case "down":worldY += speed;break;
+                case "left":worldX -= speed;break;
+                case "right":worldX += speed;break;
                 }
             }
-        }
-
-        // Если все клавиши отпущены, персонаж стоит на месте
-        if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
-            standCounter++;
-            if (standCounter > 20) { // можно настроить время простоя
-                spriteNum = 1; // возвращаем персонажа в начальное положение
-                standCounter = 0;
             }
-        }
 
         // Обновление анимации
         spriteCounter++;
@@ -134,6 +103,11 @@ public class Player extends Entity {
     public void pickUpObject (int i){
         if(i != 999){
 
+        }
+    }
+    public void interactNPC(int i){
+        if(i != 999){
+            System.out.println("hit npc");
         }
     }
     public void draw(Graphics2D g2){

@@ -44,14 +44,14 @@ public class UI {
         String text = "PAUSED";
         int x = getXforCenteredText(text);
 
-        int y = gp.screenHeight / 2;
+        int y = gp.screenHeight/2;
 
         g2.drawString(text, x, y);
     }
 
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-        int x = gp.screenHeight / 2 - length/2;
+        int x = gp.screenHeight/2 - length/4;
         return x;
     }
 }
