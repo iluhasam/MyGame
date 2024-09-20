@@ -13,6 +13,7 @@ public class UI {
     int messageCounter = 0;
     public boolean gameOver = false;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
 
     public UI(GamePanel gp) {
@@ -37,19 +38,79 @@ public class UI {
 
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
-        //playState
+
+        //TITLESTATE
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
+        //PLAYSTATE
         if(gp.gameState == gp.playState){
             // do playstate ... later
         }
-        //pauseState
+
+        //PAUSESTATE
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
         }
-        //DialogueState
+
+        //DIALOGUESTATE
         if(gp.gameState == gp.dialogueState){
             drawDialogScreen();
         }
+
     }
+    public void drawTitleScreen(){
+
+        //TITLE COLOR
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight );
+        //TITLE NAME
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "Boy's Journey: The Island of Change";
+        int x = getXforCenteredText(text);//(gp.tileSize*5);
+        int y = gp.tileSize *3;
+
+        //SHADOW
+        g2.setColor(Color.darkGray);
+        g2.drawString(text, x+5, y+5);
+        //MAIN COLOR
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        //DRAW BOY IMAGE
+        x = gp.screenWidth/2 - (gp.tileSize*2)/2;//gp.screenWidth/2 - (gp.tileSize*2);
+        y += gp.tileSize*2;
+        g2.drawImage(gp.player.right1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+        //MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+
+        text = "NEW GAME";
+        x = getXforCenteredText(text);// gp.screenWidth/2 - (gp.tileSize*3);
+        y += gp.tileSize*4;
+        g2.drawString(text, x, y);
+        if(commandNum == 0){
+            g2.drawString("> ", x - gp.tileSize, y);
+        }
+
+        text = "LOAD GAME";
+        x = getXforCenteredText(text);//gp.screenWidth/2 - (gp.tileSize*3);
+        y += gp.tileSize ;
+        g2.drawString(text, x, y);
+        if(commandNum == 1){
+            g2.drawString("> ", x - gp.tileSize, y);
+        }
+
+        text = "EXIT GAME";
+        x = getXforCenteredText(text);//gp.screenWidth/2 - (gp.tileSize*3);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 2){
+            g2.drawString("> ", x - gp.tileSize, y);
+        }
+
+    }
+
     public void drawPauseScreen(){
 
         g2.setFont(g2.getFont().deriveFont( Font.PLAIN, 80F));
@@ -92,7 +153,7 @@ public class UI {
 
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-        int x = gp.screenHeight/2 - length/4;
+        int x = gp.screenWidth/2 - length/2;
         return x;
     }
 }
