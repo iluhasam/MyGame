@@ -1,11 +1,13 @@
 package Main;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B;
+    Font maruMonica;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -16,10 +18,14 @@ public class UI {
     public UI(GamePanel gp) {
         this.gp = gp;
 
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80B = new Font("Arial", Font.BOLD, 80);
-//        OBJ_Key key = new OBJ_Key(gp);
-//        keyImage = key.image;
+        try {
+            InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
+            maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void showMessage(String text) {
         message = text;
@@ -29,7 +35,7 @@ public class UI {
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
-        g2.setFont(arial_40);
+        g2.setFont(maruMonica);
         g2.setColor(Color.white);
         //playState
         if(gp.gameState == gp.playState){
@@ -61,7 +67,7 @@ public class UI {
         int height = gp.tileSize*4;
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont( Font.PLAIN, 32F));
+        g2.setFont(g2.getFont().deriveFont( Font.PLAIN, 48F));
         x += gp.tileSize;
         y += gp.tileSize;
 
