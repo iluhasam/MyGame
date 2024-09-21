@@ -93,10 +93,10 @@ public class UI {
 
         //DRAW LIFE
         while(i < gp.player.life){
-            g2.drawImage(life_1, x, y, null);
+            g2.drawImage(life_2, x, y, null);
             i++;
             if(i < gp.player.life){
-                g2.drawImage(life_2, x, y, null);
+                g2.drawImage(life_1, x, y, null);
             }
             i++;
             if(i < gp.player.life){
