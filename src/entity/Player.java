@@ -40,6 +40,10 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
+
+        //PLAYER STATUS
+        maxLife = 9;
+        life = maxLife;
     }
 
     public void getPlayerImage(){
@@ -132,10 +136,9 @@ public class Player extends Entity {
                     image = up3;
                 }
                 break;
-            case "down":
-                if(spriteNum == 1) {
-                    image = down1;
-                }
+            case "down":if(spriteNum == 1){
+                image = down1;
+            }
                 if(spriteNum == 2) {
                     image = down2;
                 }

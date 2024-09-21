@@ -24,13 +24,13 @@ public class KeyHabdler implements KeyListener {
         // TITLE STATE(MENU)
         if(gp.gameState == gp.titleState){
 
-            if (code == KeyEvent.VK_W) {
+            if (code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum < 0){
                     gp.ui.commandNum = 2;
                 }
             }
-            if (code == KeyEvent.VK_S) {
+            if (code == KeyEvent.VK_DOWN) {
                 gp.ui.commandNum++;
                 if(gp.ui.commandNum > 2){
                     gp.ui.commandNum = 0;
