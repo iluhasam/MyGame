@@ -23,12 +23,12 @@ public class Player extends Entity {
         screenY = gp.screenHeight/2;
 
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 46;
+        solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -38,6 +38,8 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23 - (gp.tileSize/2);
         worldY = gp.tileSize * 21 - (gp.tileSize/2);
+//        worldX = gp.tileSize * 11 - (gp.tileSize/2);
+//        worldY = gp.tileSize * 14 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
 
@@ -83,6 +85,11 @@ public class Player extends Entity {
             int npcIndex = gp.cCheker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            //CHECK MONSTER COLLISION
+            int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
+
+
             //CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -109,6 +116,16 @@ public class Player extends Entity {
             }
             spriteCounter = 0;
         }
+
+        //OUTSIDE OF KEY IF
+        if(invincible == true){
+            invicibleCounter++;
+            if(invicibleCounter > 60){
+                invincible = false;
+                invicibleCounter = 0;
+            }
+        }
+
     }
     public void pickUpObject (int i){
         if(i != 999){
@@ -123,6 +140,17 @@ public class Player extends Entity {
             }
         }
     }
+    public void contactMonster(int i){
+
+        if(i != 999){
+            if(invincible == false){
+                life -= 1;
+                invincible = true;
+            }
+
+        }
+    }
+
     public void draw(Graphics2D g2){
 //        g2.setColor(Color.WHITE);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize );
@@ -170,8 +198,20 @@ public class Player extends Entity {
 default:
 
         }
+
+        if(invincible == true){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
+        }
         g2.drawImage(image, screenX, screenY, null);
 
+        //RESET ALPHA
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        //DEBUG invincible
+//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//        g2.setColor(Color.white);
+//        g2.drawString("invincible" + invicibleCounter, 10, 400);
 
         // Прорисовка коллизии
 //        g2.setColor(Color.red);
