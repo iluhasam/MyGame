@@ -3,7 +3,6 @@ package Main;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -177,6 +176,10 @@ public class GamePanel extends JPanel implements Runnable {
             //DRAW ENTITIES
             for(int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
+            }
+            //EMPTY ENTITY LIST
+            for(int i = 0; i < entityList.size(); i++) {
+                entityList.remove(i);
             }
 
             //UI
