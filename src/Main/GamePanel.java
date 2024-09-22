@@ -2,11 +2,11 @@ package Main;
 
 import entity.Entity;
 import entity.Player;
-import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -41,8 +41,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     //entity and obj
     public Player player = new Player(this,keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     //game state
     public int gameState;
@@ -145,25 +146,24 @@ public class GamePanel extends JPanel implements Runnable {
             //tile
             tileM.draw(g2);
 
-            //obj
-            for( int i = 0; i < obj.length; i++){
-                if(obj[i] != null) {
-                    obj[i].draw(g2, this);
-                }
-            }
-            //npc
-            for(int i = 0; i < npc.length; i++){
-                if(npc[i] != null) {
-                    npc[i].draw(g2);
-                }
-            }
-            //player
-            player.draw(g2);
+            //ADD ENTITIES TO THE LIST
+            entityList.add(player);
 
-            //ui
+            for(int i = 0; i < npc.length; i++) {
+                if(npc[i] != null) {
+                    entityList.add(npc[i]);
+                }
+            }
+
+            for(int i = 0; i < obj.length; i++) {
+                if(obj[i] != null) {
+                    entityList.add(obj[i]);
+                }
+            }
+            //UI
             ui.draw(g2);
 
-            //debug
+            //DEBUG
             if(keyH.checkDrawTime ==true){
                 long drawEnd = System.nanoTime();
                 long passed = drawEnd - drawStart;
@@ -172,13 +172,6 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("Время отрисоки " + passed);
             }
         }
-
-
-
-
-
-
-
         g2.dispose();
     }
     public void playMusic(int i){

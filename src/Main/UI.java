@@ -1,7 +1,7 @@
 package Main;
 
+import entity.Entity;
 import object.OBJ_Heart;
-import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,7 +34,7 @@ public class UI {
         }
 
         //HUD OBJECT(LIFE)
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         life_full = heart.image;
         life_1 = heart.image2;
         life_2 = heart.image3;
