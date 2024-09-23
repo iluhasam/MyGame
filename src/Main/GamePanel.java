@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     //TILE
     TileManager tileM = new TileManager(this);
     public KeyHabdler keyH = new KeyHabdler(this);
+
     //sound
     Sound music = new Sound();
     Sound se = new Sound();
@@ -68,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         assets.setObject();
         assets.setNPC();
         assets.setMonster();
+
 
         //playMusic(0);
         gameState = titleState;
@@ -125,7 +127,12 @@ public class GamePanel extends JPanel implements Runnable {
             }
             for (int i = 0; i < monster.length; i++) {
                 if(monster[i] != null) {
-                    monster[i].update();
+                    if(monster[i].alive == true && monster[i].dying == false){
+                        monster[i].update();
+                    }
+                    if(monster[i].alive == false){
+                        monster[i] = null;
+                    }
                 }
             }
         }
@@ -170,7 +177,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             for(int i = 0; i < monster.length; i++) {
                 if(monster[i] != null) {
-                    entityList.add(monster[i]);
+                   entityList.add(monster[i]);
                 }
             }
 
@@ -217,6 +224,5 @@ public class GamePanel extends JPanel implements Runnable {
     public void playSE(int i){
         se.setFile(i);
         se.play();
-
     }
 }
