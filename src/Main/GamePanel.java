@@ -13,8 +13,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     private static final int FPS = 60;
     //Настройки экрана
-    final int originalTileSize = 32;  // плитка 22x22
-    final int scale = 2;
+    final int originalTileSize = 16;  // плитка 22x22
+    final int scale = 4;
 
     public final int tileSize = originalTileSize * scale;// 66x66 плитка
     public final int maxScreenCol = 32;
@@ -190,9 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
                 entityList.get(i).draw(g2);
             }
             //EMPTY ENTITY LIST
-            for(int i = 0; i < entityList.size(); i++) {
-                entityList.remove(i);
-            }
+            entityList.clear();
 
             //UI
             ui.draw(g2);

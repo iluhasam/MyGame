@@ -49,26 +49,15 @@ public class KeyHabdler implements KeyListener {
                 }
             }
         }
-        //playState
+
+        //PLAYSTATE
         if (gp.gameState == gp.playState){
-            if (code == KeyEvent.VK_W) {
-                upPressed = true;
-            }
-            if (code == KeyEvent.VK_S) {
-                downPressed = true;
-            }
-            if (code == KeyEvent.VK_A) {
-                leftPressed = true;
-            }
-            if (code == KeyEvent.VK_D) {
-                rightPressed = true;
-            }
-            if (code == KeyEvent.VK_ESCAPE) {
-                gp.gameState = gp.pauseState;
-            }
-            if (code == KeyEvent.VK_ENTER) {
-                enterPressed = true;
-            }
+            if (code == KeyEvent.VK_W) {upPressed = true;}
+            if (code == KeyEvent.VK_S) {downPressed = true;}
+            if (code == KeyEvent.VK_A) {leftPressed = true;}
+            if (code == KeyEvent.VK_D) {rightPressed = true;}
+            if (code == KeyEvent.VK_ESCAPE) {gp.gameState = gp.pauseState;}
+            if (code == KeyEvent.VK_ENTER) {enterPressed = true;}
 
             //DEBUG
             if (code == KeyEvent.VK_T) {
