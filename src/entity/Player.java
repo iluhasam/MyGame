@@ -30,6 +30,9 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        attackArea.width = 36;
+        attackArea.height = 36;
+
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -103,12 +106,14 @@ public class Player extends Entity {
 
         if(attacking == true){
             attacking ();
+            return ;
         }
 
         boolean isMoving = false;
 
         // Проверка нажатия клавиш
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed == true) {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed ||
+                keyH.rightPressed) {
             isMoving = true;
             if (keyH.upPressed)  {direction = "up";
             } else if (keyH.downPressed) {direction = "down";
@@ -145,6 +150,10 @@ public class Player extends Entity {
 
         gp.keyH.enterPressed = false;
 
+        if (keyH.enterPressed) {
+            attacking = true;
+            keyH.enterPressed = false;
+        }
         // Обновление анимации
         if (isMoving) {
             spriteCounter++;
@@ -156,6 +165,8 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         } else {spriteNum = 1;}
+
+
 
 
         //OUTSIDE OF KEY IF
@@ -172,23 +183,51 @@ public class Player extends Entity {
 
         spriteCounter++;
 
-        if(spriteCounter <= 5 ){
+        if (spriteCounter <= 10) {
             spriteNum = 1;
-        }
-        if(spriteCounter > 5 && spriteCounter <= 35){
+        } else if (spriteCounter > 10 && spriteCounter <= 20) {
             spriteNum = 2;
-        }
-        if(spriteCounter > 35 && spriteCounter <= 50){
+
+            //Save the current worldX, worldY solidArea
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidht = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            //Adjust player's worldX/Y for the attackArea
+            switch (direction) {
+                case "up": worldY -= attackArea.height;break;
+                case "down": worldY += attackArea.height;break;
+                case "left": worldX -= attackArea.width;break;
+                case "right": worldX += attackArea.width;break;
+            }
+
+            //attackArea become solidArea
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            //Check monster collision with the updated worldX, worldY and solidArea
+            int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            //After checking collision
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaHeight;
+            solidArea.height = solidAreaHeight;
+
+
+        } else if (spriteCounter > 20 && spriteCounter <= 30) {
             spriteNum = 3;
-        }
-        if(spriteCounter > 50 && spriteCounter <= 75){
+        } else if (spriteCounter > 30 && spriteCounter <= 40) {
             spriteNum = 4;
-        }
-        if(spriteCounter > 75){
+        } else if (spriteCounter > 40) {
             spriteNum = 1;
             spriteCounter = 0;
-            attacking = false;
+            attacking = false; // Сбрасываем атаку
         }
+
+
     }
     public void pickUpObject (int i){
         if(i != 999){
@@ -196,27 +235,31 @@ public class Player extends Entity {
         }
     }
     public void interactNPC(int i){
-
         if(gp.keyH.enterPressed == true){
             if(i != 999){
                    gp.gameState = gp.dialogueState;
-                    gp.npc[i].speak();
-            }
-            else {
-                    attacking = true;
-            }
+                    gp.npc[i].speak();}
+            else {attacking = true;}
         }
-
-
     }
     public void contactMonster(int i){
-
-        if(i != 999){
-            if(invincible == false){
+        if(i != 999 &&i >-0 && i < gp.monster.length){
+            if(gp.monster[i] !=null && invincible == false){
                 life -= 1;
                 invincible = true;
             }
+        }
+    }
+    public void damageMonster(int i) {
+        if (i != 999 && i >= 0 && i < gp.monster.length) { // Проверка индекса
+            if (gp.monster[i] != null && gp.monster[i].invincible == false) {
+                gp.monster[i].life -= 1;
+                gp.monster[i].invincible = true;
 
+                if (gp.monster[i].life <= 0) {
+                    gp.monster[i] = null;
+                }
+            }
         }
     }
 
@@ -225,6 +268,8 @@ public class Player extends Entity {
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize );
 
         BufferedImage image = null;
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
 
         switch(direction){
             case "up":
@@ -236,7 +281,7 @@ public class Player extends Entity {
                     if(spriteNum == 5) {image = up4;}
                     if(spriteNum == 6) {image = up5;}
                     if(spriteNum == 7) {image = up6;}
-                }
+                    }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackUp1;}
                     if(spriteNum == 2) {image = attackUp2;}
@@ -245,10 +290,13 @@ public class Player extends Entity {
                 }
                 break;
             case "down":
-                if(attacking == false){
-                if(spriteNum == 1){image = down;}if(spriteNum == 2) {image = down1;}
-                if(spriteNum == 3) {image = down2;}if(spriteNum == 4) {image = down3;}
-                if(spriteNum == 5) {image = down4;}if(spriteNum == 6) {image = down5;}
+                 if(attacking == false){
+                if(spriteNum == 1){image = down;}
+                if(spriteNum == 2) {image = down1;}
+                if(spriteNum == 3) {image = down2;}
+                if(spriteNum == 4) {image = down3;}
+                if(spriteNum == 5) {image = down4;}
+                if(spriteNum == 6) {image = down5;}
                 if(spriteNum == 7) {image = down6;}
                 }
                 if(attacking == true){
@@ -260,12 +308,16 @@ public class Player extends Entity {
                 break;
             case "left":
                 if(attacking == false){
-                if(spriteNum == 1) {image = left;}if(spriteNum == 2) {image = left1;}
-                if(spriteNum == 3) {image = left2;}if(spriteNum == 4) {image = left3;}
-                if(spriteNum == 5) {image = left4;}if(spriteNum == 6) {image = left5;}
+                if(spriteNum == 1) {image = left;}
+                if(spriteNum == 2) {image = left1;}
+                if(spriteNum == 3) {image = left2;}
+                if(spriteNum == 4) {image = left3;}
+                if(spriteNum == 5) {image = left4;}
+                if(spriteNum == 6) {image = left5;}
                 if(spriteNum == 7) {image = left6;}
                 }
                 if(attacking == true){
+                    tempScreenX = screenX - gp.tileSize;
                     if(spriteNum == 1) {image = attackLeft1;}
                     if(spriteNum == 2) {image = attackLeft2;}
                     if(spriteNum == 3) {image = attackLeft3;}
@@ -274,9 +326,12 @@ public class Player extends Entity {
                 break;
             case "right":
                 if(attacking == false){
-                if(spriteNum == 1) {image = right;}if(spriteNum == 2) {image = right1;}
-                if(spriteNum == 3) {image = right2;}if(spriteNum == 4) {image = right3;}
-                if(spriteNum == 5) {image = right4;}if(spriteNum == 6) {image = right5;}
+                if(spriteNum == 1) {image = right;}
+                if(spriteNum == 2) {image = right1;}
+                if(spriteNum == 3) {image = right2;}
+                if(spriteNum == 4) {image = right3;}
+                if(spriteNum == 5) {image = right4;}
+                if(spriteNum == 6) {image = right5;}
                 if(spriteNum == 7) {image = right6;}
                 }
                 if(attacking == true){
@@ -293,7 +348,7 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
         }
-        g2.drawImage(image, screenX, screenY, null);
+        g2.drawImage(image, tempScreenX, screenY, null);
 
         //RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
@@ -302,9 +357,5 @@ public class Player extends Entity {
 //        g2.setFont(new Font("Arial", Font.PLAIN, 26));
 //        g2.setColor(Color.white);
 //        g2.drawString("invincible" + invicibleCounter, 10, 400);
-
-        // Прорисовка коллизии
-//        g2.setColor(Color.red);
-//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 }

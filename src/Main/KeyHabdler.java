@@ -51,7 +51,7 @@ public class KeyHabdler implements KeyListener {
         }
 
         //PLAYSTATE
-        if (gp.gameState == gp.playState){
+        else if (gp.gameState == gp.playState){
             if (code == KeyEvent.VK_W) {upPressed = true;}
             if (code == KeyEvent.VK_S) {downPressed = true;}
             if (code == KeyEvent.VK_A) {leftPressed = true;}
@@ -102,6 +102,9 @@ public class KeyHabdler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_ENTER){
+            enterPressed = false;
         }
     }
 }

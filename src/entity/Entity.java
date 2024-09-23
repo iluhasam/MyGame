@@ -20,6 +20,7 @@ public class Entity {
             attackLeft1, attackLeft2, attackLeft3, attackLeft4,
             attackRight1, attackRight2, attackRight3, attackRight4;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle attackArea = new Rectangle(0, 0, 0, 0 );
     public BufferedImage image, image2, image3, image4;
     public int solidAreaDefaultX, solidAreaDefaultY;
     String dialogues[] = new String[50];
@@ -111,6 +112,15 @@ public class Entity {
             spriteNum = 1; // Останавливаем анимацию на первом спрайте
         }
 
+        if(invincible == true){
+            invicibleCounter++;
+            if(invicibleCounter > 40){
+                invincible = false;
+                invicibleCounter = 0;
+            }
+        }
+
+
     }
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();
@@ -155,8 +165,14 @@ public class Entity {
                 if (spriteNum == 2) {image = right2;}
                 break;
         }
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            if(invincible == true){
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+
+            }
+           g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            //g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
+        //g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 
 }
