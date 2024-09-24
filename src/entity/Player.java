@@ -29,6 +29,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2;
         screenY = gp.screenHeight/2;
 
+        //SOLID AREA
         solidArea = new Rectangle();
         solidArea.x = 6;
         solidArea.y = 16;
@@ -37,8 +38,9 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        attackArea.width = 36;
-        attackArea.height = 36;
+        //ATTACK AREA
+//        attackArea.width = 36;
+//        attackArea.height = 36;
 
         setDefaultValues();
         getPlayerImage();
@@ -76,6 +78,7 @@ public class Player extends Entity {
 
     }
     public int getAttack(){
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
     public int getDefense(){
@@ -152,6 +155,8 @@ public class Player extends Entity {
             // Проверка на коллизию
             collisionOn = false;
             gp.cCheker.checkTile(this);
+            int objIndex = gp.cCheker.checkObject(this, true);
+            pickUpObject(objIndex);
 
             //CHECK NPC COLLISION
             int npcIndex = gp.cCheker.checkEntity(this, gp.npc);
@@ -266,7 +271,18 @@ public class Player extends Entity {
     }
     public void pickUpObject (int i){
         if(i != 999){
+            String text;
+            if(inventory.size() != maxInventorySize){
+                inventory.add(gp.obj[i]);
+                gp.playSE(1);
 
+                text = "Подобрано: " + gp.obj[i].name + "!";
+            }
+            else{
+                text = "Многовато не потяну!";
+            }
+            gp.ui.addMessage(text);
+            gp.obj[i] = null;
         }
     }
     public void interactNPC(int i){
@@ -331,6 +347,26 @@ public class Player extends Entity {
             gp.ui.currentDialogue = "Твой уровень " + level + " сейчас \n"
             + " Ты чувствуешь себя сильнее!";
 
+        }
+    }
+    public void selectItem(){
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+
+        if(itemIndex < inventory.size()){
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if(selectedItem.type == type_sword || selectedItem.type == type_axe){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+            }
+            if(selectedItem.type == type_shield){
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if(selectedItem.type == type_consumable){
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 
