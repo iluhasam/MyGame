@@ -42,6 +42,7 @@ public class Entity {
     public int spriteCounter = 0;
     public int actionLockCounter = 0;
     public int invicibleCounter = 0;
+    public int shotAvaliableCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
 
@@ -120,16 +121,7 @@ public class Entity {
 
 
         if(this.type == type_monster && contactPlayer == true){
-            if(gp.player.invincible == false){
-                //we can give damage
-                gp.playSE(6);
-                int damage = attack - gp.player.defense;
-                if(damage < 0 ) {
-                    damage = 0;
-                }
-                gp.player.life -= damage;
-                gp.player.invincible = true;
-            }
+           damagePlayer(attack);
         }
 
 
@@ -166,6 +158,19 @@ public class Entity {
         }
 
 
+    }
+    public void damagePlayer(int attack){
+
+        if(gp.player.invincible == false){
+            //we can give damage
+            gp.playSE(6);
+            int damage = attack - gp.player.defense;
+            if(damage < 0 ) {
+                damage = 0;
+            }
+            gp.player.life -= damage;
+            gp.player.invincible = true;
+        }
     }
     public BufferedImage setup(String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();

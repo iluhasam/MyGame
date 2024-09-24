@@ -86,52 +86,44 @@ public class Player extends Entity {
     }
     public void getPlayerImage(){
 
-        up = setup("/player/boy_up", gp.tileSize, gp.tileSize);
-        up1 = setup("/player/boy_up1",gp.tileSize, gp.tileSize);
-        up2 = setup("/player/boy_up2",gp.tileSize, gp.tileSize);
-        up3 = setup("/player/boy_up3",gp.tileSize, gp.tileSize);
-        up4 = setup("/player/boy_up4",gp.tileSize, gp.tileSize);
-        up5 = setup("/player/boy_up5",gp.tileSize, gp.tileSize);
-        up6 = setup("/player/boy_up6",gp.tileSize, gp.tileSize);
-        down = setup("/player/boy_down",gp.tileSize, gp.tileSize);
-        down1 = setup("/player/boy_down1",gp.tileSize, gp.tileSize);
-        down2 = setup("/player/boy_down2",gp.tileSize, gp.tileSize);
-        down3 = setup("/player/boy_down3",gp.tileSize, gp.tileSize);
-        down4 = setup("/player/boy_down4",gp.tileSize, gp.tileSize);
-        down5 = setup("/player/boy_down5",gp.tileSize, gp.tileSize);
-        down6 = setup("/player/boy_down6",gp.tileSize, gp.tileSize);
-        left = setup("/player/boy_left",gp.tileSize, gp.tileSize);
-        left1 = setup("/player/boy_left1",gp.tileSize, gp.tileSize);
-        left2 = setup("/player/boy_left2",gp.tileSize, gp.tileSize);
-        left3 = setup("/player/boy_left3",gp.tileSize, gp.tileSize);
-        left4 = setup("/player/boy_left4",gp.tileSize, gp.tileSize);
-        left5 = setup("/player/boy_left5",gp.tileSize, gp.tileSize);
-        left6 = setup("/player/boy_left6",gp.tileSize, gp.tileSize);
-        right = setup("/player/boy_right",gp.tileSize, gp.tileSize);
-        right1 = setup("/player/boy_right1",gp.tileSize, gp.tileSize);
-        right2 = setup("/player/boy_right2",gp.tileSize, gp.tileSize);
-        right3 = setup("/player/boy_right3",gp.tileSize, gp.tileSize);
-        right4 = setup("/player/boy_right4",gp.tileSize, gp.tileSize);
-        right5 = setup("/player/boy_right5",gp.tileSize, gp.tileSize);
-        right6 = setup("/player/boy_right6",gp.tileSize, gp.tileSize);
+        up = setup("/player/up", gp.tileSize, gp.tileSize);
+        up1 = setup("/player/up1",gp.tileSize, gp.tileSize);
+        up2 = setup("/player/up2",gp.tileSize, gp.tileSize);
+        up3 = setup("/player/up3",gp.tileSize, gp.tileSize);
+        up4 = setup("/player/up4",gp.tileSize, gp.tileSize);
+        down = setup("/player/down",gp.tileSize, gp.tileSize);
+        down1 = setup("/player/down1",gp.tileSize, gp.tileSize);
+        down2 = setup("/player/down2",gp.tileSize, gp.tileSize);
+        down3 = setup("/player/down3",gp.tileSize, gp.tileSize);
+        down4 = setup("/player/down4",gp.tileSize, gp.tileSize);
+        left = setup("/player/left",gp.tileSize, gp.tileSize);
+        left1 = setup("/player/left1",gp.tileSize, gp.tileSize);
+        left2 = setup("/player/left2",gp.tileSize, gp.tileSize);
+        left3 = setup("/player/left3",gp.tileSize, gp.tileSize);
+        left4 = setup("/player/left4",gp.tileSize, gp.tileSize);
+        right = setup("/player/right",gp.tileSize, gp.tileSize);
+        right1 = setup("/player/right1",gp.tileSize, gp.tileSize);
+        right2 = setup("/player/right2",gp.tileSize, gp.tileSize);
+        right3 = setup("/player/right3",gp.tileSize, gp.tileSize);
+        right4 = setup("/player/right4",gp.tileSize, gp.tileSize);
     }
     public void getPlayerAttackImage(){
-        attackUp1 = setup("/player/boy_atack_up1",gp.tileSize, gp.tileSize*2);
-        attackUp2 = setup("/player/boy_atack_up2",gp.tileSize, gp.tileSize*2);
-        attackUp3 = setup("/res/player/boy_atack_up3",gp.tileSize, gp.tileSize*2);
-        attackUp4 = setup("/res/player/boy_atack_up4",gp.tileSize, gp.tileSize*2);
-        attackDown1 = setup("/res/player/boy_atack_down1",gp.tileSize, gp.tileSize*2);
-        attackDown2 = setup("/res/player/boy_atack_down2",gp.tileSize, gp.tileSize*2);
-        attackDown3 = setup("/player/boy_atack_down3",gp.tileSize, gp.tileSize*2);
-        attackDown4 = setup("/player/boy_atack_down4",gp.tileSize, gp.tileSize*2);
-        attackLeft1 = setup("/player/boy_atack_left1",gp.tileSize*2, gp.tileSize);
-        attackLeft2 = setup("/player/boy_atack_left2",gp.tileSize*2, gp.tileSize);
-        attackLeft3 = setup("/player/boy_atack_left3",gp.tileSize*2, gp.tileSize);
-        attackLeft4 = setup("/player/boy_atack_left4",gp.tileSize*2, gp.tileSize);
-        attackRight1 = setup("/player/boy_atack_right1",gp.tileSize*2, gp.tileSize);
-        attackRight2 = setup("/player/boy_atack_right2",gp.tileSize*2, gp.tileSize);
-        attackRight3 = setup("/player/boy_atack_right3",gp.tileSize*2, gp.tileSize);
-        attackRight4 = setup("/player/boy_atack_right4",gp.tileSize*2, gp.tileSize);
+        attackUp1 = setup("/player/attack_up1",gp.tileSize, gp.tileSize*2);
+        attackUp2 = setup("/player/attack_up2",gp.tileSize, gp.tileSize*2);
+        attackUp3 = setup("/res/player/attack_up3",gp.tileSize, gp.tileSize*2);
+        attackUp4 = setup("/res/player/attack_up4",gp.tileSize, gp.tileSize*2);
+        attackDown1 = setup("/res/player/attack_down1",gp.tileSize, gp.tileSize*2);
+        attackDown2 = setup("/res/player/attack_down2",gp.tileSize, gp.tileSize*2);
+        attackDown3 = setup("/player/attack_down3",gp.tileSize, gp.tileSize*2);
+        attackDown4 = setup("/player/attack_down4",gp.tileSize, gp.tileSize*2);
+        attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize);
+        attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize);
+        attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize);
+        attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize);
+        attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize);
+        attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize);
+        attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize);
+        attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize);
     }
     public void update() {
 
@@ -199,7 +191,7 @@ public class Player extends Entity {
             spriteCounter++;
             if (spriteCounter > 11) {
                 spriteNum++;
-                if (spriteNum > 7) {
+                if (spriteNum > 5) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
