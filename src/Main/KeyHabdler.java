@@ -8,7 +8,7 @@ public class KeyHabdler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
         //debug
-    boolean checkDrawTime = false;
+    boolean showDebugConsole = false;
 
     public KeyHabdler(GamePanel gp) {
     this.gp = gp;
@@ -81,10 +81,10 @@ public class KeyHabdler implements KeyListener {
 
         //DEBUG
         if (code == KeyEvent.VK_T) {
-            if(checkDrawTime == false) {
-                checkDrawTime = true;
-            } else if (checkDrawTime == true) {
-                checkDrawTime = false;
+            if(showDebugConsole == false) {
+                showDebugConsole = true;
+            } else if (showDebugConsole == true) {
+                showDebugConsole = false;
 
             }
         }

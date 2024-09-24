@@ -41,7 +41,6 @@ public class Player extends Entity {
         getPlayerAttackImage();
 
     }
-
     public void setDefaultValues() {
         worldX = gp.tileSize * 23 - (gp.tileSize/2);
         worldY = gp.tileSize * 21 - (gp.tileSize/2);
@@ -57,7 +56,7 @@ public class Player extends Entity {
         strength = 1;
         agility = 1;
         exp = 0;
-        nextLevelExp = 25;
+        nextLevelExp = 4;
         coin = 0;
         currentWeapon = new OBJ_Sword_Start(gp);
         currentShield = new OBJ_Shield_Start(gp);
@@ -67,7 +66,6 @@ public class Player extends Entity {
     public int getAttack(){
         return attack = strength * currentWeapon.attackValue;
     }
-
     public int getDefense(){
         return defense = strength * currentShield.defenseValue;
     }
@@ -120,7 +118,6 @@ public class Player extends Entity {
         attackRight3 = setup("/player/boy_atack_right3",gp.tileSize*2, gp.tileSize);
         attackRight4 = setup("/player/boy_atack_right4",gp.tileSize*2, gp.tileSize);
     }
-
     public void update() {
 
         if(attacking == true){
@@ -273,8 +270,12 @@ public class Player extends Entity {
         if(i != 999 &&i >-0 && i < gp.monster.length){
             if(gp.monster[i] !=null && invincible == false){
                 gp.playSE(6);
+                int damage = gp.monster[i].attack - defense;
+                if(damage < 0 ) {
+                    damage = 0;
+                }
 
-                life -= 1;
+                life -= damage;
                 invincible = true;
             }
         }
@@ -283,14 +284,41 @@ public class Player extends Entity {
         if (i != 999 && i >= 0 && i < gp.monster.length) { // Проверка индекса
             if (gp.monster[i] != null && gp.monster[i].invincible == false) {
                 gp.playSE(5);
-                gp.monster[i].life -= 1;
+
+                int damage = attack - gp.monster[i].defense;
+                if(damage < 0 ) {
+                    damage = 0;
+                }
+                gp.monster[i].life -= damage;
+                gp.ui.addMessage(damage + " damage!");
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
 
                 if (gp.monster[i].life <= 0) {
                     gp.monster[i].dying = true;
+                    gp.ui.addMessage("killed the" + gp.monster[i].name + "!");
+                    gp.ui.addMessage("Exp +" + gp.monster[i].exp + "!");
+                    exp += gp.monster[i].exp;
+                    checkLevelUp();
                 }
             }
+        }
+    }
+    public void checkLevelUp(){
+        if(exp >= nextLevelExp){
+            level++;
+            nextLevelExp = nextLevelExp*2;
+            maxLife += 3;
+            strength++;
+            agility++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.playSE(8);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "Твой уровень " + level + " сейчас \n"
+            + " Ты чувствуешь себя сильнее!";
+
         }
     }
 
