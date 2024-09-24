@@ -88,6 +88,9 @@ public class KeyHabdler implements KeyListener {
 
             }
         }
+        if (code == KeyEvent.VK_R){
+            gp.tileM.loadMap("/maps/worldV2.txt");
+        }
     }
     public void pauseState(int code){
         if (code == KeyEvent.VK_ESCAPE) {
