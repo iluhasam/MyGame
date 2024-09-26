@@ -2,10 +2,7 @@ package Main;
 
 import entity.NPC_OldMan;
 import monster.MON_GreenSlime;
-import object.OBJ_Axe_Wood;
-import object.OBJ_Key;
-import object.OBJ_Potion_Red;
-import object.OBJ_Stick;
+import object.*;
 
 public class Assets {
     GamePanel gp;
@@ -14,11 +11,11 @@ public class Assets {
     }
     public void setObject(){
         int i = 0;
-        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i] = new OBJ_Coin_Bronze(gp);
         gp.obj[i].worldX = gp.tileSize*25;
         gp.obj[i].worldY = gp.tileSize*19;
         i++;
-        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i] = new OBJ_Coin_Bronze(gp);
         gp.obj[i].worldX = gp.tileSize*21;
         gp.obj[i].worldY = gp.tileSize*19;
         i++;
@@ -34,7 +31,11 @@ public class Assets {
         gp.obj[i].worldX = gp.tileSize*22;
         gp.obj[i].worldY = gp.tileSize*27;
         i++;
-        gp.obj[i] = new OBJ_Stick(gp);
+        gp.obj[i] =new OBJ_Heart(gp);
+        gp.obj[i].worldX = gp.tileSize*30;
+        gp.obj[i].worldY = gp.tileSize*21;
+        i++;
+        gp.obj[i] = new OBJ_ManaCrystal(gp);
         gp.obj[i].worldX = gp.tileSize*22;
         gp.obj[i].worldY = gp.tileSize*25;
         i++;

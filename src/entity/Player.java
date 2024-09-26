@@ -230,6 +230,12 @@ public class Player extends Entity {
             shotAvaliableCounter++;
 
         }
+        if(life > maxLife){
+            life = maxLife;
+        }
+        if(mana > maxMana){
+            mana = maxMana;
+        }
 
     }
     public void attacking(){
@@ -284,18 +290,26 @@ public class Player extends Entity {
     }
     public void pickUpObject (int i){
         if(i != 999){
-            String text;
-            if(inventory.size() != maxInventorySize){
-                inventory.add(gp.obj[i]);
-                gp.playSE(1);
 
-                text = "Подобрано: " + gp.obj[i].name + "!";
+            //PICKUP ONLY ITEMS
+            if(gp.obj[i].type == type_pickupOnly){
+
+                gp.obj[i].use(this);
+                gp.obj[i] = null;
             }
-            else{
-                text = "Многовато не потяну!";
-            }
-            gp.ui.addMessage(text);
-            gp.obj[i] = null;
+            //INVENTORY ITEMS
+            else{String text;
+                if(inventory.size() != maxInventorySize){
+                    inventory.add(gp.obj[i]);
+                    gp.playSE(1);
+
+                    text = "Подобрано: " + gp.obj[i].name + "!";
+                }
+                else{
+                    text = "Многовато не потяну!";
+                }
+                gp.ui.addMessage(text);
+                gp.obj[i] = null;}
         }
     }
     public void interactNPC(int i){
