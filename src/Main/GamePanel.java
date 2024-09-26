@@ -7,6 +7,7 @@ import tile_interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,8 +20,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 4;
 
     public final int tileSize = originalTileSize * scale;// 66x66 плитка
-    public final int maxScreenCol = 32;
-    public final int maxScreenRow = 16;
+    public final int maxScreenCol = 20;
+    public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol;  //1792px
     public final int screenHeight = tileSize * maxScreenRow;    // 1064 px
 
@@ -28,6 +29,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
 
+    //FOR FULL SCREEN
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+    BufferedImage tempScreen;
+    Graphics2D g2;
 
     //TILE
     TileManager tileM = new TileManager(this);
@@ -78,16 +84,28 @@ public class GamePanel extends JPanel implements Runnable {
         assets.setMonster();
         assets.setInteractiveTile();
 
-
         //playMusic(0);
         gameState = titleState;
-    }
 
+        tempScreen = new BufferedImage(screenWidth, screenHeight,BufferedImage.TYPE_INT_ARGB);
+        g2 = (Graphics2D) tempScreen.getGraphics();
+
+        setFullscreen();
+    }
+    public void setFullscreen(){
+        //GET LOCAL SCREEN DEVICE
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(Main.window);
+
+        //GET FULL SCREEN WIDTH AND HEIGHT
+        screenWidth2 = Main.window.getWidth();
+        screenHeight2 = Main.window.getHeight();
+    }
     public void startGameTread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
     @Override
     public void run() {
 
@@ -110,7 +128,8 @@ public class GamePanel extends JPanel implements Runnable {
                 //1: обновление информации позиции непися
                 update();
                 //2: нарисовать экран с информацией об обновлении
-                repaint();
+                drawToTempScreen();// draw everything to buf image
+                drawToScreen();// draw buf image to screen
                 delta--;
                 drawCount++;
             }
@@ -121,7 +140,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
-
     public void update() {
 
         if(gameState == playState) {
@@ -175,11 +193,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
     }
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D) g;
-
+    public void drawToTempScreen() {
         //DEBUG
         long drawStart = 0;
         if(keyH.showDebugConsole == true){
@@ -198,7 +212,7 @@ public class GamePanel extends JPanel implements Runnable {
             //INTERACTIVE TILE
             for(int i = 0; i < iTile.length; i++) {
                 if(iTile[i] != null){
-                iTile[i].draw(g2);
+                    iTile[i].draw(g2);
                 }
             }
 
@@ -217,7 +231,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             for(int i = 0; i < monster.length; i++) {
                 if(monster[i] != null) {
-                   entityList.add(monster[i]);
+                    entityList.add(monster[i]);
                 }
             }
             for(int i = 0; i < projectileList.size(); i++) {
@@ -277,7 +291,11 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("Время отрисоки " + passed);
             }
         }
-        g2.dispose();
+    }
+    public void drawToScreen(){
+        Graphics g = getGraphics();
+        g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2,  null);
+        g.dispose();
     }
     public void playMusic(int i){
         music.setFile(i);
