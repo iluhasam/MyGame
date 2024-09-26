@@ -53,6 +53,7 @@ public class Entity {
     public int life;
     public int maxMana;
     public int mana;
+    public int ammo;
     public int level;
     public int strength;
     public int agility;
@@ -160,7 +161,9 @@ public class Entity {
                 invicibleCounter = 0;
             }
         }
-
+        if(shotAvaliableCounter < 30){
+            shotAvaliableCounter++;
+        }
 
     }
     public void damagePlayer(int attack){

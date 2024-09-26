@@ -2,10 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHabdler;
-import object.OBJ_Fireball;
-import object.OBJ_Key;
-import object.OBJ_Shield_Start;
-import object.OBJ_Sword_Start;
+import object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -61,6 +58,9 @@ public class Player extends Entity {
         level =1;
         maxLife = 9;
         life = maxLife;
+        maxMana = 4;
+        mana = maxMana;
+        ammo = 10;
         strength = 1;
         agility = 1;
         exp = 0;
@@ -69,6 +69,7 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Start(gp);
         currentShield = new OBJ_Shield_Start(gp);
         projectile = new OBJ_Fireball(gp);
+        //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -200,10 +201,14 @@ public class Player extends Entity {
             }
         } else {spriteNum = 1;}
 
-        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvaliableCounter == 30){
+        if(gp.keyH.shotKeyPressed == true && projectile.alive == false &&
+                shotAvaliableCounter == 30 && projectile.haveResource(this) == true) {
 
             //SET DEFAULT COORDINATE, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
+
+            //SUBTRACT COST(MANA, LATER ARROWS)
+            projectile.subtractResource(this);
 
             //ADD IT TO THE LIST
             gp.projectileList.add(projectile);
@@ -355,7 +360,7 @@ public class Player extends Entity {
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "Твой уровень " + level + " сейчас \n"
-            + " Ты чувствуешь себя сильнее!";
+            + "Ты чувствуешь себя сильнее!";
 
         }
     }
@@ -396,8 +401,7 @@ public class Player extends Entity {
                     if(spriteNum == 3) {image = up2;}
                     if(spriteNum == 4) {image = up3;}
                     if(spriteNum == 5) {image = up4;}
-                    if(spriteNum == 6) {image = up5;}
-                    if(spriteNum == 7) {image = up6;}
+
                     }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackUp1;}
@@ -413,8 +417,6 @@ public class Player extends Entity {
                 if(spriteNum == 3) {image = down2;}
                 if(spriteNum == 4) {image = down3;}
                 if(spriteNum == 5) {image = down4;}
-                if(spriteNum == 6) {image = down5;}
-                if(spriteNum == 7) {image = down6;}
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackDown1;}
@@ -430,8 +432,6 @@ public class Player extends Entity {
                 if(spriteNum == 3) {image = left2;}
                 if(spriteNum == 4) {image = left3;}
                 if(spriteNum == 5) {image = left4;}
-                if(spriteNum == 6) {image = left5;}
-                if(spriteNum == 7) {image = left6;}
                 }
                 if(attacking == true){
                     tempScreenX = screenX - gp.tileSize;
@@ -448,8 +448,6 @@ public class Player extends Entity {
                 if(spriteNum == 3) {image = right2;}
                 if(spriteNum == 4) {image = right3;}
                 if(spriteNum == 5) {image = right4;}
-                if(spriteNum == 6) {image = right5;}
-                if(spriteNum == 7) {image = right6;}
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackRight1;}

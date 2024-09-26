@@ -89,6 +89,7 @@ public class EventHandler {
                 gp.player.attackCanceled = true;
                 gp.ui.currentDialogue = "Ты попил мочи\n Радуйся жизни! ";
                 gp.player.life = gp.player.maxLife;
+                gp.player.mana = gp.player.maxMana;
                 gp.assets.setMonster();
 
             }

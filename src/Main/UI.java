@@ -2,6 +2,7 @@ package Main;
 
 import entity.Entity;
 import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    BufferedImage life_full, life_1, life_2, life_blank;
+    BufferedImage life_full, life_1, life_2, life_blank, crystal_full, crystal_blank;
     Font maruMonica;
     public boolean messageOn = false;
 //    public String message = "";
@@ -46,6 +47,9 @@ public class UI {
         life_1 = heart.image2;
         life_2 = heart.image3;
         life_blank = heart.image4;
+        Entity crystal = new OBJ_ManaCrystal(gp);
+        crystal_full = crystal.image2;
+        crystal_blank = crystal.image;
     }
     public void addMessage(String text) {
         message.add(text);
@@ -117,6 +121,25 @@ public class UI {
             i++;
             x += gp.tileSize;
         }
+
+        //DRAW MAX MANA
+        x = (gp.tileSize/2) - 5;
+        y = (int)(gp.tileSize*1.5);
+        i = 0;
+        while(i < gp.player.maxMana){
+            g2.drawImage(crystal_blank, x, y, null);
+            i++;
+            x+=35;
+        }
+        //DRAW MANA
+        x = (gp.tileSize/2) - 5;
+        y = (int)(gp.tileSize*1.5);
+        i = 0;
+        while(i < gp.player.mana){
+            g2.drawImage(crystal_full, x, y, null);
+            i++;
+            x +=35;
+        }
     }
     public void drawMessage(){
         int messageX = gp.tileSize;
@@ -168,7 +191,7 @@ public class UI {
         //MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 
-        text = "NEW GAME";
+        text = "НОВАЯ ИГРА";
         x = getXforCenteredText(text);// gp.screenWidth/2 - (gp.tileSize*3);
         y += gp.tileSize*4;
         g2.drawString(text, x, y);
@@ -176,7 +199,7 @@ public class UI {
             g2.drawString("> ", x - gp.tileSize, y);
         }
 
-        text = "LOAD GAME";
+        text = "ЗАГРУЗИТЬ ИГРУ";
         x = getXforCenteredText(text);//gp.screenWidth/2 - (gp.tileSize*3);
         y += gp.tileSize ;
         g2.drawString(text, x, y);
@@ -184,7 +207,7 @@ public class UI {
             g2.drawString("> ", x - gp.tileSize, y);
         }
 
-        text = "EXIT GAME";
+        text = "ВЫЙТИ ИЗ ИГРЫ";
         x = getXforCenteredText(text);//gp.screenWidth/2 - (gp.tileSize*3);
         y += gp.tileSize;
         g2.drawString(text, x, y);
@@ -245,6 +268,8 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Здоровье", textX, textY);
         textY += lineHeight;
+        g2.drawString("Мана", textX, textY);
+        textY += lineHeight;
         g2.drawString("Сила", textX, textY);
         textY += lineHeight;
         g2.drawString("Ловкость", textX, textY);
@@ -258,7 +283,7 @@ public class UI {
         g2.drawString("До следующего уровня", textX, textY);
         textY += lineHeight;
         g2.drawString("Монет", textX, textY);
-        textY += lineHeight + 20;
+        textY += lineHeight + 10;
         g2.drawString("Оружие", textX, textY);
         textY += lineHeight + 20;
         g2.drawString("Щит", textX, textY);
@@ -276,6 +301,11 @@ public class UI {
         textY += lineHeight;
 
         value = String.valueOf(gp.player.life + "/"+ gp.player.maxLife);
+        textX = getXforAlignToRight(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = String.valueOf(gp.player.mana + "/"+ gp.player.maxMana);
         textX = getXforAlignToRight(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -315,9 +345,9 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 25, null);
+        g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 30, null);
         textY += gp.tileSize;
-        g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 25, null);
+        g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 35, null);
         textY += gp.tileSize;
 
     }
@@ -327,7 +357,7 @@ public class UI {
         int frameX = gp.tileSize*9;
         int frameY = gp.tileSize;
         int frameWidth = gp.tileSize*6;
-        int frameHeight = gp.tileSize*5;
+        int frameHeight = gp.tileSize*4;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         //SLOT
