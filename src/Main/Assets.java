@@ -5,6 +5,7 @@ import monster.MON_GreenSlime;
 import object.OBJ_Axe_Wood;
 import object.OBJ_Key;
 import object.OBJ_Potion_Red;
+import object.OBJ_Stick;
 
 public class Assets {
     GamePanel gp;
@@ -32,6 +33,10 @@ public class Assets {
         gp.obj[i] = new OBJ_Potion_Red(gp);
         gp.obj[i].worldX = gp.tileSize*22;
         gp.obj[i].worldY = gp.tileSize*27;
+        i++;
+        gp.obj[i] = new OBJ_Stick(gp);
+        gp.obj[i].worldX = gp.tileSize*22;
+        gp.obj[i].worldY = gp.tileSize*25;
         i++;
     }
     public void setNPC(){

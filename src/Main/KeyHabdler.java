@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHabdler implements KeyListener {
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
         //debug
     boolean showDebugConsole = false;
 
@@ -69,7 +69,6 @@ public class KeyHabdler implements KeyListener {
             }
         }
     }
-
     public void playState(int code){
         if (code == KeyEvent.VK_W) {upPressed = true;}
         if (code == KeyEvent.VK_S) {downPressed = true;}
@@ -77,6 +76,7 @@ public class KeyHabdler implements KeyListener {
         if (code == KeyEvent.VK_D) {rightPressed = true;}
         if (code == KeyEvent.VK_ESCAPE) {gp.gameState = gp.pauseState;}
         if (code == KeyEvent.VK_ENTER) {enterPressed = true;}
+        if (code == KeyEvent.VK_F) {shotKeyPressed = true;}
         if (code == KeyEvent.VK_C){gp.gameState = gp.characterState;}
 
         //DEBUG
@@ -156,5 +156,6 @@ public class KeyHabdler implements KeyListener {
         if (code == KeyEvent.VK_ENTER){
             enterPressed = false;
         }
+        if (code == KeyEvent.VK_F){shotKeyPressed = false;}
     }
 }

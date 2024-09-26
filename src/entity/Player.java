@@ -2,6 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHabdler;
+import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Start;
 import object.OBJ_Sword_Start;
@@ -67,6 +68,7 @@ public class Player extends Entity {
         coin = 0;
         currentWeapon = new OBJ_Sword_Start(gp);
         currentShield = new OBJ_Shield_Start(gp);
+        projectile = new OBJ_Fireball(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -108,22 +110,22 @@ public class Player extends Entity {
         right4 = setup("/player/right4",gp.tileSize, gp.tileSize);
     }
     public void getPlayerAttackImage(){
-        attackUp1 = setup("/player/attack_up1",gp.tileSize, gp.tileSize*2);
-        attackUp2 = setup("/player/attack_up2",gp.tileSize, gp.tileSize*2);
-        attackUp3 = setup("/res/player/attack_up3",gp.tileSize, gp.tileSize*2);
-        attackUp4 = setup("/res/player/attack_up4",gp.tileSize, gp.tileSize*2);
-        attackDown1 = setup("/res/player/attack_down1",gp.tileSize, gp.tileSize*2);
-        attackDown2 = setup("/res/player/attack_down2",gp.tileSize, gp.tileSize*2);
-        attackDown3 = setup("/player/attack_down3",gp.tileSize, gp.tileSize*2);
-        attackDown4 = setup("/player/attack_down4",gp.tileSize, gp.tileSize*2);
-        attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize);
-        attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize);
-        attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize);
-        attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize);
-        attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize);
-        attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize);
-        attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize);
-        attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize);
+        attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
+        attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
+        attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
+        attackUp4 = setup("/player/attack_up4",gp.tileSize*3, gp.tileSize*2);
+        attackDown1 = setup("/player/attack_down1",gp.tileSize*3, gp.tileSize*2);
+        attackDown2 = setup("/player/attack_down2",gp.tileSize*3, gp.tileSize*2);
+        attackDown3 = setup("/player/attack_down3",gp.tileSize*3, gp.tileSize*2);
+        attackDown4 = setup("/player/attack_down4",gp.tileSize*3, gp.tileSize*2);
+        attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize*3);
+        attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize*3);
+        attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize*3);
+        attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize*3);
+        attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize*3);
+        attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
+        attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
+        attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
     }
     public void update() {
 
@@ -198,8 +200,18 @@ public class Player extends Entity {
             }
         } else {spriteNum = 1;}
 
+        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvaliableCounter == 30){
 
+            //SET DEFAULT COORDINATE, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
 
+            //ADD IT TO THE LIST
+            gp.projectileList.add(projectile);
+
+            shotAvaliableCounter = 0;
+
+            gp.playSE(10);
+        }
 
         //OUTSIDE OF KEY IF
         if(invincible == true){
@@ -208,6 +220,10 @@ public class Player extends Entity {
                 invincible = false;
                 invicibleCounter = 0;
             }
+        }
+        if(shotAvaliableCounter < 30){
+            shotAvaliableCounter++;
+
         }
 
     }
@@ -240,7 +256,7 @@ public class Player extends Entity {
 
             //Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             //After checking collision
             worldX = currentWorldX;
@@ -287,8 +303,10 @@ public class Player extends Entity {
         }
     }
     public void contactMonster(int i){
-        if(i != 999 &&i >-0 && i < gp.monster.length){
-            if(gp.monster[i] !=null && invincible == false){
+//        if(i != 999 &&i >-0 && i < gp.monster.length){
+//            if(gp.monster[i] !=null && invincible == false){
+            if( i != 999){
+                if(invincible == false && gp.monster[i].dying == false){
                 gp.playSE(6);
                 int damage = gp.monster[i].attack - defense;
                 if(damage < 0 ) {
@@ -300,7 +318,7 @@ public class Player extends Entity {
             }
         }
     }
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
         if (i != 999 && i >= 0 && i < gp.monster.length) { // Проверка индекса
             if (gp.monster[i] != null && gp.monster[i].invincible == false) {
                 gp.playSE(5);
@@ -310,14 +328,14 @@ public class Player extends Entity {
                     damage = 0;
                 }
                 gp.monster[i].life -= damage;
-                gp.ui.addMessage(damage + " damage!");
+                gp.ui.addMessage( "Урон: " + damage );
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
 
                 if (gp.monster[i].life <= 0) {
                     gp.monster[i].dying = true;
-                    gp.ui.addMessage("killed the" + gp.monster[i].name + "!");
-                    gp.ui.addMessage("Exp +" + gp.monster[i].exp + "!");
+                    gp.ui.addMessage("Убит: " + gp.monster[i].name + "!");
+                    gp.ui.addMessage("Опыт + " + gp.monster[i].exp + "!");
                     exp += gp.monster[i].exp;
                     checkLevelUp();
                 }
