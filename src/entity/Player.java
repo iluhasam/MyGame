@@ -30,8 +30,8 @@ public class Player extends Entity {
         //SOLID AREA
         solidArea = new Rectangle();
         solidArea.x = 6;
-        solidArea.y = 16;
-        solidArea.width = 46;
+        solidArea.y = 14;
+        solidArea.width = 48;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
@@ -49,8 +49,6 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23 - (gp.tileSize/2);
         worldY = gp.tileSize * 21 - (gp.tileSize/2);
-//        worldX = gp.tileSize * 11 - (gp.tileSize/2);
-//        worldY = gp.tileSize * 14 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
 
@@ -66,7 +64,8 @@ public class Player extends Entity {
         exp = 0;
         nextLevelExp = 4;
         coin = 0;
-        currentWeapon = new OBJ_Sword_Start(gp);
+       // currentWeapon = new OBJ_Sword_Start(gp);
+        currentWeapon = new OBJ_Axe_Wood(gp);
         currentShield = new OBJ_Shield_Start(gp);
         projectile = new OBJ_Fireball(gp);
         //projectile = new OBJ_Rock(gp);
@@ -161,6 +160,9 @@ public class Player extends Entity {
             int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
+            //CHECK INTERACTIVE TILE COLLISION
+            int iTileIndex = gp.cCheker.checkEntity(this, gp.iTile);
+
 
             //CHECK EVENT
             gp.eHandler.checkEvent();
@@ -176,7 +178,7 @@ public class Player extends Entity {
             }
         }
 
-        if(keyH.enterPressed == true && attackCanceled == false){
+        if(keyH.enterPressed == true && attackCanceled == false) {
             gp.playSE(7);
             attacking = true;
             spriteCounter = 0;
@@ -268,6 +270,9 @@ public class Player extends Entity {
             //Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex, attack);
+
+            int iTileIndex = gp.cCheker.checkEntity(this, gp.iTile);
+            damageInteractiveTile(iTileIndex);
 
             //After checking collision
             worldX = currentWorldX;
@@ -361,6 +366,20 @@ public class Player extends Entity {
             }
         }
     }
+    public void damageInteractiveTile(int i){
+
+        if(i != 999 && gp.iTile[i].destructible == true &&
+                gp.iTile[i].isCorrectItem(this) == true && gp.iTile[i].invincible == false) {
+
+            gp.iTile[i].life--;
+            gp.iTile[i].invincible = true;
+            if(gp.iTile[i].life == 0){
+                gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+            }
+            gp.iTile[i].playSE();
+
+        }
+    }
     public void checkLevelUp(){
         if(exp >= nextLevelExp){
             level++;
@@ -398,7 +417,6 @@ public class Player extends Entity {
             }
         }
     }
-
     public void draw(Graphics2D g2){
 //        g2.setColor(Color.WHITE);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize );
@@ -481,6 +499,10 @@ public class Player extends Entity {
 
         //RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        //DEBUG COLLISION
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         //DEBUG invincible
 //        g2.setFont(new Font("Arial", Font.PLAIN, 26));

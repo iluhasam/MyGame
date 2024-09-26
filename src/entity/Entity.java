@@ -137,6 +137,7 @@ public class Entity {
         gp.cCheker.checkObject(this,false);
         gp.cCheker.checkEntity(this, gp.npc);
         gp.cCheker.checkEntity(this, gp.monster);
+        gp.cCheker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cCheker.checkPlayer(this);
 
 

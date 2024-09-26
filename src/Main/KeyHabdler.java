@@ -88,7 +88,7 @@ public class KeyHabdler implements KeyListener {
 
             }
         }
-        if (code == KeyEvent.VK_R){
+        if (code == KeyEvent.VK_Y){
             gp.tileM.loadMap("/maps/worldV2.txt");
         }
     }

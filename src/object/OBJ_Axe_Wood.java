@@ -8,12 +8,12 @@ public class OBJ_Axe_Wood extends Entity {
     public OBJ_Axe_Wood(GamePanel gp) {
         super(gp);
 
-        type = type_sword;
+        type = type_axe;
         name = "Деревянный топор";
         down1 = setup("/objects/axe_wood", gp.tileSize, gp.tileSize);
-        attackArea.width = 30;
-        attackArea.height = 30;
+        attackArea.width = 36;
+        attackArea.height = 36;
         attackValue = 2;
-        description = "[" + name + "]" + "\nПоменьше чем меч *_*";
+        description = "[" + name + "]" + "\nДеревья рубит) *_*";
     }
 }
