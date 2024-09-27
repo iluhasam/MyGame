@@ -24,6 +24,7 @@ public class UI {
     public int titleScreenState = 0;
     public int slotCol = 0;
     public int slotRow = 0;
+    public int subState = 0;
 
 
 
@@ -86,6 +87,10 @@ public class UI {
             drawCharacterScreen();
             drawInventory();
         }
+        //OPTIONS STATE
+        if(gp.gameState == gp.optionsState){
+            drawOptionsScreen();
+        }
     }
     public void drawPlayerLife(){
 
@@ -138,6 +143,7 @@ public class UI {
             x +=35;
         }
     }
+
     public void drawMessage(){
         int messageX = gp.tileSize;
         int messageY = gp.tileSize*4;
@@ -354,7 +360,7 @@ public class UI {
         int frameX = gp.tileSize*12;
         int frameY = gp.tileSize;
         int frameWidth = gp.tileSize*6;
-        int frameHeight = gp.tileSize*4;
+        int frameHeight = gp.tileSize*5;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         //SLOT
@@ -416,6 +422,225 @@ public class UI {
                 textY += 32;
             }
 
+        }
+
+    }
+
+    public void drawOptionsScreen(){
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(32F));
+
+        //SUB WINDOW
+        int frameX = gp.tileSize*6;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize*8;
+        int frameHeight = gp.tileSize*10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        switch (subState){
+            case 0:options_top(frameX, frameY);break;
+            case 1:options_fullScreenNotification(frameX,frameY);break;
+            case 2:options_control(frameX,frameY);break;
+            case 3:options_endGameConfirmation(frameX,frameY);break;
+        }
+
+        gp.keyH.enterPressed = false;
+    }
+
+    public void options_top(int frameX, int frameY){
+        int textX;
+        int textY;
+
+        //TITLE
+        String text = "Настройки";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        //FULL SCREEN ON/OFF
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize*2;
+        g2.drawString("Полноэкранный режим", textX, textY);
+        if(commandNum == 0){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                if(gp.fullScreenOn == false){
+                    gp.fullScreenOn = true;
+                }
+                else if(gp.fullScreenOn == true){
+                    gp.fullScreenOn = false;
+                }
+                subState = 1;
+            }
+        }
+
+        //MUSIC
+        textY += gp.tileSize;
+        g2.drawString("Музыка", textX, textY);
+        if(commandNum == 1){
+            g2.drawString(">", textX-25, textY);
+        }
+
+        //SE
+        textY += gp.tileSize;
+        g2.drawString("Звуковые эффекты", textX, textY);
+        if(commandNum == 2){
+            g2.drawString(">", textX-25, textY);
+        }
+
+        //CONTROL
+        textY += gp.tileSize;
+        g2.drawString("Управление", textX, textY);
+        if(commandNum == 3){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 2;
+                commandNum = 0;
+            }
+        }
+
+        //END GAME
+        textY += gp.tileSize;
+        g2.drawString("Выйти из игры", textX, textY);
+        if(commandNum == 4){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 3;
+                commandNum = 0;
+            }
+        }
+
+        //BACK
+        textY += gp.tileSize*2;
+        g2.drawString("Вернуться", textX, textY);
+        if(commandNum == 5){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                gp.gameState = gp.playState;
+                commandNum = 0;
+            }
+        }
+        //FULL SCREEN CHECK BOX
+        textX = frameX + (int)(gp.tileSize*5.5);
+        textY = frameY + gp.tileSize*2 + 42;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRect(textX, textY, 24, 24);
+        if(gp.fullScreenOn == true){
+            g2.fillRect(textX, textY, 24, 24);
+        }
+
+        //MUSIC VOLUME
+        textY += gp.tileSize;
+        g2.drawRect(textX, textY, 120, 24);
+        int volumeWidth = 24 * gp.music.volumeScale;
+        g2.fillRect(textX, textY, volumeWidth, 24);
+
+        //SE VOLUME
+        textY += gp.tileSize;
+        g2.drawRect(textX, textY, 120, 24);
+        volumeWidth = 24 * gp.se.volumeScale;
+        g2.fillRect(textX, textY, volumeWidth, 24);
+    }
+
+    public void options_fullScreenNotification(int frameX, int frameY){
+
+        int textX = frameX + gp.tileSize;
+        int textY = frameY + gp.tileSize*3;
+
+        currentDialogue = "Изменения вступят в силу \nпосле перезапуска игры ";
+        for(String line : currentDialogue.split("\n")){
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+
+        //BACK
+        textY = frameY + gp.tileSize*9;
+        g2.drawString("Вернуться", textX, textY);
+        if(commandNum == 0){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 0;
+            }
+        }
+    }
+
+    public void options_control(int frameX, int frameY){
+
+        int textX;
+        int textY;
+
+        //TITLE
+        String text = "Управление";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize;
+        g2.drawString("Движение", textX-20, textY); textY += gp.tileSize;
+        g2.drawString("Выбрать/Атака", textX-20, textY); textY += gp.tileSize;
+        g2.drawString("Стрельба/Атака(М)", textX-20, textY); textY += gp.tileSize;
+        g2.drawString("Экран персонажа", textX-20, textY); textY += gp.tileSize;
+        g2.drawString("Пауза", textX-20, textY); textY += gp.tileSize;
+        g2.drawString("Настройки", textX-20, textY); textY += gp.tileSize;
+
+
+        textX = frameX + gp.tileSize*6;
+        textY = frameY + gp.tileSize*2;
+        g2.drawString("W/S/A/D", textX-10, textY); textY += gp.tileSize;
+        g2.drawString("ENTER", textX-10, textY); textY += gp.tileSize;
+        g2.drawString("F", textX-10, textY); textY += gp.tileSize;
+        g2.drawString("C", textX-10, textY); textY += gp.tileSize;
+        g2.drawString("P", textX-10, textY); textY += gp.tileSize;
+        g2.drawString("ESC", textX-10, textY); textY += gp.tileSize;
+
+        //BACK
+        textX = frameX + gp.tileSize;
+        textY = frameY + gp.tileSize*9;
+        g2.drawString("Вернуться", textX, textY);
+        if(commandNum == 0){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 0;
+                commandNum = 3;
+            }
+        }
+    }
+    public void options_endGameConfirmation(int frameX, int frameY){
+
+        int textX = frameX + gp.tileSize;
+        int textY = frameY + gp.tileSize*3;
+
+        currentDialogue = "Выйти из игры\nи вернуться в начальное меню?";
+
+        for(String line : currentDialogue.split("\n")){
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+
+        //YES
+        String text = "Да";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize*3;
+        g2.drawString(text, textX, textY);
+        if(commandNum == 0){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 0;
+                gp.gameState = gp.titleState;
+            }
+        }
+        //NO
+        text = "Нет";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if(commandNum == 1){
+            g2.drawString(">", textX-25, textY);
+            if(gp.keyH.enterPressed == true){
+                subState = 0;
+                commandNum = 4;
+            }
         }
 
     }

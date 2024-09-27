@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
     Graphics2D g2;
+    public boolean fullScreenOn = false;
 
     //TILE
     TileManager tileM = new TileManager(this);
@@ -59,13 +60,14 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
-    //game state
+    //GAME STATE
     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int optionsState = 5;
 
 
     public GamePanel() {
@@ -96,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
         //GET LOCAL SCREEN DEVICE
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(Main.window);
+        //gd.setFullScreenWindow(Main.window);
 
         //GET FULL SCREEN WIDTH AND HEIGHT
         screenWidth2 = Main.window.getWidth();
