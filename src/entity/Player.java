@@ -2,11 +2,13 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHabdler;
-import object.*;
+import object.OBJ_Fireball;
+import object.OBJ_Key;
+import object.OBJ_Shield_Start;
+import object.OBJ_Sword_Start;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -15,8 +17,6 @@ public class Player extends Entity {
     public final int screenY;
     public int standCounter = 0;
     public boolean attackCanceled = false;
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHabdler keyH) {
 
@@ -38,7 +38,7 @@ public class Player extends Entity {
 
         //ATTACK AREA
 //        attackArea.width = 36;
-//        attackArea.height = 36;
+  //      attackArea.height = 36;
 
         setDefaultValues();
         getPlayerImage();
@@ -53,7 +53,7 @@ public class Player extends Entity {
 
         //map interior
         worldX = gp.tileSize * 12;//map interior01
-        worldY = gp.tileSize * 13;
+        worldY = gp.tileSize * 12;
 
         speed = 4;
         direction = "down";
@@ -70,8 +70,8 @@ public class Player extends Entity {
         exp = 0;
         nextLevelExp = 4;
         coin = 0;
-       // currentWeapon = new OBJ_Sword_Start(gp);
-        currentWeapon = new OBJ_Axe_Wood(gp);
+        currentWeapon = new OBJ_Sword_Start(gp);
+        //currentWeapon = new OBJ_Axe_Wood(gp);
         currentShield = new OBJ_Shield_Start(gp);
         projectile = new OBJ_Fireball(gp);
         //projectile = new OBJ_Rock(gp);

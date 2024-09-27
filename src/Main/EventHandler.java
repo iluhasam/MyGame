@@ -53,6 +53,7 @@ public class EventHandler {
                 else if (hit(0,23,12,"up") == true){healingPool(gp.dialogueState);}
                 else if(hit(0,10,39,"any")== true){teleport(1,12,13);}
                 else if(hit(1,12,13, "any")==true){teleport(0,10,39);}
+
             }
 
         }
@@ -116,4 +117,5 @@ public class EventHandler {
             canTouchEvent = false;
             gp.playSE(13);
         }
+
 }
