@@ -48,4 +48,9 @@ public class NPC_Trader extends Entity{
         inventory.add(new OBJ_Sword_Start(gp));
 
     }
+    public void speak(){
+        super.speak();
+        gp.gameState = gp.tradeState;
+        gp.ui.npc = this;
+    }
 }

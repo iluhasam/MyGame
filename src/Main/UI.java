@@ -25,6 +25,8 @@ public class UI {
     public int slotCol = 0;
     public int slotRow = 0;
     public int subState = 0;
+    public Entity npc;
+
 
 
 
@@ -94,6 +96,10 @@ public class UI {
         //GAME OVER STATE
         if(gp.gameState == gp.gameOverState){
             drawGameOverScreen();
+        }
+        //TRADE STATE
+        if(gp.gameState == gp.tradeState){
+            drawTradeScreen();
         }
     }
     public void drawPlayerLife(){
@@ -236,7 +242,7 @@ public class UI {
     public void drawDialogScreen(){
 
         //window
-        int x = gp.tileSize*2;
+        int x = gp.tileSize*3;
         int y = gp.tileSize/2;
         int width = gp.screenWidth - (gp.tileSize*6);
         int height = gp.tileSize*4;
@@ -687,6 +693,68 @@ public class UI {
                 commandNum = 4;
             }
         }
+
+    }
+
+    public void drawTradeScreen(){
+        switch (subState){
+            case 0:trade_select();break;
+            case 1:trade_buy();break;
+            case 2:trade_sell();break;
+        }
+        gp.keyH.enterPressed = false;
+    }
+
+    public void trade_select(){
+        drawDialogScreen();
+
+        //DRAW WINDOW
+        int x = gp.tileSize*15;
+        int y = gp.tileSize*4;
+        int width = (int)(gp.tileSize * 3.5);
+        int height = (int)(gp.tileSize * 3.5);
+        drawSubWindow(x,y,width,height);
+
+        //DRAW TEXT
+        x += gp.tileSize-20;
+        y += gp.tileSize;
+        g2.drawString("Купить",x,y);
+        if(commandNum == 0){
+            g2.drawString(">", x-20,y);
+            if(gp.keyH.enterPressed == true){
+                subState = 1;
+            }
+        }
+        y += gp.tileSize;
+
+        g2.drawString("Продать",x,y);
+        if(commandNum == 1){
+            g2.drawString(">", x-20,y);
+            if(gp.keyH.enterPressed == true){
+                subState = 2;
+            }
+        }
+        y += gp.tileSize;
+
+        g2.drawString("Выйти",x,y);
+        if(commandNum == 2){
+            g2.drawString(">", x-20,y);
+            if(gp.keyH.enterPressed == true){
+                commandNum = 0;
+                gp.gameState = gp.dialogueState;
+                currentDialogue = "Приходи ещё, хи-хи-хи!!!";
+            }
+        }
+        y += gp.tileSize;
+
+
+    }
+
+    public void trade_buy(){
+
+    }
+
+    public void trade_sell(){
 
     }
 
