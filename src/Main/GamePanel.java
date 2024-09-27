@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Assets assets = new Assets(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread;
 
     //ENTITY AND OBJ
@@ -92,18 +93,22 @@ public class GamePanel extends JPanel implements Runnable {
         tempScreen = new BufferedImage(screenWidth, screenHeight,BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D) tempScreen.getGraphics();
 
-        setFullscreen();
+        if(fullScreenOn == true){
+            setFullscreen();
+        }
     }
+
     public void setFullscreen(){
         //GET LOCAL SCREEN DEVICE
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        //gd.setFullScreenWindow(Main.window);
+        gd.setFullScreenWindow(Main.window);
 
         //GET FULL SCREEN WIDTH AND HEIGHT
         screenWidth2 = Main.window.getWidth();
         screenHeight2 = Main.window.getHeight();
     }
+
     public void startGameTread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -142,6 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
+
     public void update() {
 
         if(gameState == playState) {
@@ -195,6 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
     }
+
     public void drawToTempScreen() {
         //DEBUG
         long drawStart = 0;
@@ -294,19 +301,23 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
+
     public void drawToScreen(){
         Graphics g = getGraphics();
         g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2,  null);
         g.dispose();
     }
+
     public void playMusic(int i){
         music.setFile(i);
         music.play();
         music.loop();
     }
+
     public void stopMusic(){
         se.stop();
     }
+
     public void playSE(int i){
         se.setFile(i);
         se.play();
