@@ -15,5 +15,6 @@ public class OBJ_Axe_Wood extends Entity {
         attackArea.height = 36;
         attackValue = 2;
         description = "[" + name + "]" + "\nДеревья рубит) *_*";
+        price = 10;
     }
 }

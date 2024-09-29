@@ -12,5 +12,6 @@ public class OBJ_Stick extends Entity {
         down1 = setup("/objects/stick", gp.tileSize, gp.tileSize);
         defenseValue = 1;
         description = "[" + name + "]" + "\nПросто палка!.";
+        price = 9999;
     }
 }

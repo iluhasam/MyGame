@@ -19,5 +19,6 @@ public class OBJ_Coin_Bronze extends Entity {
         gp.playSE(1);
         gp.ui.addMessage("Монета + " + value );
         gp.player.coin += value;
+
     }
 }

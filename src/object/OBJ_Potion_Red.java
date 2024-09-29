@@ -11,6 +11,7 @@ public class OBJ_Potion_Red extends Entity {
         type = type_consumable;
         name = "Фласка здоровья";
         value = 5;
+        price = 75;
         down1 = setup("/objects/potion_hil", gp.tileSize, gp.tileSize);
         description = "[" + name + "]" + "\nВосполняет здоровье на " + value + ".";
 

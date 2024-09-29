@@ -15,6 +15,7 @@ public class OBJ_Sword_Start extends Entity {
         attackArea.height = 36;
         attackValue = 1;
         description = "[" + name + "]"+"\nСтарый меч.";
+        price = 15;
 
     }
 }

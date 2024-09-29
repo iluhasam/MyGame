@@ -11,6 +11,7 @@ public class OBJ_Shield_Start extends Entity {
         down1 = setup("/objects/shield", gp.tileSize, gp.tileSize);
         defenseValue = 1;
         description = "[" + name + "]" + "\nСделан из дерева.";
+        price = 15;
 
     }
 
