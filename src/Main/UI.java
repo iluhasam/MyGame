@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+//import static jdk.jfr.internal.test.DeprecatedMethods.counter;
+
 public class UI {
     GamePanel gp;
     Graphics2D g2;
@@ -106,6 +108,10 @@ public class UI {
         //TRADE STATE
         if(gp.gameState == gp.tradeState){
             drawTradeScreen();
+        }
+        //SLEEP STATE
+        if(gp.gameState == gp.sleepState){
+            drawSleepScreen();
         }
     }
 
@@ -929,6 +935,29 @@ public class UI {
                     }
                     gp.player.coin += price;
                 }
+            }
+        }
+    }
+
+    public void drawSleepScreen(){
+
+        commandNum++;
+
+        if(commandNum < 120){
+            gp.eManager.lighting.filterAlpha += 0.01f;
+            if(gp.eManager.lighting.filterAlpha > 1f){
+                gp.eManager.lighting.filterAlpha = 1f;
+            }
+        }
+        if(commandNum >= 120){
+            gp.eManager.lighting.filterAlpha -= 0.01f;
+            if(gp.eManager.lighting.filterAlpha <= 0f){
+                gp.eManager.lighting.filterAlpha = 0f;
+                commandNum = 0;
+                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+                gp.eManager.lighting.dayCounter = 0;
+                gp.gameState = gp.playState;
+                gp.player.getPlayerImage();
             }
         }
     }

@@ -128,6 +128,28 @@ public class Player extends Entity {
         right3 = setup("/player/right3",gp.tileSize, gp.tileSize);
         right4 = setup("/player/right4",gp.tileSize, gp.tileSize);
     }
+    public void getSleepingImage(BufferedImage image){
+        up = image;
+        up1 =image;
+        up2 = image;
+        up3 = image;
+        up4 = image;
+        down = image;
+        down1 = image;
+        down2 = image;
+        down3 = image;
+        down4 = image;
+        left = image;
+        left1 = image;
+        left2 = image;
+        left3 = image;
+        left4 = image;
+        right = image;
+        right1 = image;
+        right2 = image;
+        right3 = image;
+        right4 = image;
+    }
     public void getPlayerAttackImage(){
         attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
         attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
