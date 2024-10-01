@@ -1,5 +1,6 @@
 package Main;
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 20;
-    public int currentMap = 1;
+    public int currentMap = 0;
 
 
     //FOR FULL SCREEN
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean fullScreenOn = false;
 
     //TILE
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHabdler keyH = new KeyHabdler(this);
 
     //sound
@@ -51,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Assets assets = new Assets(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    //Config config = new Config(this);
+    public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
 
     //ENTITY AND OBJ

@@ -48,8 +48,8 @@ public class Assets {
         int mapNum = 0;
         int i = 0;
         gp.npc[mapNum][i] = new NPC_OldMan(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize * 10;
-        gp.npc[mapNum][i].worldY = gp.tileSize * 10;
+        gp.npc[mapNum][i].worldX = gp.tileSize * 25;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 23;
         i++;
 
         //MAP 1

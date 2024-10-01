@@ -32,7 +32,7 @@ public class Player extends Entity {
         solidArea.x = 6;
         solidArea.y = 14;
         solidArea.width = 48;
-        solidArea.height = 32;
+        solidArea.height = 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
@@ -48,12 +48,12 @@ public class Player extends Entity {
     }
     public void setDefaultValues() {
         //mapv3
-//        worldX = gp.tileSize * 23;// - (gp.tileSize/2);
-//        worldY = gp.tileSize * 21;// - (gp.tileSize/2);
+        worldX = gp.tileSize * 23;// - (gp.tileSize/2);
+        worldY = gp.tileSize * 21;// - (gp.tileSize/2);
 
         //map interior
-        worldX = gp.tileSize * 12;//map interior01
-        worldY = gp.tileSize * 12;
+//        worldX = gp.tileSize * 13;//map interior01
+//        worldY = gp.tileSize * 12;
 
         speed = 4;
         direction = "down";
@@ -69,7 +69,7 @@ public class Player extends Entity {
         agility = 1;
         exp = 0;
         nextLevelExp = 4;
-        coin = 9999;
+        coin = 100;
         currentWeapon = new OBJ_Sword_Start(gp);
         //currentWeapon = new OBJ_Axe_Wood(gp);
         currentShield = new OBJ_Shield_Start(gp);

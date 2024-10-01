@@ -38,6 +38,7 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     boolean hpBarOn = false;
+    public boolean onPath = false;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -79,7 +80,7 @@ public class Entity {
     public int defenseValue;
     public String description = " ";
     public int useCost;
-    public int price; 
+    public int price;
 
     //TYPE
     public int type;  // 0 = player, 1 = npc, 2 = monster
@@ -165,10 +166,7 @@ public class Entity {
         gp.particleList.add(p3);
         gp.particleList.add(p4);
     }
-    public void update(){
-
-            setAction();
-
+    public void checkCollision(){
         collisionOn = false;
         gp.cCheker.checkTile(this);
         gp.cCheker.checkObject(this,false);
@@ -177,10 +175,15 @@ public class Entity {
         gp.cCheker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cCheker.checkPlayer(this);
 
-
         if(this.type == type_monster && contactPlayer == true){
-           damagePlayer(attack);
+            damagePlayer(attack);
         }
+    }
+    public void update(){
+
+        setAction();
+        checkCollision();
+
 
 
         if(collisionOn == false){
@@ -331,5 +334,78 @@ public class Entity {
     public void changeAlpha(Graphics2D g2, float alphaValue){
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
+    public void searchPath(int goalCol, int goalRow){
 
+        int startCol = (worldX + solidArea.x)/gp.tileSize;
+        int startRow = (worldY + solidArea.y)/gp.tileSize;
+
+        gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if(gp.pFinder.search() == true){
+
+            //Next worldX, worldY
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+
+            //Entity solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
+                direction = "up";
+            }
+            else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
+                direction = "down";
+            }
+            else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
+                //LEFT OR RIGHT
+                if(enLeftX > nextX){
+                    direction = "left";
+                }
+                if(enLeftX < nextX){
+                    direction = "right";
+                }
+            }
+            else if(enTopY > nextY && enLeftX > nextX){
+                //UP OR LEFT
+                direction = "up";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "left";
+                }
+            }
+            else if(enTopY > nextY && enLeftX < nextX){
+                //UP OR RIGHT
+                direction = "up";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "right";
+                }
+            }
+            else if(enTopY < nextY && enLeftX > nextX){
+                //DOWN OR LEFT
+                direction = "down";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "left";
+                }
+            }
+            else if(enTopY < nextY && enLeftX < nextX){
+                //DOWN OR RIGHT
+                direction = "down";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "right";
+                }
+            }
+            //If reaches the goal, stop search
+            int nextCol = gp.pFinder.pathList.get(0).col;
+            int nextRow = gp.pFinder.pathList.get(0).row;
+            if(nextCol == goalCol && nextRow == goalRow){
+                onPath = false;
+            }
+        }
+    }
 }
