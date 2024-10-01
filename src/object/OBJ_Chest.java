@@ -36,11 +36,10 @@ public class OBJ_Chest extends Entity {
             StringBuilder sb = new StringBuilder();
             sb.append("Ты открыл сундук и нашёл " + loot.name + "!");
 
-            if(gp.player.inventory.size() == gp.player.maxInventorySize){
+            if(gp.player.canObtainItem(loot) == false){
                 sb.append("\n... Ты не можешь нести больше");
             }else {
                 sb.append("\nТы получил " + loot.name + "!");
-                gp.player.inventory.add(loot);
                 down1 = image2;
                 opened = true;
             }
