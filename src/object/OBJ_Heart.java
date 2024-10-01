@@ -18,9 +18,10 @@ public class OBJ_Heart extends Entity {
         image3 = setup("/objects/life_2",gp.tileSize,gp.tileSize);
         image4 = setup("/objects/life_blank",gp.tileSize,gp.tileSize);
     }
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.playSE(1);
         gp.ui.addMessage("Здоровье + " + value);
         entity.life += value;
+        return true;
     }
 }
