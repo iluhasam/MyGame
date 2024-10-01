@@ -16,5 +16,6 @@ public class OBJ_Axe_Wood extends Entity {
         attackValue = 2;
         description = "[" + name + "]" + "\nДеревья рубит) *_*";
         price = 10;
+        knockBackPower = 10;
     }
 }

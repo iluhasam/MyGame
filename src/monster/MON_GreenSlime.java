@@ -20,7 +20,8 @@ public class MON_GreenSlime extends Entity {
 
         type = type_monster;
         name = "Зеленый Слизень";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 8;
         life = maxLife;
         attack = 0;
@@ -56,7 +57,7 @@ public class MON_GreenSlime extends Entity {
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
 
-        if(onPath == false && tileDistance < 5){
+        if(onPath == false && tileDistance < 3){
 
             int i = new Random().nextInt(100)+1;
             if(i > 50){
@@ -76,9 +77,18 @@ public class MON_GreenSlime extends Entity {
             searchPath(goalCol, goalRow);
 
             int i = new Random().nextInt(100)+1;
-            if(i > 197 && projectile.alive == false && shotAvaliableCounter == 30){
+            if(i > 97 && projectile.alive == false && shotAvaliableCounter == 30){
                 projectile.set(worldX,worldY, direction, true, this);
-                gp.projectileList.add(projectile);
+                //gp.projectileList.add(projectile);
+
+
+                //CHECK PROJECTILE
+                for(int ii = 0; ii < gp.projectile[1].length; ii++){
+                    if(gp.projectile[gp.currentMap][ii] == null){
+                        gp.projectile[gp.currentMap][ii] = projectile;
+                        break;
+                    }
+                }
                 shotAvaliableCounter = 0;
             }
         }

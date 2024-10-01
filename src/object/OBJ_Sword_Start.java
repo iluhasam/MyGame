@@ -16,6 +16,7 @@ public class OBJ_Sword_Start extends Entity {
         attackValue = 1;
         description = "[" + name + "]"+"\nСтарый меч.";
         price = 15;
+        knockBackPower = 3;
 
     }
 }
