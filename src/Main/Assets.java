@@ -3,6 +3,7 @@ package Main;
 import entity.NPC_OldMan;
 import entity.NPC_Trader;
 import monster.MON_GreenSlime;
+import monster.MON_Orc;
 import object.*;
 import tile_interactive.IT_DryTree;
 
@@ -106,7 +107,7 @@ public class Assets {
         gp.monster[mapNum][i].worldY = gp.tileSize * 36;
         i++;
         gp.monster[mapNum][i]= new MON_GreenSlime(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 24;
+        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
         gp.monster[mapNum][i].worldY = gp.tileSize * 37;
         i++;
         gp.monster[mapNum][i]= new MON_GreenSlime(gp);
@@ -117,9 +118,17 @@ public class Assets {
         gp.monster[mapNum][i].worldX = gp.tileSize * 34;
         gp.monster[mapNum][i].worldY = gp.tileSize * 42;
         i++;
-        gp.monster[mapNum][i]= new MON_GreenSlime(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 38;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 42;
+        gp.monster[mapNum][i]= new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+        i++;
+        gp.monster[mapNum][i]= new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 34;
+        i++;
+        gp.monster[mapNum][i]= new MON_Orc(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 13;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
         i++;
 
         //Мобы на новой карте добавляются так ->

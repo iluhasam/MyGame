@@ -23,7 +23,13 @@ public class CollisionCheker {
 
         int tileNum1, tileNum2;
 
-        switch (entity.direction) {
+        //use direction knockback
+        String direction = entity.direction;
+        if(entity.knockBack == true){
+            direction = entity.knockBackDiraction;
+        }
+
+        switch (direction) {
             case "up":
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
@@ -99,6 +105,12 @@ public class CollisionCheker {
     public int checkEntity(Entity entity,Entity[][] target){
         int index = 999;
 
+        //use direction knockback
+        String direction = entity.direction;
+        if(entity.knockBack == true){
+            direction = entity.knockBackDiraction;
+        }
+
         for (int i = 0; i < target[1].length; i++) {
 
             if (target[gp.currentMap][i] != null) {
@@ -109,7 +121,7 @@ public class CollisionCheker {
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX + target[gp.currentMap][i].solidArea.x;
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
 
-                switch (entity.direction) {
+                switch (direction) {
                     case "up": entity.solidArea.y -= entity.speed;break;
                     case "down": entity.solidArea.y += entity.speed;break;
                     case "left": entity.solidArea.x -= entity.speed;break;

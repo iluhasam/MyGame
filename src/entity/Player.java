@@ -31,15 +31,15 @@ public class Player extends Entity {
         //SOLID AREA
         solidArea = new Rectangle();
         solidArea.x = 6;
-        solidArea.y = 14;
+        solidArea.y = 32;
         solidArea.width = 48;
-        solidArea.height = 42;
+        solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
         //ATTACK AREA
-//      attackArea.width = 36;
-//      attackArea.height = 36;
+//      attackArea.width = 64;
+//      attackArea.height = 64;
 
         setDefaultValues();
         getPlayerImage();
@@ -62,7 +62,7 @@ public class Player extends Entity {
 
         //PLAYER STATUS
         level =1;
-        maxLife = 9;
+        maxLife = 999;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
@@ -100,6 +100,8 @@ public class Player extends Entity {
     }
     public int getAttack(){
         attackArea = currentWeapon.attackArea;
+        motion1_duration = currentWeapon.motion1_duration;
+        motion2_duration = currentWeapon.motion2_duration;
         return attack = strength * currentWeapon.attackValue;
     }
     public int getDefense(){
@@ -151,6 +153,8 @@ public class Player extends Entity {
         right4 = image;
     }
     public void getPlayerAttackImage(){
+
+        if(currentWeapon.type == type_sword){
         attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
         attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
         attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
@@ -167,6 +171,25 @@ public class Player extends Entity {
         attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
         attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
         attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
+        }
+        if(currentWeapon.type == type_axe){
+            attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
+            attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
+            attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
+            attackUp4 = setup("/player/attack_up4",gp.tileSize*3, gp.tileSize*2);
+            attackDown1 = setup("/player/attack_down1",gp.tileSize*3, gp.tileSize*2);
+            attackDown2 = setup("/player/attack_down2",gp.tileSize*3, gp.tileSize*2);
+            attackDown3 = setup("/player/attack_down3",gp.tileSize*3, gp.tileSize*2);
+            attackDown4 = setup("/player/attack_down4",gp.tileSize*3, gp.tileSize*2);
+            attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize*3);
+            attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize*3);
+            attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize*3);
+            attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize*3);
+            attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize*3);
+            attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
+            attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
+            attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
+        }
     }
     public void update() {
 
@@ -294,12 +317,11 @@ public class Player extends Entity {
 
     }
     public void attacking(){
-
         spriteCounter++;
 
         if (spriteCounter <= 5) {
             spriteNum = 1;
-        } else if (spriteCounter > 5 && spriteCounter <= 25) {
+        } else if (spriteCounter > 5 && spriteCounter <= 10) {
             spriteNum = 2;
 
             //Save the current worldX, worldY solidArea
@@ -322,7 +344,7 @@ public class Player extends Entity {
 
             //Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
+            damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
 
             int iTileIndex = gp.cCheker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
@@ -337,11 +359,11 @@ public class Player extends Entity {
             solidArea.height = solidAreaHeight;
 
             //SPEED ANIMATION ATTACKING
-        } else if (spriteCounter > 20 && spriteCounter <= 30) {
+        } else if (spriteCounter > 10 && spriteCounter <= 15) {
             spriteNum = 3;
-        } else if (spriteCounter > 30 && spriteCounter <= 40) {
+        } else if (spriteCounter > 15 && spriteCounter <= 20) {
             spriteNum = 4;
-        } else if (spriteCounter > 40) {
+        } else if (spriteCounter > 25) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false; // Сбрасываем атаку
@@ -406,13 +428,13 @@ public class Player extends Entity {
             }
         }
     }
-    public void damageMonster(int i, int attack, int knockBackPower ) {
+    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower ) {
         if (i != 999){// && i >= 0 && i < gp.monster.length) { // Проверка индекса
             if (gp.monster[gp.currentMap][i] != null && gp.monster[gp.currentMap][i].invincible == false) {
                 gp.playSE(5);
 
                 if(knockBackPower > 0){
-                    knockBack(gp.monster[gp.currentMap][i],knockBackPower);
+                    setKnockBack(gp.monster[gp.currentMap][i], attacker, knockBackPower);
                 }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
@@ -433,12 +455,6 @@ public class Player extends Entity {
                 }
             }
         }
-    }
-    public void knockBack(Entity entity, int knockBackPower){
-
-        entity.direction = direction;
-        entity.speed += knockBackPower;
-        entity.knockBack = true;
     }
     public void damageInteractiveTile(int i){
 

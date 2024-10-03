@@ -17,5 +17,7 @@ public class OBJ_Axe_Wood extends Entity {
         description = "[" + name + "]" + "\nДеревья рубит) *_*";
         price = 10;
         knockBackPower = 10;
+        motion1_duration = 20;
+        motion2_duration = 45;
     }
 }

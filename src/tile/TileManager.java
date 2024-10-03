@@ -46,7 +46,7 @@ public class TileManager {
         getTileImage();
 
         //get maxWorldCol && Row
-        is = getClass().getResourceAsStream("/maps/sample.txt");
+        is = getClass().getResourceAsStream("/maps/worldmap.txt");
         br = new BufferedReader(new InputStreamReader(is));
 
         try{
@@ -63,9 +63,9 @@ public class TileManager {
             System.out.println("Exception");
         }
 
-        loadMap("/maps/sample.txt",0);
-//    loadMap("/maps/worldV3.txt",0);
-//    loadMap("/maps/interior01.txt",1);
+        //loadMap("/maps/sample.txt",0);
+    loadMap("/maps/worldmap.txt",0);
+    //loadMap("/maps/interior01.txt",1);
     }
     public void getTileImage(){
 
