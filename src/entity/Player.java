@@ -49,7 +49,7 @@ public class Player extends Entity {
     }
     public void setDefaultValues() {
         //mapv3
-        worldX = gp.tileSize * 23;// - (gp.tileSize/2);
+        worldX = gp.tileSize * 21;// - (gp.tileSize/2);
         worldY = gp.tileSize * 21;// - (gp.tileSize/2);
 
         //map interior

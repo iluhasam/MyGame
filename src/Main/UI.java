@@ -17,7 +17,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     BufferedImage life_full, life_1, life_2, life_blank, crystal_full, crystal_blank, coin;
-    Font maruMonica;
+    public Font maruMonica;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
