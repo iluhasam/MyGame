@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class Sound {
     Clip clip;
-    URL soundURL[] = new URL[30];
+    URL soundURL [] = new URL[30];
     FloatControl fc;
     int volumeScale = 3;
     float volume;
@@ -29,6 +29,7 @@ public class Sound {
         soundURL[12] = getClass().getResource("/sound/gameover.wav");
         soundURL[13] = getClass().getResource("/sound/stairs.wav");
         soundURL[14] = getClass().getResource("/sound/sleep.wav");
+
     }
 
     public void setFile(int i){
@@ -41,17 +42,8 @@ public class Sound {
                 checkVolume();
             }
         }catch (Exception e){
-
+            e.printStackTrace();  // Вывод всех деталей ошибки
         }
-    }
-    public void play(){
-        clip.start();
-    }
-    public void loop(){
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
-    public void stop(){
-        clip.stop();
     }
     public void checkVolume(){
         switch (volumeScale){
@@ -64,4 +56,14 @@ public class Sound {
         }
         fc.setValue(volume);
     }
+    public void play(){
+        clip.start();
+    }
+    public void loop(){
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+    public void stop(){
+        clip.stop();
+    }
+
 }

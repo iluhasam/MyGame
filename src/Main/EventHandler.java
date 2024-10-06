@@ -103,10 +103,12 @@ public class EventHandler {
             if(gp.keyH.enterPressed == true){
                 gp.gameState = gameState;
                 gp.player.attackCanceled = true;
-                gp.ui.currentDialogue = "Ты попил мочи\n Радуйся жизни! ";
+                gp.ui.currentDialogue = "Ты попил воды\nРадуйся жизни!\n(Прогресс сохранён) ";
                 gp.player.life = gp.player.maxLife;
                 gp.player.mana = gp.player.maxMana;
                 gp.assets.setMonster();
+                gp.saveLoad.save();
+                //gp.playSE(2);
 
             }
         }

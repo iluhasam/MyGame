@@ -22,11 +22,11 @@ public class MON_GreenSlime extends Entity {
         name = "Зеленый Слизень";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 8;
+        maxLife = 1;
         life = maxLife;
         attack = 0;
         defense = 0;
-        exp = 2;
+        exp = 10;
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
@@ -52,22 +52,22 @@ public class MON_GreenSlime extends Entity {
     }
     public void setAction(){
 
-        if(onPath == true){
-            //STOP CHASING
-            checkStopChasingOrNot(gp.player, 10, 100);
+            if(onPath == true){
+                //STOP CHASING
+                checkStopChasingOrNot(gp.player, 10, 100);
 
-            //НЕПИСЬ СЛЕДУЕТ ЗА ТОБОЙ( НАДО В ENTITY УБИРАТЬ, КАК ТОЛЬКО ПОГОВОРИЛ СРАЗУ ББ)
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+                //НЕПИСЬ СЛЕДУЕТ ЗА ТОБОЙ( НАДО В ENTITY УБИРАТЬ, КАК ТОЛЬКО ПОГОВОРИЛ СРАЗУ ББ)
+                searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
-            //Проверка выстрела projectile
-            checkShootOrNot(200, 30);
-        }else {
-            //START CHASING
-            checkStartChasingOrNot(gp.player, 5, 100);
+                //Проверка выстрела projectile
+                checkShootOrNot(200, 30);
+            }else {
+                //START CHASING
+                checkStartChasingOrNot(gp.player, 5, 100);
 
-            //Рандои направление
-            getRandomDirection();
-        }
+                //Рандои направление
+                getRandomDirection();
+            }
     }
     public void damageReaction(){
         actionLockCounter = 0;

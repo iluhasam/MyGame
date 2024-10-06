@@ -1,6 +1,7 @@
 package Main;
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public PathFinder pFinder = new PathFinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread;
 
     //ENTITY AND OBJ
@@ -89,7 +91,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
     }
-
     public void setupGame(){
 
         assets.setObject();
@@ -106,25 +107,19 @@ public class GamePanel extends JPanel implements Runnable {
 
         setFullscreen();
     }
+    public void resetGame(boolean restart){
 
-    public void retry(){
         player.setDefaultPosition();
         player.restoreLifeAndMana();
         assets.setNPC();
         assets.setMonster();
-    }
 
-    public void restart(){
-        player.setDefaultValues();
-        player.setDefaultPosition();
-        player.restoreLifeAndMana();
-        player.setItems();
-        assets.setNPC();
-        assets.setMonster();
-        assets.setInteractiveTile();
-        assets.setObject();
+        if(restart == true){
+            player.setDefaultValues();
+            assets.setObject();
+            assets.setInteractiveTile();
+        }
     }
-
     public void setFullscreen(){
         //GET LOCAL SCREEN DEVICE
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

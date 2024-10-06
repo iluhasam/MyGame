@@ -42,12 +42,11 @@ public class Player extends Entity {
 //      attackArea.height = 64;
 
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItems();
+
 
     }
     public void setDefaultValues() {
+
         //mapv3
         worldX = gp.tileSize * 21;// - (gp.tileSize/2);
         worldY = gp.tileSize * 21;// - (gp.tileSize/2);
@@ -62,7 +61,7 @@ public class Player extends Entity {
 
         //PLAYER STATUS
         level =1;
-        maxLife = 999;
+        maxLife = 9;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
@@ -79,6 +78,9 @@ public class Player extends Entity {
         //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
+        getPlayerImage();
+        getPlayerAttackImage();
+        setItems();
     }
     public void setDefaultPosition() {
         worldX = gp.tileSize * 23;
@@ -107,28 +109,58 @@ public class Player extends Entity {
     public int getDefense(){
         return defense = strength * currentShield.defenseValue;
     }
+    public int getCurrentWeaponSlot(){
+        int currentWeaponSlot = 0;
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i) == currentWeapon){
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+    public int getCurrentShieldSlot(){
+        int currentShieldSlot = 0;
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i) == currentShield){
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
+    }
     public void getPlayerImage(){
 
-        up = setup("/player/up", gp.tileSize, gp.tileSize);
-        up1 = setup("/player/up1",gp.tileSize, gp.tileSize);
-        up2 = setup("/player/up2",gp.tileSize, gp.tileSize);
-        up3 = setup("/player/up3",gp.tileSize, gp.tileSize);
-        up4 = setup("/player/up4",gp.tileSize, gp.tileSize);
-        down = setup("/player/down",gp.tileSize, gp.tileSize);
-        down1 = setup("/player/down1",gp.tileSize, gp.tileSize);
-        down2 = setup("/player/down2",gp.tileSize, gp.tileSize);
-        down3 = setup("/player/down3",gp.tileSize, gp.tileSize);
-        down4 = setup("/player/down4",gp.tileSize, gp.tileSize);
-        left = setup("/player/left",gp.tileSize, gp.tileSize);
-        left1 = setup("/player/left1",gp.tileSize, gp.tileSize);
-        left2 = setup("/player/left2",gp.tileSize, gp.tileSize);
-        left3 = setup("/player/left3",gp.tileSize, gp.tileSize);
-        left4 = setup("/player/left4",gp.tileSize, gp.tileSize);
-        right = setup("/player/right",gp.tileSize, gp.tileSize);
-        right1 = setup("/player/right1",gp.tileSize, gp.tileSize);
-        right2 = setup("/player/right2",gp.tileSize, gp.tileSize);
-        right3 = setup("/player/right3",gp.tileSize, gp.tileSize);
-        right4 = setup("/player/right4",gp.tileSize, gp.tileSize);
+        up = setup("/player/walk/up", gp.tileSize, gp.tileSize);
+        up1 = setup("/player/walk/up1",gp.tileSize, gp.tileSize);
+        up2 = setup("/player/walk/up2",gp.tileSize, gp.tileSize);
+        up3 = setup("/player/walk/up3",gp.tileSize, gp.tileSize);
+        up4 = setup("/player/walk/up4",gp.tileSize, gp.tileSize);
+        up5 = setup("/player/walk/up5",gp.tileSize, gp.tileSize);
+        up6 = setup("/player/walk/up6",gp.tileSize, gp.tileSize);
+        up7 = setup("/player/walk/up7",gp.tileSize, gp.tileSize);
+        down = setup("/player/walk/down",gp.tileSize, gp.tileSize);
+        down1 = setup("/player/walk/down1",gp.tileSize, gp.tileSize);
+        down2 = setup("/player/walk/down2",gp.tileSize, gp.tileSize);
+        down3 = setup("/player/walk/down3",gp.tileSize, gp.tileSize);
+        down4 = setup("/player/walk/down4",gp.tileSize, gp.tileSize);
+        down5 = setup("/player/walk/down5",gp.tileSize, gp.tileSize);
+        down6 = setup("/player/walk/down6",gp.tileSize, gp.tileSize);
+        down7 = setup("/player/walk/down7",gp.tileSize, gp.tileSize);
+        left = setup("/player/walk/left",gp.tileSize, gp.tileSize);
+        left1 = setup("/player/walk/left1",gp.tileSize, gp.tileSize);
+        left2 = setup("/player/walk/left2",gp.tileSize, gp.tileSize);
+        left3 = setup("/player/walk/left3",gp.tileSize, gp.tileSize);
+        left4 = setup("/player/walk/left4",gp.tileSize, gp.tileSize);
+        left5 = setup("/player/walk/left5",gp.tileSize, gp.tileSize);
+        left6 = setup("/player/walk/left6",gp.tileSize, gp.tileSize);
+        left7 = setup("/player/walk/left7",gp.tileSize, gp.tileSize);
+        right = setup("/player/walk/right",gp.tileSize, gp.tileSize);
+        right1 = setup("/player/walk/right1",gp.tileSize, gp.tileSize);
+        right2 = setup("/player/walk/right2",gp.tileSize, gp.tileSize);
+        right3 = setup("/player/walk/right3",gp.tileSize, gp.tileSize);
+        right4 = setup("/player/walk/right4",gp.tileSize, gp.tileSize);
+        right5 = setup("/player/walk/right5",gp.tileSize, gp.tileSize);
+        right6 = setup("/player/walk/right6",gp.tileSize, gp.tileSize);
+        right7 = setup("/player/walk/right7",gp.tileSize, gp.tileSize);
     }
     public void getSleepingImage(BufferedImage image){
         up = image;
@@ -155,41 +187,49 @@ public class Player extends Entity {
     public void getPlayerAttackImage(){
 
         if(currentWeapon.type == type_sword){
-        attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
-        attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
-        attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
-        attackUp4 = setup("/player/attack_up4",gp.tileSize*3, gp.tileSize*2);
-        attackDown1 = setup("/player/attack_down1",gp.tileSize*3, gp.tileSize*2);
-        attackDown2 = setup("/player/attack_down2",gp.tileSize*3, gp.tileSize*2);
-        attackDown3 = setup("/player/attack_down3",gp.tileSize*3, gp.tileSize*2);
-        attackDown4 = setup("/player/attack_down4",gp.tileSize*3, gp.tileSize*2);
-        attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize*3);
-        attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize*3);
-        attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize*3);
-        attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize*3);
-        attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize*3);
-        attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
-        attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
-        attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
+            attackUp1 = setup("/player/attack/attack_up1",gp.tileSize, gp.tileSize);
+            attackUp2 = setup("/player/attack/attack_up2",gp.tileSize, gp.tileSize);
+            attackUp3 = setup("/player/attack/attack_up3",gp.tileSize, gp.tileSize);
+            attackUp4 = setup("/player/attack/attack_up4",gp.tileSize, gp.tileSize);
+            attackUp5 = setup("/player/attack/attack_up5",gp.tileSize, gp.tileSize);
+            attackUp6 = setup("/player/attack/attack_up6",gp.tileSize, gp.tileSize);
+            attackDown1 = setup("/player/attack/attack_down1",gp.tileSize, gp.tileSize);
+            attackDown2 = setup("/player/attack/attack_down2",gp.tileSize, gp.tileSize);
+            attackDown3 = setup("/player/attack/attack_down3",gp.tileSize, gp.tileSize);
+            attackDown4 = setup("/player/attack/attack_down4",gp.tileSize, gp.tileSize);
+            attackDown5 = setup("/player/attack/attack_down5",gp.tileSize, gp.tileSize);
+            attackDown6 = setup("/player/attack/attack_down6",gp.tileSize, gp.tileSize);
+            attackLeft1 = setup("/player/attack/attack_left1",gp.tileSize, gp.tileSize);
+            attackLeft2 = setup("/player/attack/attack_left2",gp.tileSize, gp.tileSize);
+            attackLeft3 = setup("/player/attack/attack_left3",gp.tileSize, gp.tileSize);
+            attackLeft4 = setup("/player/attack/attack_left4",gp.tileSize, gp.tileSize);
+            attackLeft5 = setup("/player/attack/attack_left5",gp.tileSize, gp.tileSize);
+            attackLeft6 = setup("/player/attack/attack_left6",gp.tileSize, gp.tileSize);
+            attackRight1 = setup("/player/attack/attack_right1",gp.tileSize, gp.tileSize);
+            attackRight2 = setup("/player/attack/attack_right2",gp.tileSize, gp.tileSize);
+            attackRight3 = setup("/player/attack/attack_right3",gp.tileSize, gp.tileSize);
+            attackRight4 = setup("/player/attack/attack_right4",gp.tileSize, gp.tileSize);
+            attackRight5 = setup("/player/attack/attack_right5",gp.tileSize, gp.tileSize);
+            attackRight6 = setup("/player/attack/attack_right6",gp.tileSize, gp.tileSize);
         }
-        if(currentWeapon.type == type_axe){
-            attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
-            attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
-            attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
-            attackUp4 = setup("/player/attack_up4",gp.tileSize*3, gp.tileSize*2);
-            attackDown1 = setup("/player/attack_down1",gp.tileSize*3, gp.tileSize*2);
-            attackDown2 = setup("/player/attack_down2",gp.tileSize*3, gp.tileSize*2);
-            attackDown3 = setup("/player/attack_down3",gp.tileSize*3, gp.tileSize*2);
-            attackDown4 = setup("/player/attack_down4",gp.tileSize*3, gp.tileSize*2);
-            attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize*3);
-            attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize*3);
-            attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize*3);
-            attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize*3);
-            attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize*3);
-            attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
-            attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
-            attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
-        }
+//        if(currentWeapon.type == type_axe){
+//            attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
+//            attackUp2 = setup("/player/attack_up2",gp.tileSize*3, gp.tileSize*2);
+//            attackUp3 = setup("/player/attack_up3",gp.tileSize*3, gp.tileSize*2);
+//            attackUp4 = setup("/player/attack_up4",gp.tileSize*3, gp.tileSize*2);
+//            attackDown1 = setup("/player/attack_down1",gp.tileSize*3, gp.tileSize*2);
+//            attackDown2 = setup("/player/attack_down2",gp.tileSize*3, gp.tileSize*2);
+//            attackDown3 = setup("/player/attack_down3",gp.tileSize*3, gp.tileSize*2);
+//            attackDown4 = setup("/player/attack_down4",gp.tileSize*3, gp.tileSize*2);
+//            attackLeft1 = setup("/player/attack_left1",gp.tileSize*2, gp.tileSize*3);
+//            attackLeft2 = setup("/player/attack_left2",gp.tileSize*2, gp.tileSize*3);
+//            attackLeft3 = setup("/player/attack_left3",gp.tileSize*2, gp.tileSize*3);
+//            attackLeft4 = setup("/player/attack_left4",gp.tileSize*2, gp.tileSize*3);
+//            attackRight1 = setup("/player/attack_right1",gp.tileSize*2, gp.tileSize*3);
+//            attackRight2 = setup("/player/attack_right2",gp.tileSize*2, gp.tileSize*3);
+//            attackRight3 = setup("/player/attack_right3",gp.tileSize*2, gp.tileSize*3);
+//            attackRight4 = setup("/player/attack_right4",gp.tileSize*2, gp.tileSize*3);
+//        }
     }
     public void update() {
 
@@ -234,10 +274,10 @@ public class Player extends Entity {
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(collisionOn == false && keyH.enterPressed == false) {
                 switch (direction) {
-                case "up":worldY -= speed;break;
-                case "down":worldY += speed;break;
-                case "left":worldX -= speed;break;
-                case "right":worldX += speed;break;
+                    case "up":worldY -= speed;break;
+                    case "down":worldY += speed;break;
+                    case "left":worldX -= speed;break;
+                    case "right":worldX += speed;break;
                 }
             }
         }
@@ -260,7 +300,7 @@ public class Player extends Entity {
             spriteCounter++;
             if (spriteCounter > 11) {
                 spriteNum++;
-                if (spriteNum > 5) {
+                if (spriteNum > 8) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
@@ -363,8 +403,14 @@ public class Player extends Entity {
             spriteNum = 3;
         } else if (spriteCounter > 15 && spriteCounter <= 20) {
             spriteNum = 4;
-        } else if (spriteCounter > 25) {
-            spriteNum = 1;
+        }
+        else if (spriteCounter > 25 && spriteCounter <= 30) {
+            spriteNum = 5;
+            spriteCounter = 0;
+            attacking = false; // Сбрасываем атаку
+        }
+        else if (spriteCounter > 30 ) {
+            spriteNum = 6;
             spriteCounter = 0;
             attacking = false; // Сбрасываем атаку
         }
@@ -407,16 +453,16 @@ public class Player extends Entity {
         if(gp.keyH.enterPressed == true){
             if(i != 999){
                 attackCanceled = true;
-                   gp.gameState = gp.dialogueState;
-                    gp.npc[gp.currentMap][i].speak();}
+                gp.gameState = gp.dialogueState;
+                gp.npc[gp.currentMap][i].speak();}
 
         }
     }
     public void contactMonster(int i){
 //        if(i != 999 &&i >-0 && i < gp.monster.length){
 //            if(gp.monster[i] !=null && invincible == false){
-            if( i != 999){
-                if(invincible == false && gp.monster[gp.currentMap][i].dying == false){
+        if( i != 999){
+            if(invincible == false && gp.monster[gp.currentMap][i].dying == false){
                 gp.playSE(6);
                 int damage = gp.monster[gp.currentMap][i].attack - defense;
                 if(damage < 0 ) {
@@ -494,7 +540,7 @@ public class Player extends Entity {
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "Твой уровень " + level + " сейчас \n"
-            + "Ты чувствуешь себя сильнее!";
+                    + "Ты чувствуешь себя сильнее!";
 
         }
     }
@@ -591,59 +637,83 @@ public class Player extends Entity {
                     if(spriteNum == 3) {image = up2;}
                     if(spriteNum == 4) {image = up3;}
                     if(spriteNum == 5) {image = up4;}
+                    if(spriteNum == 6) {image = up5;}
+                    if(spriteNum == 7) {image = up6;}
+                    if(spriteNum == 8) {image = up7;}
 
-                    }
+
+                }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackUp1;}
                     if(spriteNum == 2) {image = attackUp2;}
                     if(spriteNum == 3) {image = attackUp3;}
                     if(spriteNum == 4) {image = attackUp4;}
+                    if(spriteNum == 5) {image = attackUp5;}
+                    if(spriteNum == 6) {image = attackUp6;}
+
                 }
                 break;
             case "down":
-                 if(attacking == false){
-                if(spriteNum == 1){image = down;}
-                if(spriteNum == 2) {image = down1;}
-                if(spriteNum == 3) {image = down2;}
-                if(spriteNum == 4) {image = down3;}
-                if(spriteNum == 5) {image = down4;}
+                if(attacking == false){
+                    if(spriteNum == 1){image = down;}
+                    if(spriteNum == 2) {image = down1;}
+                    if(spriteNum == 3) {image = down2;}
+                    if(spriteNum == 4) {image = down3;}
+                    if(spriteNum == 5) {image = down4;}
+                    if(spriteNum == 6) {image = down5;}
+                    if(spriteNum == 7) {image = down6;}
+                    if(spriteNum == 8) {image = down7;}
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackDown1;}
                     if(spriteNum == 2) {image = attackDown2;}
                     if(spriteNum == 3) {image = attackDown3;}
                     if(spriteNum == 4) {image = attackDown4;}
+                    if(spriteNum == 5) {image = attackDown5;}
+                    if(spriteNum == 6) {image = attackDown6;}
+
                 }
                 break;
             case "left":
                 if(attacking == false){
-                if(spriteNum == 1) {image = left;}
-                if(spriteNum == 2) {image = left1;}
-                if(spriteNum == 3) {image = left2;}
-                if(spriteNum == 4) {image = left3;}
-                if(spriteNum == 5) {image = left4;}
+                    if(spriteNum == 1) {image = left;}
+                    if(spriteNum == 2) {image = left1;}
+                    if(spriteNum == 3) {image = left2;}
+                    if(spriteNum == 4) {image = left3;}
+                    if(spriteNum == 5) {image = left4;}
+                    if(spriteNum == 6) {image = left5;}
+                    if(spriteNum == 7) {image = left6;}
+                    if(spriteNum == 8) {image = left7;}
                 }
                 if(attacking == true){
-                    tempScreenX = screenX - gp.tileSize;
                     if(spriteNum == 1) {image = attackLeft1;}
                     if(spriteNum == 2) {image = attackLeft2;}
                     if(spriteNum == 3) {image = attackLeft3;}
                     if(spriteNum == 4) {image = attackLeft4;}
+                    if(spriteNum == 5) {image = attackLeft5;}
+                    if(spriteNum == 6) {image = attackLeft6;}
+
                 }
                 break;
             case "right":
                 if(attacking == false){
-                if(spriteNum == 1) {image = right;}
-                if(spriteNum == 2) {image = right1;}
-                if(spriteNum == 3) {image = right2;}
-                if(spriteNum == 4) {image = right3;}
-                if(spriteNum == 5) {image = right4;}
+                    if(spriteNum == 1) {image = right;}
+                    if(spriteNum == 2) {image = right1;}
+                    if(spriteNum == 3) {image = right2;}
+                    if(spriteNum == 4) {image = right3;}
+                    if(spriteNum == 5) {image = right4;}
+                    if(spriteNum == 6) {image = right5;}
+                    if(spriteNum == 7) {image = right6;}
+                    if(spriteNum == 8) {image = right7;}
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackRight1;}
                     if(spriteNum == 2) {image = attackRight2;}
                     if(spriteNum == 3) {image = attackRight3;}
                     if(spriteNum == 4) {image = attackRight4;}
+                    if(spriteNum == 5) {image = attackRight5;}
+                    if(spriteNum == 6) {image = attackRight6;}
+
                 }
 
                 break;
@@ -658,9 +728,9 @@ public class Player extends Entity {
         //RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-        //DEBUG COLLISION
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+//        //DEBUG COLLISION
+//        g2.setColor(Color.RED);
+//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         //DEBUG invincible
 //        g2.setFont(new Font("Arial", Font.PLAIN, 26));

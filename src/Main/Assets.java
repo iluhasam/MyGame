@@ -4,6 +4,7 @@ import entity.NPC_OldMan;
 import entity.NPC_Trader;
 import monster.MON_GreenSlime;
 import monster.MON_Orc;
+import monster.MON_RedSlime;
 import object.*;
 import tile_interactive.IT_DryTree;
 
@@ -23,9 +24,10 @@ public class Assets {
 //        gp.obj[mapNum][i].worldX = gp.tileSize*21;
 //        gp.obj[mapNum][i].worldY = gp.tileSize*19;
 //        i++;
-        gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Key(gp));
+        gp.obj[mapNum][i] = new OBJ_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*30;
-        gp.obj[mapNum][i].worldY = gp.tileSize*28;
+        gp.obj[mapNum][i].worldY = gp.tileSize*29;
         i++;
         gp.obj[mapNum][i] = new OBJ_Door(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*14;
@@ -118,18 +120,22 @@ public class Assets {
         gp.monster[mapNum][i].worldX = gp.tileSize * 34;
         gp.monster[mapNum][i].worldY = gp.tileSize * 42;
         i++;
+        gp.monster[mapNum][i]= new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 34;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 37;
+        i++;
         gp.monster[mapNum][i]= new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 12;
         gp.monster[mapNum][i].worldY = gp.tileSize * 33;
         i++;
-        gp.monster[mapNum][i]= new MON_Orc(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 34;
-        i++;
-        gp.monster[mapNum][i]= new MON_Orc(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 13;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
-        i++;
+//        gp.monster[mapNum][i]= new MON_Orc(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
+//        gp.monster[mapNum][i].worldY = gp.tileSize * 34;
+//        i++;
+//        gp.monster[mapNum][i]= new MON_Orc(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize * 13;
+//        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+//        i++;
 
         //Мобы на новой карте добавляются так ->
 //        mapNum = 1;

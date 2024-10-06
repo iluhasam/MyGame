@@ -65,7 +65,7 @@ public class Map extends TileManager {
         double scale1 = (double) (gp.tileSize * gp.maxWorldRow) / height;
         int playerX = (int)(x + gp.player.worldX/scale);
         int playerY = (int)(y + gp.player.worldY/scale1);
-        int playerSize = (int)((gp.tileSize*1.3) / scale);
+        int playerSize = (int)((gp.tileSize) / scale);
         g2.drawImage(gp.player.down1, playerX, playerY, playerSize, playerSize, null);
 
         //Hits
@@ -79,7 +79,7 @@ public class Map extends TileManager {
             //Draw map
             int width = 200;
             int height = 200;
-            int x = gp.screenWidth - width - 50;
+            int x = gp.screenWidth - width -5 ;// - 50;
             int y = 50;
 
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
@@ -87,11 +87,11 @@ public class Map extends TileManager {
 
             //Draw player
             double scale = (double) (gp.tileSize * gp.maxWorldCol) / width;
-            //double scale1 = (double) (gp.tileSize * gp.maxWorldRow) / height;
+            double scale1 = (double) (gp.tileSize * gp.maxWorldRow) / height;
             int playerX = (int)(x + gp.player.worldX/scale);
-            int playerY = (int)(y -10 + gp.player.worldY/scale);
-            int playerSize = (int)((gp.tileSize) / 4);
-            g2.drawImage(gp.player.down1, playerX, playerY, playerSize, playerSize, null);
+            int playerY = (int)(y + gp.player.worldY/scale1);
+            int playerSize = (int)((gp.tileSize) / 5);
+            g2.drawImage(gp.player.down1, playerX - 5, playerY - 5, playerSize, playerSize, null);
 
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
