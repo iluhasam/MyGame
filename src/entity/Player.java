@@ -129,88 +129,49 @@ public class Player extends Entity {
     }
     public void getPlayerImage(){
 
-        up = setup("/player/walk/up", gp.tileSize, gp.tileSize);
-        up1 = setup("/player/walk/up1",gp.tileSize, gp.tileSize);
-        up2 = setup("/player/walk/up2",gp.tileSize, gp.tileSize);
-        up3 = setup("/player/walk/up3",gp.tileSize, gp.tileSize);
-        up4 = setup("/player/walk/up4",gp.tileSize, gp.tileSize);
-        up5 = setup("/player/walk/up5",gp.tileSize, gp.tileSize);
-        up6 = setup("/player/walk/up6",gp.tileSize, gp.tileSize);
-        up7 = setup("/player/walk/up7",gp.tileSize, gp.tileSize);
-        down = setup("/player/walk/down",gp.tileSize, gp.tileSize);
-        down1 = setup("/player/walk/down1",gp.tileSize, gp.tileSize);
-        down2 = setup("/player/walk/down2",gp.tileSize, gp.tileSize);
-        down3 = setup("/player/walk/down3",gp.tileSize, gp.tileSize);
-        down4 = setup("/player/walk/down4",gp.tileSize, gp.tileSize);
-        down5 = setup("/player/walk/down5",gp.tileSize, gp.tileSize);
-        down6 = setup("/player/walk/down6",gp.tileSize, gp.tileSize);
-        down7 = setup("/player/walk/down7",gp.tileSize, gp.tileSize);
-        left = setup("/player/walk/left",gp.tileSize, gp.tileSize);
-        left1 = setup("/player/walk/left1",gp.tileSize, gp.tileSize);
-        left2 = setup("/player/walk/left2",gp.tileSize, gp.tileSize);
-        left3 = setup("/player/walk/left3",gp.tileSize, gp.tileSize);
-        left4 = setup("/player/walk/left4",gp.tileSize, gp.tileSize);
-        left5 = setup("/player/walk/left5",gp.tileSize, gp.tileSize);
-        left6 = setup("/player/walk/left6",gp.tileSize, gp.tileSize);
-        left7 = setup("/player/walk/left7",gp.tileSize, gp.tileSize);
-        right = setup("/player/walk/right",gp.tileSize, gp.tileSize);
-        right1 = setup("/player/walk/right1",gp.tileSize, gp.tileSize);
-        right2 = setup("/player/walk/right2",gp.tileSize, gp.tileSize);
-        right3 = setup("/player/walk/right3",gp.tileSize, gp.tileSize);
-        right4 = setup("/player/walk/right4",gp.tileSize, gp.tileSize);
-        right5 = setup("/player/walk/right5",gp.tileSize, gp.tileSize);
-        right6 = setup("/player/walk/right6",gp.tileSize, gp.tileSize);
-        right7 = setup("/player/walk/right7",gp.tileSize, gp.tileSize);
+        up1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/res/player/boy_up_2",gp.tileSize, gp.tileSize);
+
+        down1 = setup("/res/player/boy_down_1",gp.tileSize, gp.tileSize);
+        down2 = setup("/res/player/boy_down_2",gp.tileSize, gp.tileSize);
+
+        left1 = setup("/res/player/boy_left_1",gp.tileSize, gp.tileSize);
+        left2 = setup("/res/player/boy_left_2",gp.tileSize, gp.tileSize);
+
+        right1 = setup("/res/player/boy_right_1",gp.tileSize, gp.tileSize);
+        right2 = setup("/res/player/boy_right_2",gp.tileSize, gp.tileSize);
+
     }
     public void getSleepingImage(BufferedImage image){
-        up = image;
         up1 =image;
         up2 = image;
-        up3 = image;
-        up4 = image;
-        down = image;
+
         down1 = image;
         down2 = image;
-        down3 = image;
-        down4 = image;
-        left = image;
+
         left1 = image;
         left2 = image;
-        left3 = image;
-        left4 = image;
-        right = image;
+
         right1 = image;
         right2 = image;
-        right3 = image;
-        right4 = image;
+
     }
     public void getPlayerAttackImage(){
 
         if(currentWeapon.type == type_sword){
-            attackUp1 = setup("/player/attack/attack_up1",gp.tileSize, gp.tileSize);
-            attackUp2 = setup("/player/attack/attack_up2",gp.tileSize, gp.tileSize);
-            attackUp3 = setup("/player/attack/attack_up3",gp.tileSize, gp.tileSize);
-            attackUp4 = setup("/player/attack/attack_up4",gp.tileSize, gp.tileSize);
-            attackUp5 = setup("/player/attack/attack_up5",gp.tileSize, gp.tileSize);
-            attackUp6 = setup("/player/attack/attack_up6",gp.tileSize, gp.tileSize);
-            attackDown1 = setup("/player/attack/attack_down1",gp.tileSize, gp.tileSize);
-            attackDown2 = setup("/player/attack/attack_down2",gp.tileSize, gp.tileSize);
-            attackDown3 = setup("/player/attack/attack_down3",gp.tileSize, gp.tileSize);
-            attackDown4 = setup("/player/attack/attack_down4",gp.tileSize, gp.tileSize);
-            attackDown5 = setup("/player/attack/attack_down5",gp.tileSize, gp.tileSize);
-            attackDown6 = setup("/player/attack/attack_down6",gp.tileSize, gp.tileSize);
-            attackLeft1 = setup("/player/attack/attack_left1",gp.tileSize, gp.tileSize);
-            attackLeft2 = setup("/player/attack/attack_left2",gp.tileSize, gp.tileSize);
-            attackLeft3 = setup("/player/attack/attack_left3",gp.tileSize, gp.tileSize);
-            attackLeft4 = setup("/player/attack/attack_left4",gp.tileSize, gp.tileSize);
-            attackLeft5 = setup("/player/attack/attack_left5",gp.tileSize, gp.tileSize);
-            attackLeft6 = setup("/player/attack/attack_left6",gp.tileSize, gp.tileSize);
-            attackRight1 = setup("/player/attack/attack_right1",gp.tileSize, gp.tileSize);
-            attackRight2 = setup("/player/attack/attack_right2",gp.tileSize, gp.tileSize);
-            attackRight3 = setup("/player/attack/attack_right3",gp.tileSize, gp.tileSize);
-            attackRight4 = setup("/player/attack/attack_right4",gp.tileSize, gp.tileSize);
-            attackRight5 = setup("/player/attack/attack_right5",gp.tileSize, gp.tileSize);
-            attackRight6 = setup("/player/attack/attack_right6",gp.tileSize, gp.tileSize);
+            attackUp1 = setup("/player/boy_attack_up_1",gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/player/boy_attack_up_2",gp.tileSize, gp.tileSize*2);
+
+            attackDown1 = setup("/player/boy_attack_down_1",gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/player/boy_attack_down_2",gp.tileSize, gp.tileSize*2);
+
+
+            attackLeft1 = setup("/player/boy_attack_left_1",gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/player/boy_attack_left_2",gp.tileSize*2, gp.tileSize);
+
+            attackRight1 = setup("/player/boy_attack_right_1",gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/player/boy_attack_right_2",gp.tileSize*2, gp.tileSize);
+
         }
 //        if(currentWeapon.type == type_axe){
 //            attackUp1 = setup("/player/attack_up1",gp.tileSize*3, gp.tileSize*2);
@@ -300,7 +261,7 @@ public class Player extends Entity {
             spriteCounter++;
             if (spriteCounter > 11) {
                 spriteNum++;
-                if (spriteNum > 8) {
+                if (spriteNum > 2) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
@@ -361,7 +322,7 @@ public class Player extends Entity {
 
         if (spriteCounter <= 5) {
             spriteNum = 1;
-        } else if (spriteCounter > 5 && spriteCounter <= 10) {
+        } else if (spriteCounter >5 && spriteCounter <= 25) {
             spriteNum = 2;
 
             //Save the current worldX, worldY solidArea
@@ -372,10 +333,18 @@ public class Player extends Entity {
 
             //Adjust player's worldX/Y for the attackArea
             switch (direction) {
-                case "up": worldY -= attackArea.height;break;
-                case "down": worldY += attackArea.height;break;
-                case "left": worldX -= attackArea.width;break;
-                case "right": worldX += attackArea.width;break;
+                case "up":
+                    worldY -= attackArea.height;
+                    break;
+                case "down":
+                    worldY += attackArea.height;
+                    break;
+                case "left":
+                    worldX -= attackArea.width;
+                    break;
+                case "right":
+                    worldX += attackArea.width;
+                    break;
             }
 
             //attackArea become solidArea
@@ -395,24 +364,15 @@ public class Player extends Entity {
             //After checking collision
             worldX = currentWorldX;
             worldY = currentWorldY;
-            solidArea.width = solidAreaHeight;
+            solidArea.width = solidAreaWidht;
             solidArea.height = solidAreaHeight;
 
+        } else if (spriteCounter <= 45) {
             //SPEED ANIMATION ATTACKING
-        } else if (spriteCounter > 10 && spriteCounter <= 15) {
-            spriteNum = 3;
-        } else if (spriteCounter > 15 && spriteCounter <= 20) {
-            spriteNum = 4;
-        }
-        else if (spriteCounter > 25 && spriteCounter <= 30) {
-            spriteNum = 5;
+            spriteNum = 2;
             spriteCounter = 0;
             attacking = false; // Сбрасываем атаку
-        }
-        else if (spriteCounter > 30 ) {
-            spriteNum = 6;
-            spriteCounter = 0;
-            attacking = false; // Сбрасываем атаку
+
         }
 
 
@@ -453,7 +413,6 @@ public class Player extends Entity {
         if(gp.keyH.enterPressed == true){
             if(i != 999){
                 attackCanceled = true;
-                gp.gameState = gp.dialogueState;
                 gp.npc[gp.currentMap][i].speak();}
 
         }
@@ -632,87 +591,51 @@ public class Player extends Entity {
         switch(direction){
             case "up":
                 if(attacking == false){
-                    if(spriteNum == 1) {image = up;}
-                    if(spriteNum == 2) {image = up1;}
-                    if(spriteNum == 3) {image = up2;}
-                    if(spriteNum == 4) {image = up3;}
-                    if(spriteNum == 5) {image = up4;}
-                    if(spriteNum == 6) {image = up5;}
-                    if(spriteNum == 7) {image = up6;}
-                    if(spriteNum == 8) {image = up7;}
-
+                    if(spriteNum == 1) {image = up1;}
+                    if(spriteNum == 2) {image = up2;}
 
                 }
                 if(attacking == true){
+                    tempScreenY = screenY - gp.tileSize;
                     if(spriteNum == 1) {image = attackUp1;}
                     if(spriteNum == 2) {image = attackUp2;}
-                    if(spriteNum == 3) {image = attackUp3;}
-                    if(spriteNum == 4) {image = attackUp4;}
-                    if(spriteNum == 5) {image = attackUp5;}
-                    if(spriteNum == 6) {image = attackUp6;}
-
                 }
                 break;
             case "down":
                 if(attacking == false){
-                    if(spriteNum == 1){image = down;}
-                    if(spriteNum == 2) {image = down1;}
-                    if(spriteNum == 3) {image = down2;}
-                    if(spriteNum == 4) {image = down3;}
-                    if(spriteNum == 5) {image = down4;}
-                    if(spriteNum == 6) {image = down5;}
-                    if(spriteNum == 7) {image = down6;}
-                    if(spriteNum == 8) {image = down7;}
+                    if(spriteNum == 1){image = down1;}
+                    if(spriteNum == 2) {image = down2;}
+
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackDown1;}
                     if(spriteNum == 2) {image = attackDown2;}
-                    if(spriteNum == 3) {image = attackDown3;}
-                    if(spriteNum == 4) {image = attackDown4;}
-                    if(spriteNum == 5) {image = attackDown5;}
-                    if(spriteNum == 6) {image = attackDown6;}
+
 
                 }
                 break;
             case "left":
                 if(attacking == false){
-                    if(spriteNum == 1) {image = left;}
-                    if(spriteNum == 2) {image = left1;}
-                    if(spriteNum == 3) {image = left2;}
-                    if(spriteNum == 4) {image = left3;}
-                    if(spriteNum == 5) {image = left4;}
-                    if(spriteNum == 6) {image = left5;}
-                    if(spriteNum == 7) {image = left6;}
-                    if(spriteNum == 8) {image = left7;}
+                    if(spriteNum == 1) {image = left1;}
+                    if(spriteNum == 2) {image = left2;}
+
                 }
                 if(attacking == true){
+                    tempScreenX = screenX - gp.tileSize;
                     if(spriteNum == 1) {image = attackLeft1;}
                     if(spriteNum == 2) {image = attackLeft2;}
-                    if(spriteNum == 3) {image = attackLeft3;}
-                    if(spriteNum == 4) {image = attackLeft4;}
-                    if(spriteNum == 5) {image = attackLeft5;}
-                    if(spriteNum == 6) {image = attackLeft6;}
 
                 }
                 break;
             case "right":
                 if(attacking == false){
-                    if(spriteNum == 1) {image = right;}
-                    if(spriteNum == 2) {image = right1;}
-                    if(spriteNum == 3) {image = right2;}
-                    if(spriteNum == 4) {image = right3;}
-                    if(spriteNum == 5) {image = right4;}
-                    if(spriteNum == 6) {image = right5;}
-                    if(spriteNum == 7) {image = right6;}
-                    if(spriteNum == 8) {image = right7;}
+                    if(spriteNum == 1) {image = right1;}
+                    if(spriteNum == 2) {image = right2;}
+
                 }
                 if(attacking == true){
                     if(spriteNum == 1) {image = attackRight1;}
                     if(spriteNum == 2) {image = attackRight2;}
-                    if(spriteNum == 3) {image = attackRight3;}
-                    if(spriteNum == 4) {image = attackRight4;}
-                    if(spriteNum == 5) {image = attackRight5;}
-                    if(spriteNum == 6) {image = attackRight6;}
 
                 }
 
@@ -723,7 +646,7 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
         }
-        g2.drawImage(image, tempScreenX, screenY, null);
+        g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         //RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

@@ -37,8 +37,7 @@ public class NPC_Trader extends Entity{
         right2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
     }
     public void setDialogue(){
-        dialogues[0] = " Привет, ищешь что можно прикупить? ";
-        dialogues[1] = " Тогда ты пришел по адресу";
+        dialogues[0][0] = " Привет, ищешь что можно прикупить?\nТогда ты пришел по адресу ";
     }
     public void setItems(){
         inventory.add(new OBJ_Potion_Red(gp));

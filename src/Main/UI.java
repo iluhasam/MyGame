@@ -33,8 +33,6 @@ public class UI {
     public Entity npc;
 
 
-
-
     public UI(GamePanel gp) {
         this.gp = gp;
 
@@ -59,12 +57,10 @@ public class UI {
         Entity bronzeCoin = new OBJ_Coin_Bronze(gp);
         coin = bronzeCoin.down1;
     }
-
     public void addMessage(String text) {
         message.add(text);
         messageCounter.add(0);
     }
-
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
@@ -114,7 +110,6 @@ public class UI {
             drawSleepScreen();
         }
     }
-
     public void drawPlayerLife(){
 
         int x = gp.tileSize/2;
@@ -166,7 +161,6 @@ public class UI {
             x +=35;
         }
     }
-
     public void drawMessage(){
         int messageX = gp.tileSize;
         int messageY = gp.tileSize*4;
@@ -190,7 +184,6 @@ public class UI {
             }
         }
     }
-
     public void drawTitleScreen(){
 
         //TITLE COLOR
@@ -242,7 +235,6 @@ public class UI {
         }
 
     }
-
     public void drawPauseScreen(){
 
         g2.setFont(g2.getFont().deriveFont( Font.PLAIN, 80F));
@@ -251,7 +243,6 @@ public class UI {
         int y = gp.screenHeight/2;
         g2.drawString(text, x, y);
     }
-
     public void drawDialogScreen(){
 
         //window
@@ -265,13 +256,31 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize;
 
+        if(npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
+            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+
+            if(gp.keyH.enterPressed == true){
+
+                if(gp.gameState == gp.dialogueState){
+                    npc.dialogueIndex++;
+                    gp.keyH.enterPressed = false;
+                }
+            }
+        }
+        else{ // Нет текста в массиве
+            npc.dialogueIndex = 0;
+
+            if(gp.gameState == gp.dialogueState){
+                gp.gameState = gp.playState;
+            }
+        }
+
         for(String line : currentDialogue.split("\n")){
             g2.drawString(line, x, y);
             y += 40;
         }
 
     }
-
     public void drawCharacterScreen(){
         //CREATE A FRAME
         final int frameX = gp.tileSize*2;
@@ -377,7 +386,6 @@ public class UI {
         textY += gp.tileSize;
 
     }
-
     public void drawInventory(Entity entity, boolean cursor){
 
         int frameX = 0;
@@ -494,7 +502,6 @@ public class UI {
 
 
     }
-
     public void drawGameOverScreen(){
         g2.setColor(new Color(0,0,0,150));
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
@@ -534,7 +541,6 @@ public class UI {
             g2.drawString(">", x-40, y);
         }
     }
-
     public void drawOptionsScreen(){
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(32F));
@@ -555,7 +561,6 @@ public class UI {
 
         gp.keyH.enterPressed = false;
     }
-
     public void options_top(int frameX, int frameY){
         int textX;
         int textY;
@@ -650,7 +655,6 @@ public class UI {
         volumeWidth = 24 * gp.se.volumeScale;
         g2.fillRect(textX, textY, volumeWidth, 24);
     }
-
     public void options_fullScreenNotification(int frameX, int frameY){
 
         int textX = frameX + gp.tileSize;
@@ -672,7 +676,6 @@ public class UI {
             }
         }
     }
-
     public void options_control(int frameX, int frameY){
 
         int textX;
@@ -715,7 +718,6 @@ public class UI {
             }
         }
     }
-
     public void options_endGameConfirmation(int frameX, int frameY){
 
         int textX = frameX + gp.tileSize;
@@ -754,7 +756,6 @@ public class UI {
         }
 
     }
-
     public void drawTradeScreen(){
         switch (subState){
             case 0:trade_select();break;
@@ -763,7 +764,6 @@ public class UI {
         }
         gp.keyH.enterPressed = false;
     }
-
     public void trade_select(){
         drawDialogScreen();
 
@@ -808,7 +808,6 @@ public class UI {
 
 
     }
-
     public void trade_buy(){
 
 
@@ -870,7 +869,6 @@ public class UI {
             }
         }
     }
-
     public void trade_sell(){
 
         //DRAW PLAYER INVENTORY
@@ -938,7 +936,6 @@ public class UI {
             }
         }
     }
-
     public void drawSleepScreen(){
 
         commandNum++;
@@ -961,12 +958,10 @@ public class UI {
             }
         }
     }
-
     public int getItemIndexOnSlot(int slotCol, int slotRow){
         int itemIndex = slotCol + (slotRow*5);
         return itemIndex;
     }
-
     public void drawSubWindow(int x, int y, int width, int height){
 
         Color c = new Color(0, 0, 0, 195);
@@ -979,13 +974,11 @@ public class UI {
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25,25 );
 
     }
-
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
     }
-
     public int getXforAlignToRight(String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = tailX - length;

@@ -13,26 +13,28 @@ import java.util.Random;
 public class Entity {
     GamePanel gp;
 
-    public BufferedImage up, up1, up2, up3,up4,up5,up6,up7,
-            down, down1, down2, down3, down4, down5, down6, down7,
-            left, left1, left2, left3, left4, left5, left6, left7,
-            right, right1, right2, right3, right4, right5, right6, right7;
-    public BufferedImage attackUp1, attackUp2, attackUp3, attackUp4,attackUp5,attackUp6,
-            attackDown1, attackDown2, attackDown3, attackDown4,attackDown5,attackDown6,
-            attackLeft1, attackLeft2, attackLeft3, attackLeft4,attackLeft5,attackLeft6,
-            attackRight1, attackRight2, attackRight3, attackRight4, attackRight5, attackRight6;
+    public BufferedImage  up1, up2,
+            down1, down2,
+             left1, left2,
+            right, right1, right2;
+    public BufferedImage attackUp1, attackUp2,
+            attackDown1, attackDown2,
+            attackLeft1, attackLeft2,
+            attackRight1, attackRight2;
     public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0 );
     public BufferedImage image, image2, image3, image4;
     public int solidAreaDefaultX, solidAreaDefaultY;
-    String dialogues[] = new String[50];
+    public String[][] dialogues = new String[50][50];
+
     public Entity attacker;
 
     //STATE
     public int worldX,worldY;
     public String direction = "down";
     public int spriteNum = 1;
-    int dialogueIndex = 0;
+    public int dialogueSet = 0;
+    public int dialogueIndex = 0;
     public boolean collisionOn = false;
     public boolean invincible = false;
     public boolean collision = false;
@@ -153,21 +155,11 @@ public class Entity {
         int goalRow = (target.worldY + target.solidArea.y)/gp.tileSize;
         return goalRow;
     }
-    public void setLoot(Entity loot){
-
-    }
-    public void setAction(){
-
-    }
-    public void damageReaction(){
-
-    }
-    public void speak(){
-        if(dialogues[dialogueIndex] == null){
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+    public void setLoot(Entity loot){}
+    public void setAction(){}
+    public void damageReaction(){}
+    public void speak(){}
+    public void facePlayer(){
 
         switch (gp.player.direction){
             case "up":direction = "down";break;
@@ -176,15 +168,17 @@ public class Entity {
             case "right":direction = "left";break;
         }
     }
-    public void interact(){
+    public void startDialogue(Entity entity, int setNum){
 
+        gp.gameState = gp.dialogueState;
+        gp.ui.npc = entity;
+        dialogueSet = setNum;
     }
+    public void interact(){}
     public boolean use(Entity entity){
         return false;
     }
-    public void checkDrop(){
-
-    }
+    public void checkDrop(){}
     public void dropItem(Entity droppedItem){
         for(int i = 0; i < gp.obj[1].length; i++){
             if(gp.obj[gp.currentMap][i] == null){
