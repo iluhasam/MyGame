@@ -21,11 +21,18 @@ public class OBJ_Door extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+
+    }
+    public void setDialogue(){
+
+        dialogues[0][0] = "Тебе нужен ключ чтобы открыть ";
     }
     public void interact(){
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "Тебе нужен ключ чтобы открыть ";
+        startDialogue(this,0);
+
 
     }
 }

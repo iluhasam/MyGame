@@ -30,7 +30,10 @@ public class UI {
     public int npcSlotCol = 0;
     public int npcSlotRow = 0;
     public int subState = 0;
+    public int counter = 0;
     public Entity npc;
+    int charIndex = 0;
+    String combinedText = "";
 
 
     public UI(GamePanel gp) {
@@ -109,6 +112,11 @@ public class UI {
         if(gp.gameState == gp.sleepState){
             drawSleepScreen();
         }
+        //TRANSITION STATE
+        if(gp.gameState == gp.transitionState){
+            drawTransition();
+        }
+
     }
     public void drawPlayerLife(){
 
@@ -257,9 +265,23 @@ public class UI {
         y += gp.tileSize;
 
         if(npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
-            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+           // currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+
+            char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+
+            if(charIndex < characters.length){
+
+                gp.playSE(15);
+                String s = String.valueOf(characters[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
 
             if(gp.keyH.enterPressed == true){
+
+                charIndex = 0;
+                combinedText = "";
 
                 if(gp.gameState == gp.dialogueState){
                     npc.dialogueIndex++;
@@ -756,6 +778,24 @@ public class UI {
         }
 
     }
+    public void drawTransition(){
+
+        counter++;
+        g2.setColor(new Color(0,0,0, counter*5));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        if(counter == 50){
+            counter = 0;
+            gp.gameState = gp.playState;
+            gp.currentMap = gp.eHandler.tempMap;
+            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+            gp.eHandler.previousEventX = gp.player.worldX;
+            gp.eHandler.previousEventY = gp.player.worldY;
+            gp.changeArea();
+        }
+
+    }
     public void drawTradeScreen(){
         switch (subState){
             case 0:trade_select();break;
@@ -764,7 +804,9 @@ public class UI {
         }
         gp.keyH.enterPressed = false;
     }
-    public void trade_select(){
+    public void trade_select() {
+
+        npc.dialogueSet = 0;
         drawDialogScreen();
 
         //DRAW WINDOW
@@ -800,8 +842,7 @@ public class UI {
             g2.drawString(">", x-20,y);
             if(gp.keyH.enterPressed == true){
                 commandNum = 0;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Приходи ещё, хе-хе-хе!!!";
+                npc.startDialogue(npc, 1);
             }
         }
         y += gp.tileSize;
@@ -852,9 +893,8 @@ public class UI {
             if(gp.keyH.enterPressed == true){
                 if(npc.inventory.get(itemIndex).price > gp.player.coin){
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "Надо больше";
-                    drawDialogScreen();
+                    npc.startDialogue(npc,2);
+
                 }
                 else {
                     if(gp.player.canObtainItem(npc.inventory.get(itemIndex)) == true){
@@ -862,8 +902,8 @@ public class UI {
                     }
                     else {
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "В тебя больше не влезет";
+                        npc.startDialogue(npc,3);
+
                     }
                 }
             }
@@ -921,8 +961,7 @@ public class UI {
                 gp.player.inventory.get(itemIndex) == gp.player.currentHelment){
                     commandNum = 0;
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "Ты не можешь продать\nэкипированные предметы";
+                    npc.startDialogue(npc,4);
                 }
                 else {
                     if (gp.player.inventory.get(itemIndex).amount > 1) {

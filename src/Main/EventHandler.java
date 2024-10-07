@@ -2,10 +2,12 @@ package Main;
 
 import entity.Entity;
 
-public class EventHandler {
+public class EventHandler  {
 
     GamePanel gp;
     EventRect eventRect[][][];
+    Entity eventMaster;
+    int tempMap,tempCol,tempRow;
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
@@ -13,6 +15,7 @@ public class EventHandler {
         public EventHandler(GamePanel gp) {
             this.gp = gp;
 
+            eventMaster = new Entity(gp);
 
             eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
@@ -39,8 +42,17 @@ public class EventHandler {
                     }
                 }
             }
+            setDialogue();
         }
+        public void setDialogue(){
 
+            eventMaster.dialogues[0][0] = "Ты наступил в какашку!)";;
+
+            eventMaster.dialogues[1][0] = "Ты попил воды\nРадуйся жизни!\n(Прогресс сохранён) ";
+
+            eventMaster.dialogues[1][1] = "Черт. Очень вкусно";
+
+        }
         public void checkEvent() {
             //CHECK PLAYER 1 TILE AWAY FROM THE LAST EVENT
             int xDistance = Math.abs(gp.player.worldX - previousEventX);
@@ -53,10 +65,13 @@ public class EventHandler {
             if(canTouchEvent == true) {
                 if(hit(0,27,16,"right") == true){damagePit(gp.dialogueState);}
                 else if (hit(0,23,12,"up") == true){healingPool(gp.dialogueState);}
-                else if (hit(0,10,39,"any") == true){teleport(1,12,13);}
-                else if (hit(1,12,13, "any") == true){teleport(0,10,39);}
+                else if (hit(0,10,39,"any") == true){teleport(1,12,13, gp.indoor);}//trader
+                else if (hit(1,12,13, "any") == true){teleport(0,10,39, gp.outside);}//out trader
                 else if (hit(1, 12,7,"up") == true){speak(gp.npc[1][0]);}
-
+                else if (hit(0,12,9, "any") == true){teleport(2,9,41, gp.dungeon);} // тп в данж
+                else if (hit(2,9,41, "any") == true){teleport(0,12,9, gp.outside);} // тп из данжа
+                else if (hit(2,8,7, "any") == true){teleport(3,26,41, gp.dungeon);} // to b2
+                else if (hit(3,26,41, "any") == true){teleport(2,8,7, gp.dungeon);} // to b1
             }
 
         }
@@ -88,37 +103,40 @@ public class EventHandler {
             }
             return hit;
         }
-
         public void damagePit(int gameState){
 
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "Ты наступил в какашку!)";
+            gp.playSE(6);
+            eventMaster.startDialogue(eventMaster,0);
             gp.player.life -= 1;
-            //eventRect[col][row].eventDone = true;
             canTouchEvent = false;
         }
-
         public void healingPool(int gameState ){
 
             if(gp.keyH.enterPressed == true){
                 gp.gameState = gameState;
                 gp.player.attackCanceled = true;
-                gp.ui.currentDialogue = "Ты попил воды\nРадуйся жизни!\n(Прогресс сохранён) ";
+                eventMaster.startDialogue(eventMaster,1);
                 gp.player.life = gp.player.maxLife;
                 gp.player.mana = gp.player.maxMana;
                 gp.assets.setMonster();
                 gp.saveLoad.save();
-                //gp.playSE(2);
+                gp.playSE(2);
 
             }
         }
+        public void teleport(int map, int col, int row,int area) {
 
-        public void teleport(int map, int col, int row) {
-            gp.currentMap = map;
-            gp.player.worldX = gp.tileSize * col;
-            gp.player.worldY = gp.tileSize * row;
-            previousEventX = gp.player.worldX;
-            previousEventY = gp.player.worldY;
+            gp.gameState = gp.transitionState;
+            gp.nextArea = area;
+            tempMap = map;
+            tempCol = col;
+            tempRow = row;
+//            gp.currentMap = map;
+//            gp.player.worldX = gp.tileSize * col;
+//            gp.player.worldY = gp.tileSize * row;
+//            previousEventX = gp.player.worldX;
+//            previousEventY = gp.player.worldY;
             canTouchEvent = false;
             gp.playSE(13);
         }

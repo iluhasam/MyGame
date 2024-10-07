@@ -13,14 +13,14 @@ import java.util.Random;
 public class Entity {
     GamePanel gp;
 
-    public BufferedImage  up1, up2,
-            down1, down2,
-             left1, left2,
-            right, right1, right2;
-    public BufferedImage attackUp1, attackUp2,
-            attackDown1, attackDown2,
-            attackLeft1, attackLeft2,
-            attackRight1, attackRight2;
+    public BufferedImage  up1, up2, up3,up4,
+            down1, down2, down3,down4,
+             left1, left2, left3, left4,
+            right, right1, right2, right3, right4;
+    public BufferedImage attackUp1, attackUp2, attackUp3, attackUp4,
+            attackDown1, attackDown2, attackDown3, attackDown4,
+            attackLeft1, attackLeft2, attackLeft3, attackLeft4,
+            attackRight1, attackRight2, attackRight3, attackRight4;
     public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0 );
     public BufferedImage image, image2, image3, image4;
@@ -55,7 +55,7 @@ public class Entity {
     public int shotAvaliableCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
-    int knockBackCounter = 0;
+    public int knockBackCounter = 0;
 
     //CHARACTER ATTIBUTES
     public int speed;
@@ -450,7 +450,7 @@ public class Entity {
             //After checking collision
             worldX = currentWorldX;
             worldY = currentWorldY;
-            solidArea.width = solidAreaHeight;
+            solidArea.width = solidAreaWidht;
             solidArea.height = solidAreaHeight;
 
             //SPEED ANIMATION ATTACKING

@@ -23,29 +23,37 @@ public class OBJ_Chest extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+
     }
     public void setLoot(Entity loot) {
         this.loot = loot;
+
+        setDialogue();
+    }
+    public void setDialogue(){
+
+        dialogues[0][0] = "Ты открыл сундук и нашёл " + loot.name + "!";
+        dialogues[1][0] = "\n... Ты не можешь нести больше";
+        dialogues[2][0] = "\nТы получил " + loot.name + "!";
     }
     public void interact(){
 
-        gp.gameState = gp.dialogueState;
         if(opened == false){
             gp.playSE(3);
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("Ты открыл сундук и нашёл " + loot.name + "!");
 
             if(gp.player.canObtainItem(loot) == false){
-                sb.append("\n... Ты не можешь нести больше");
-            }else {
-                sb.append("\nТы получил " + loot.name + "!");
+                startDialogue(this,0);
+            }
+            else {
+                startDialogue(this,1);
                 down1 = image2;
                 opened = true;
             }
-            gp.ui.currentDialogue = sb.toString();
         } else {
-            gp.ui.currentDialogue = "Он пуст";
+
+            startDialogue(this, 2);
         }
     }
 }

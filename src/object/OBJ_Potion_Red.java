@@ -16,13 +16,16 @@ public class OBJ_Potion_Red extends Entity {
         down1 = setup("/objects/potion_hil", gp.tileSize, gp.tileSize);
         description = "[" + name + "]" + "\nВосполняет здоровье на " + value + ".";
 
+        setDialogue();
+    }
+    public void setDialogue(){
+
+        dialogues[0][0] = "Ты выпил фласку здоровья!\n"
+                + "Твоё здоровье восполнено на " + value;
     }
     public boolean use(Entity entity) {
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "Ты выпил фласку здоровья!\n"
-        + "Твоё здоровье восполнено на " + value;
-
+        startDialogue(this,0);
         entity.life += value;
         gp.playSE(2);
         return true;

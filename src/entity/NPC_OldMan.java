@@ -21,6 +21,9 @@ public class NPC_OldMan extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 48;
         solidArea.height = 48;
+
+        dialogueSet = -1;
+
         getImage();
         setDialogue();
     }
@@ -91,6 +94,16 @@ public class NPC_OldMan extends Entity {
 
         facePlayer();
         startDialogue(this,dialogueSet);
+
+        dialogueSet++;
+
+        if(dialogues[dialogueSet][0] == null){
+             dialogueSet--;
+        }
+
+//        if(gp.player.life < gp.player.maxLife/3){
+//            dialogueSet = 1;
+//        }
 
         //onPath = true;
     }

@@ -2,6 +2,7 @@ package Main;
 
 import entity.NPC_OldMan;
 import entity.NPC_Trader;
+import monster.MON_Dworf;
 import monster.MON_GreenSlime;
 import monster.MON_Orc;
 import monster.MON_RedSlime;
@@ -128,6 +129,11 @@ public class Assets {
         gp.monster[mapNum][i].worldX = gp.tileSize * 12;
         gp.monster[mapNum][i].worldY = gp.tileSize * 33;
         i++;
+        gp.monster[mapNum][i]= new MON_Dworf(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 31;
+        i++;
+
 //        gp.monster[mapNum][i]= new MON_Orc(gp);
 //        gp.monster[mapNum][i].worldX = gp.tileSize * 12;
 //        gp.monster[mapNum][i].worldY = gp.tileSize * 34;

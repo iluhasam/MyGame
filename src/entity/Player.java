@@ -80,12 +80,18 @@ public class Player extends Entity {
         defense = getDefense();
         getPlayerImage();
         getPlayerAttackImage();
+        setDialogue();
         setItems();
     }
     public void setDefaultPosition() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         direction = "down";
+    }
+    public void setDialogue(){
+
+       dialogues [0][0] = "Твой уровень " + level + " сейчас \n"
+                + "Ты чувствуешь себя сильнее!";
     }
     public void restoreLifeAndMana(){
         life = maxLife;
@@ -498,9 +504,11 @@ public class Player extends Entity {
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "Твой уровень " + level + " сейчас \n"
+            dialogues [0][0] = "Твой уровень " + level + " сейчас \n"
                     + "Ты чувствуешь себя сильнее!";
+            setDialogue();
 
+            startDialogue(this,0);
         }
     }
     public void selectItem(){

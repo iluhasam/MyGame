@@ -37,7 +37,13 @@ public class NPC_Trader extends Entity{
         right2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
     }
     public void setDialogue(){
+
         dialogues[0][0] = " Привет, ищешь что можно прикупить?\nТогда ты пришел по адресу ";
+        dialogues[1][0] = "Приходи ещё, хе-хе-хе!!!";
+        dialogues[2][0] = "Надо больше золота";
+        dialogues[3][0] = "В тебя больше не влезет";
+        dialogues[4][0] = "Ты не можешь продать\nэкипированные предметы";
+
     }
     public void setItems(){
         inventory.add(new OBJ_Potion_Red(gp));
@@ -48,7 +54,8 @@ public class NPC_Trader extends Entity{
 
     }
     public void speak(){
-        super.speak();
+
+        facePlayer();
         gp.gameState = gp.tradeState;
         gp.ui.npc = this;
     }
