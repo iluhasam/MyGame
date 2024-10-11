@@ -27,14 +27,14 @@ public class NPC_Trader extends Entity{
         setItems();
     }
     public void getImage(){
-        down1 = setup("/npc/trader01", gp.tileSize*2, gp.tileSize*2);
-        down2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
-        up1 = setup("/npc/trader01", gp.tileSize*2, gp.tileSize*2);
-        up2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
-        left1 = setup("/npc/trader01", gp.tileSize*2, gp.tileSize*2);
-        left2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
-        right1 = setup("/npc/trader01", gp.tileSize*2, gp.tileSize*2);
-        right2 = setup("/npc/trader02", gp.tileSize*2, gp.tileSize*2);
+        down1 = setup("/npc/trader1/trader01", gp.tileSize*2, gp.tileSize*2);
+        down2 = setup("/npc/trader1/trader02", gp.tileSize*2, gp.tileSize*2);
+        up1 = setup("/npc/trader1/trader01", gp.tileSize*2, gp.tileSize*2);
+        up2 = setup("/npc/trader1/trader02", gp.tileSize*2, gp.tileSize*2);
+        left1 = setup("/npc/trader1/trader01", gp.tileSize*2, gp.tileSize*2);
+        left2 = setup("/npc/trader1/trader02", gp.tileSize*2, gp.tileSize*2);
+        right1 = setup("/npc/trader1/trader01", gp.tileSize*2, gp.tileSize*2);
+        right2 = setup("/npc/trader1/trader02", gp.tileSize*2, gp.tileSize*2);
     }
     public void setDialogue(){
 

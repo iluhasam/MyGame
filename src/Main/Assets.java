@@ -2,6 +2,7 @@ package Main;
 
 import entity.NPC_OldMan;
 import entity.NPC_Trader;
+import entity.NPC_Trader2;
 import monster.MON_Dworf;
 import monster.MON_GreenSlime;
 import monster.MON_Orc;
@@ -58,31 +59,31 @@ public class Assets {
         gp.obj[mapNum][i].worldX = gp.tileSize*23;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
-//        gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*26;
-//        i++;
-//        gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*25;
-//        i++;
-//        gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*24;
-//        i++;
-//        gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*23;
-//        i++;
 
-//        gp.obj[mapNum][i] =new OBJ_Heart(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*30;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*21;
-//        i++;
-//        gp.obj[mapNum][i] = new OBJ_ManaCrystal(gp);
-//        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-//        gp.obj[mapNum][i].worldY = gp.tileSize*25;
-//        i++;
+
+        mapNum = 4;
+        gp.obj[mapNum][i] = new OBJ_Tent_Small(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*43;
+        gp.obj[mapNum][i].worldY = gp.tileSize*42;
+        i++;
+        gp.obj[mapNum][i] = new OBJ_Tent_Big(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*38;
+        gp.obj[mapNum][i].worldY = gp.tileSize*42;
+        i++;
+        gp.obj[mapNum][i] = new OBJ_Building_blue(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*58;
+        gp.obj[mapNum][i].worldY = gp.tileSize*47;
+        i++;
+        gp.obj[mapNum][i] = new OBJ_Building_red(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*64;
+        gp.obj[mapNum][i].worldY = gp.tileSize*47;
+        i++;
+        gp.obj[mapNum][i] = new OBJ_Building3_blue(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*59;
+        gp.obj[mapNum][i].worldY = gp.tileSize*61;
+        i++;
+
+
     }
     public void setNPC(){
         //MAP 0
@@ -99,6 +100,14 @@ public class Assets {
         gp.npc[mapNum][i] = new NPC_Trader(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize * 12;
         gp.npc[mapNum][i].worldY = gp.tileSize * 7;
+        i++;
+
+        //MAP 5
+        mapNum = 5;
+        i = 0;
+        gp.npc[mapNum][i] = new NPC_Trader2(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 22;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 16;
         i++;
 
     }
@@ -133,6 +142,7 @@ public class Assets {
         gp.monster[mapNum][i].worldX = gp.tileSize * 12;
         gp.monster[mapNum][i].worldY = gp.tileSize * 31;
         i++;
+
 
 //        gp.monster[mapNum][i]= new MON_Orc(gp);
 //        gp.monster[mapNum][i].worldX = gp.tileSize * 12;

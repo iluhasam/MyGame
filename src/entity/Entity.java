@@ -502,9 +502,9 @@ public class Entity {
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
         // прорисовка ресов
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+        if (worldX + gp.tileSize * 6> gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                worldY + gp.tileSize * 6> gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
             int tempScreenX = screenX;
@@ -515,7 +515,6 @@ public class Entity {
                 if(attacking == false) {
                     if (spriteNum == 1) {image = up1;}
                     if (spriteNum == 2) {image = up2;}
-                    //  if (spriteNum == 3) {image = up3;}
                 }
                 if(attacking == true) {
                     tempScreenY = screenY - gp.tileSize;

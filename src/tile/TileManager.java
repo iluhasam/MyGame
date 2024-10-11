@@ -68,6 +68,9 @@ public class TileManager {
     loadMap("/maps/indoor01.txt",1);
     loadMap("/maps/dungeon01.txt",2);
     loadMap("/maps/dungeon02.txt",3);
+    loadMap("/maps/worldmap2.txt",4);
+    loadMap("/maps/maphouse01.txt",5);
+    loadMap("/maps/cave.txt",6);
     }
     public void getTileImage(){
 
@@ -91,6 +94,19 @@ public class TileManager {
         }
     }
     public void setup(int index, String imageName, boolean collision){
+        UtilityTool uTool = new UtilityTool();
+        try{
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName));
+            tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+            tile[index].collission = collision;
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void setup1(int index, String imageName, boolean collision, int width, int height){
         UtilityTool uTool = new UtilityTool();
         try{
             tile[index] = new Tile();

@@ -65,13 +65,35 @@ public class EventHandler  {
             if(canTouchEvent == true) {
                 if(hit(0,27,16,"right") == true){damagePit(gp.dialogueState);}
                 else if (hit(0,23,12,"up") == true){healingPool(gp.dialogueState);}
+
+                else if (hit(0,22,44,"any") == true){teleport(4,50,7, gp.outside);}//worldmap2
+                else if (hit(0,23,44,"any") == true){teleport(4,49,7, gp.outside);}//worldmap2
+
+                else if (hit(4,50,7,"any") == true){teleport(0,22,44, gp.outside);}//return map2
+                else if (hit(4,49,7,"any") == true){teleport(0,22,44, gp.outside);}//return map2
+
+                else if (hit(4, 61, 68, "up") == true){teleport(5,27,21, gp.indoor);}//build
+                else if (hit(5,27,22, "down") == true){teleport(4,61,68, gp.outside);}
+
                 else if (hit(0,10,39,"any") == true){teleport(1,12,13, gp.indoor);}//trader
                 else if (hit(1,12,13, "any") == true){teleport(0,10,39, gp.outside);}//out trader
+
                 else if (hit(1, 12,7,"up") == true){speak(gp.npc[1][0]);}
                 else if (hit(0,12,9, "any") == true){teleport(2,9,41, gp.dungeon);} // тп в данж
                 else if (hit(2,9,41, "any") == true){teleport(0,12,9, gp.outside);} // тп из данжа
+
                 else if (hit(2,8,7, "any") == true){teleport(3,26,41, gp.dungeon);} // to b2
                 else if (hit(3,26,41, "any") == true){teleport(2,8,7, gp.dungeon);} // to b1
+
+                //CAVE
+                else if(hit(4,74,41, "up") == true){teleport(6,36,26, gp.dungeon);}
+                else if(hit(4,75,41, "up") == true){teleport(6,37,26, gp.dungeon);}
+
+                else if(hit(6,36,26,"up") == true){teleport(4,74,42, gp.outside);}
+                else if(hit(6,37,26,"up") == true){teleport(4,75,42, gp.outside);}
+
+
+
             }
 
         }
