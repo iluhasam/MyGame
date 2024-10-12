@@ -12,7 +12,7 @@ public class MON_SkeletonLord extends Entity {
 
         GamePanel gp;
 
-        public static final String monName = "Skeleton";
+        public static final String monName = "Король Скелетов";
 
         public MON_SkeletonLord(GamePanel gp) {
             super(gp);
@@ -20,6 +20,7 @@ public class MON_SkeletonLord extends Entity {
             this.gp = gp;
 
             type = type_monster;
+            boss = true;
             name = monName;
             defaultSpeed = 1;
             speed = defaultSpeed;
