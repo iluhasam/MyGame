@@ -118,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void resetGame(boolean restart){
 
+        currentArea = outside;
         player.setDefaultPosition();
         player.restoreLifeAndMana();
         assets.setNPC();
@@ -327,17 +328,14 @@ public class GamePanel extends JPanel implements Runnable {
                 int y = 400;
                 int lineHeight = 20;
 
-                g2.drawString("WorldX" + player.worldX, x, y);
-                y += lineHeight;
-                g2.drawString("WorldY" + player.worldY, x, y);
-                y += lineHeight;
-                g2.drawString("Col" + (player.worldX + player.solidArea.x)/tileSize, x, y);
-                y += lineHeight;
-                g2.drawString("Row" + (player.worldY + player.solidArea.y)/tileSize, x, y);
-                y += lineHeight;
+                g2.drawString("WorldX" + player.worldX, x, y);y += lineHeight;
+                g2.drawString("WorldY" + player.worldY, x, y);y += lineHeight;
+                g2.drawString("Col" + (player.worldX + player.solidArea.x)/tileSize, x, y);y += lineHeight;
+                g2.drawString("Row" + (player.worldY + player.solidArea.y)/tileSize, x, y);y += lineHeight;
 
-                g2.drawString("Время отрисовки " + passed, x,y);
-                System.out.println("Время отрисоки " + passed);
+                g2.drawString("Время отрисовки " + passed, x,y);y += lineHeight;
+                //System.out.println("Время отрисоки " + passed);
+                g2.drawString("God Mode:" + keyH.godModeOn, x, y);
             }
         }
     }

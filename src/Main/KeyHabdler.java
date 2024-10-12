@@ -8,7 +8,8 @@ public class KeyHabdler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
         //debug
-    boolean showDebugConsole = false;
+    public boolean showDebugConsole = false;
+    public boolean godModeOn = false;
 
     public KeyHabdler(GamePanel gp) {
     this.gp = gp;
@@ -127,6 +128,16 @@ public class KeyHabdler implements KeyListener {
                 showDebugConsole = false;
 
             }
+
+        }
+        if (code == KeyEvent.VK_L) {
+            if(godModeOn == false) {
+                godModeOn = true;
+            } else if (godModeOn == true) {
+                godModeOn = false;
+
+            }
+
         }
         if (code == KeyEvent.VK_NUMPAD9){
             switch (gp.currentMap){

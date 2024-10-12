@@ -14,7 +14,7 @@ public class OBJ_Axe_Wood extends Entity {
         attackArea.width = 36;
         attackArea.height = 36;
         attackValue = 2;
-        description = "[" + name + "]" + "\nДеревья рубит) *_*";
+        description = "[" + name + "]" + "\nДеревья рубит";
         price = 10;
         knockBackPower = 10;
         motion1_duration = 20;

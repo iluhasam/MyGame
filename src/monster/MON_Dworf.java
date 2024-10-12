@@ -92,7 +92,7 @@ public class MON_Dworf extends Entity {
             checkStartChasingOrNot(gp.player, 10, 100);
 
             //Рандои направление
-            getRandomDirection();
+            getRandomDirection(60);
         }
         // Проверка атаки
         if(attacking == false){

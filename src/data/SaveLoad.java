@@ -25,11 +25,13 @@ public class SaveLoad {
             case "Фонарь": obj = new OBJ_Lantern(gp); break;
             case "Фласка здоровья": obj = new OBJ_Potion_Red(gp); break;
             case "Деревянный щит": obj = new OBJ_Shield_Start(gp); break;
+            case "Кирка": obj = new OBJ_Pickaxe(gp); break;
             case "Палка": obj = new OBJ_Stick(gp); break;
             case "Обычный меч": obj = new OBJ_Sword_Start(gp); break;
             case "Палатка": obj = new OBJ_Tent(gp); break;
             case "door": obj = new OBJ_Door(gp); break;
             case "chest": obj = new OBJ_Chest(gp); break;
+           // case "Железная дверь": obj = new OBJ_Door_Iron(gp); break;
         }
         return obj;
     }

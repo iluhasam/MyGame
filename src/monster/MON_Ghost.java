@@ -21,9 +21,9 @@ public class MON_Ghost extends Entity {
         speed = defaultSpeed;
         maxLife = 1;
         life = maxLife;
-        attack = 0;
+        attack = 7;
         defense = 0;
-        exp = 10;
+        exp = 1;
 
         projectile = new OBJ_Rock(gp);
         solidArea.x = 3;
@@ -82,16 +82,16 @@ public class MON_Ghost extends Entity {
 
         if(onPath == true){
             //STOP CHASING
-            checkStopChasingOrNot(gp.player, 10, 100);
+            checkStopChasingOrNot(gp.player, 20, 100);
 
             //НЕПИСЬ СЛЕДУЕТ ЗА ТОБОЙ (НАДО В ENTITY УБИРАТЬ, КАК ТОЛЬКО ПОГОВОРИЛ СРАЗУ ББ)
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
         }else {
             //START CHASING
-            checkStartChasingOrNot(gp.player, 10, 100);
+            checkStartChasingOrNot(gp.player, 15, 100);
 
             //Рандои направление
-            getRandomDirection();
+            getRandomDirection(70);
         }
         // Проверка атаки
         if(attacking == false){
