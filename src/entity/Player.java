@@ -64,7 +64,7 @@ public class Player extends Entity {
         maxMana = 4;
         mana = maxMana;
         ammo = 10;
-        strength = 5;
+        strength = 40;
         agility = 1;
         exp = 0;
         nextLevelExp = 4;
@@ -673,7 +673,10 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
         }
-        g2.drawImage(image, tempScreenX, tempScreenY, null);
+        if(drawing == true){
+            g2.drawImage(image, tempScreenX, tempScreenY, null);
+
+        }
 
         //RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

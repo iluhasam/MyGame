@@ -35,7 +35,7 @@ public class KeyHabdler implements KeyListener {
             pauseState(code);
         }
         //dialogueState
-        else if(gp.gameState == gp.dialogueState){
+        else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){
             dialogueState(code);
         }
         //CHARACTER STATE

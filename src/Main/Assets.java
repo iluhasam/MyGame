@@ -1,12 +1,12 @@
 package Main;
 
 //import entity.NPC_BigRock;
+
 import entity.NPC_OldMan;
 import entity.NPC_Trader;
 import entity.NPC_Trader2;
 import monster.*;
 import object.*;
-//import tile_interactive.IT_DestructibleWall;
 import tile_interactive.IT_DryTree;
 //import tile_interactive.IT_MetalPlate;
 
@@ -84,12 +84,13 @@ public class Assets {
         gp.obj[mapNum][i].worldY = gp.tileSize*15;
         i++;
 
-        /*gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
+        mapNum = 3;
+         i = 0;
+        gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
         gp.obj[mapNum][i].setLoot(new OBJ_Potion_Red(gp));
-        gp.obj[mapNum][i].worldX = gp.tileSize*18 ;
-        gp.obj[mapNum][i].worldY = gp.tileSize*23;
-        i++;*/
-
+        gp.obj[mapNum][i].worldX = gp.tileSize*25 ;
+        gp.obj[mapNum][i].worldY = gp.tileSize*15;
+        i++;
 
 
         mapNum = 4;
@@ -113,6 +114,8 @@ public class Assets {
         gp.obj[mapNum][i].worldX = gp.tileSize*59;
         gp.obj[mapNum][i].worldY = gp.tileSize*61;
         i++;
+
+
 
 
     }
@@ -184,7 +187,7 @@ public class Assets {
         gp.monster[mapNum][i].worldX = gp.tileSize * 34;
         gp.monster[mapNum][i].worldY = gp.tileSize * 37;
         i++;
-        gp.monster[mapNum][i]= new MON_Orc(gp);
+        gp.monster[mapNum][i] = new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 12;
         gp.monster[mapNum][i].worldY = gp.tileSize * 33;
         i++;

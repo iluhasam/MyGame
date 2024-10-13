@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     //Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
     Map map = new Map(this);
     SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread;
@@ -84,6 +85,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int sleepState = 8;
     public final int mapState = 9;
     public final int transitionState = 10;
+    public final int cutsceneState = 11;
+
+    //ДРУГОЕ
+    public boolean bossBattleOn = false;
 
     //AREA
     public int currentArea;
@@ -119,6 +124,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void resetGame(boolean restart){
 
         currentArea = outside;
+        removeTempEntity();
+        bossBattleOn = false;
         player.setDefaultPosition();
         player.restoreLifeAndMana();
         assets.setNPC();
@@ -314,6 +321,9 @@ public class GamePanel extends JPanel implements Runnable {
             //MINI MAP
             map.drawMiniMap(g2);
 
+            //КАТСЦЕНА
+            csManager.draw(g2);
+
             //UI
             ui.draw(g2);
 
@@ -376,5 +386,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
         currentArea = nextArea;
         assets.setMonster();
+    }
+    public void removeTempEntity(){
+
+        for(int mapNum = 0; mapNum < maxMap; mapNum++){
+
+            for(int i = 0; i < obj[1].length; i++) {
+                if(obj[mapNum][i] != null && obj[mapNum][i]. temp == true){
+
+                    obj[mapNum][i] = null;
+                }
+            }
+        }
     }
 }

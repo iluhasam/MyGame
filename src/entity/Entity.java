@@ -29,6 +29,7 @@ public class Entity {
 
     public Entity attacker;
     public Entity linkedEntity;
+    public boolean temp = false;
 
     //STATE
     public int worldX,worldY;
@@ -49,6 +50,7 @@ public class Entity {
     public Entity loot;
     public boolean opened = false;
     public boolean inRage = false;
+    public boolean drawing = true;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -86,6 +88,7 @@ public class Entity {
     public Entity currentBoots;
     public Projectile projectile;
     public boolean boss;
+    public boolean sleep = false;
 
 
     //ITEM ATTRIBUTES
@@ -259,74 +262,76 @@ public class Entity {
     }
     public void update(){
 
-        if(knockBack == true){
 
-            checkCollision();
+        if(sleep == false){
+            if(knockBack == true){
 
-            if(collisionOn == true){
-                knockBackCounter = 0;
-                knockBack = false;
-                speed = defaultSpeed;
-            } else if (collisionOn == false) {
-                switch (knockBackDiraction){
-                    case "up":worldY -= speed;break;
-                    case "down":worldY += speed;break;
-                    case "left":worldX -= speed;break;
-                    case "right":worldX += speed;break;
-                }
-            }
+                checkCollision();
 
-            knockBackCounter++;
-            if(knockBackCounter == 10){
-                knockBackCounter = 0;
-                knockBack = false;
-                speed = defaultSpeed;
-            }
-        }
-        else if(attacking == true){
-            attacking();
-        }
-        else {
-            setAction();
-            checkCollision();
-
-            if(collisionOn == false){
-                switch(direction){
-                    case "up":worldY -= speed;break;
-                    case "down":worldY += speed;break;
-                    case "left":worldX -= speed;break;
-                    case "right":worldX += speed;break;
-                }
-            }
-            //Обновление анимации
-            boolean isMoving = up1 != null || down1 != null || left1 != null || right != null;
-
-            if (isMoving) {
-                spriteCounter++;
-                if (spriteCounter > 11) {
-                    spriteNum++;
-                    if (spriteNum > 2) {
-                        spriteNum = 1;
+                if(collisionOn == true){
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else if (collisionOn == false) {
+                    switch (knockBackDiraction){
+                        case "up":worldY -= speed;break;
+                        case "down":worldY += speed;break;
+                        case "left":worldX -= speed;break;
+                        case "right":worldX += speed;break;
                     }
-                    spriteCounter = 0;
                 }
-            } else {
-                spriteNum = 1; // Останавливаем анимацию на первом спрайте
+
+                knockBackCounter++;
+                if(knockBackCounter == 10){
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            }
+            else if(attacking == true){
+                attacking();
+            }
+            else {
+                setAction();
+                checkCollision();
+
+                if(collisionOn == false){
+                    switch(direction){
+                        case "up":worldY -= speed;break;
+                        case "down":worldY += speed;break;
+                        case "left":worldX -= speed;break;
+                        case "right":worldX += speed;break;
+                    }
+                }
+                //Обновление анимации
+                boolean isMoving = up1 != null || down1 != null || left1 != null || right != null;
+
+                if (isMoving) {
+                    spriteCounter++;
+                    if (spriteCounter > 11) {
+                        spriteNum++;
+                        if (spriteNum > 2) {
+                            spriteNum = 1;
+                        }
+                        spriteCounter = 0;
+                    }
+                } else {
+                    spriteNum = 1; // Останавливаем анимацию на первом спрайте
+                }
+            }
+
+
+            if(invincible == true){
+                invicibleCounter++;
+                if(invicibleCounter > 40){
+                    invincible = false;
+                    invicibleCounter = 0;
+                }
+            }
+            if(shotAvaliableCounter < 30){
+                shotAvaliableCounter++;
             }
         }
-
-
-        if(invincible == true){
-            invicibleCounter++;
-            if(invicibleCounter > 40){
-                invincible = false;
-                invicibleCounter = 0;
-            }
-        }
-        if(shotAvaliableCounter < 30){
-            shotAvaliableCounter++;
-        }
-
     }
     public void checkAttackOrNot(int rate, int straight, int horizontal){
 

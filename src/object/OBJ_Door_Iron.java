@@ -1,4 +1,4 @@
-/*
+
 package object;
 
 import Main.GamePanel;
@@ -6,6 +6,7 @@ import entity.Entity;
 
 public class OBJ_Door_Iron extends Entity {
 
+    public static final String objName = "Железная дверь";
     GamePanel gp;
     public OBJ_Door_Iron(GamePanel gp) {
         super(gp);
@@ -37,4 +38,4 @@ public class OBJ_Door_Iron extends Entity {
 
     }
 }
-*/
+

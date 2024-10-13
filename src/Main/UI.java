@@ -124,7 +124,7 @@ public class UI {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
-        int iconSize = 32;
+        int iconSize = 48;
         int manaStartX = (gp.tileSize/2)-5;
         int manaStartY = 0;
 
@@ -133,7 +133,7 @@ public class UI {
             g2.drawImage(life_blank, x, y,iconSize,iconSize, null);
             i++;
             x += iconSize;
-            manaStartY = y + 32;
+            manaStartY = y + 48;
 
             if(i % 9 == 0){
                 x = gp.tileSize/2;
@@ -166,10 +166,10 @@ public class UI {
         y = (int)(gp.tileSize*1.5);
         i = 0;
         while(i < gp.player.maxMana){
-            g2.drawImage(crystal_blank, x, y, null);
+            g2.drawImage(crystal_blank, x, y,iconSize,iconSize,null);
             i++;
             x+=iconSize;
-            manaStartY = y + 32;
+            manaStartY = y + 48;
 
             if(i % 9 == 0){
                 x = gp.tileSize/2;
@@ -181,7 +181,7 @@ public class UI {
         y = (int)(gp.tileSize*1.5);
         i = 0;
         while(i < gp.player.mana){
-            g2.drawImage(crystal_full, x, y, null);
+            g2.drawImage(crystal_full, x, y,iconSize,iconSize, null);
             i++;
             x += iconSize;
         }
@@ -348,7 +348,8 @@ public class UI {
                 charIndex = 0;
                 combinedText = "";
 
-                if(gp.gameState == gp.dialogueState){
+                if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState){
+
                     npc.dialogueIndex++;
                     gp.keyH.enterPressed = false;
                 }
@@ -357,8 +358,11 @@ public class UI {
         else{ // Нет текста в массиве
             npc.dialogueIndex = 0;
 
-            if(gp.gameState == gp.dialogueState){
+            if(gp.gameState == gp.dialogueState ){
                 gp.gameState = gp.playState;
+            }
+            if(gp.gameState == gp.cutsceneState){
+                gp.csManager.scenePhase++;
             }
         }
 

@@ -1,8 +1,10 @@
 package monster;
 
 import Main.GamePanel;
+import data.Progress;
 import entity.Entity;
 import object.OBJ_Coin_Bronze;
+import object.OBJ_Door_Iron;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 
@@ -31,6 +33,8 @@ public class MON_SkeletonLord extends Entity {
             exp = 50;
             motion1_duration = 25;
             motion2_duration = 50;
+            knockBackPower = 10;
+            sleep = true;
 
             int size = gp.tileSize*5;
             solidArea.x = 64;
@@ -45,6 +49,7 @@ public class MON_SkeletonLord extends Entity {
 
             getImage();
             getAttackImage();
+            setDialogue();
         }
 
         public void getImage(){
@@ -113,6 +118,13 @@ public class MON_SkeletonLord extends Entity {
 
 
         }
+        public void setDialogue(){
+
+            dialogues[0][0] = "Очередной смельчак\n хочет забрать моё сокровище.";
+            dialogues[0][1] = "Ты умрешь здесь...";
+            dialogues[0][2] = "...(ПРИДУМАТЬ ЧТО-ТО)";
+
+        }
         public void setAction(){
 
             if(inRage == false && life < maxLife/2){
@@ -146,7 +158,24 @@ public class MON_SkeletonLord extends Entity {
         }
         public void checkDrop(){
 
-            //CAST A DIE
+            gp.bossBattleOn = false;
+            Progress.skeletonLordDefeated = true;
+
+            //Возвращение музыки
+
+            gp.stopMusic();
+            gp.playMusic(17);
+
+            //Удаление железной двери
+            for(int i = 0; i < gp.obj[1].length; i++){
+                if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(OBJ_Door_Iron.objName)){
+
+                    gp.playSE(19);
+                    gp.obj[gp.currentMap][i] = null;
+                }
+            }
+
+            //Дроп после смерти
             int i = new Random().nextInt(100)+1;
 
             //SET MONSTER DROP
