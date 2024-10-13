@@ -2,6 +2,7 @@ package Main;
 
 //import entity.NPC_BigRock;
 
+import data.Progress;
 import entity.NPC_OldMan;
 import entity.NPC_Trader;
 import entity.NPC_Trader2;
@@ -90,6 +91,12 @@ public class Assets {
         gp.obj[mapNum][i].setLoot(new OBJ_Potion_Red(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*25 ;
         gp.obj[mapNum][i].worldY = gp.tileSize*15;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BlueHeart(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Potion_Red(gp));
+        gp.obj[mapNum][i].worldX = gp.tileSize*25 ;
+        gp.obj[mapNum][i].worldY = gp.tileSize*8;
         i++;
 
 
@@ -219,11 +226,17 @@ public class Assets {
         gp.monster[mapNum][i].worldY = gp.tileSize * 19;
         i++;
 
+
         mapNum = 3;
-        gp.monster[mapNum][i]= new MON_SkeletonLord(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 23;
-        gp.monster[mapNum][i].worldY = gp.tileSize * 16;
-        i++;
+        if(Progress.skeletonLordDefeated == false){
+            gp.monster[mapNum][i]= new MON_SkeletonLord(gp);
+            gp.monster[mapNum][i].worldX = gp.tileSize * 23;
+            gp.monster[mapNum][i].worldY = gp.tileSize * 16;
+            i++;
+        }
+
+
+
         mapNum = 6;
         i++;
         gp.monster[mapNum][i]= new MON_Goblin(gp);
