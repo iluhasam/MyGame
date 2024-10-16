@@ -96,9 +96,7 @@ public class EventHandler  {
                 //BOSS CUTSCENE
                 else if(hit(3,25,27,"up") == true){skeletonLord();}
 
-
-
-
+                else if(hit(6,64,36, "any") == true){crystalknight();}
             }
 
         }
@@ -180,6 +178,13 @@ public class EventHandler  {
             if(gp.bossBattleOn == false && Progress.skeletonLordDefeated == false){
                 gp.gameState = gp.cutsceneState;
                 gp.csManager.sceneNum = gp.csManager.skeletonLord;
+            }
+        }
+        public void crystalknight(){
+
+            if(gp.bossBattleOn == false && Progress.crystalknightDefeated == false){
+                gp.gameState = gp.cutsceneState;
+                gp.csManager.sceneNum = gp.csManager.crystalknight;
             }
         }
 

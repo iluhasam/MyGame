@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxMap = 20;
     public int currentMap = 0;
     public int nextArea;
+    public Object particleManager;
 
 
     //FOR FULL SCREEN

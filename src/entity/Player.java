@@ -73,6 +73,7 @@ public class Player extends Entity {
         //currentWeapon = new OBJ_Axe_Wood(gp);
         currentShield = new OBJ_Shield_Start(gp);
         projectile = new OBJ_Fireball(gp);
+        //projectile = new OBJ_PurpleFireball(gp);
         //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
@@ -90,7 +91,7 @@ public class Player extends Entity {
     }
     public void setDialogue(){
 
-       dialogues [0][0] = "Твой уровень " + level + " сейчас \n"
+       dialogues [0][0] = "Твой уровень " + level + " сейчас\n"
                 + "Ты чувствуешь себя сильнее!";
     }
     public void restoreLifeAndMana(){
@@ -140,8 +141,20 @@ public class Player extends Entity {
         up1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/res/player/boy_up_2",gp.tileSize, gp.tileSize);
 
+        upLeft1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
+        upLeft2 = setup("/res/player/boy_up_2",gp.tileSize, gp.tileSize);
+
+        upRight1 = setup("/res/player/boy_up_1", gp.tileSize, gp.tileSize);
+        upRight2 = setup("/res/player/boy_up_2",gp.tileSize, gp.tileSize);
+
         down1 = setup("/res/player/boy_down_1",gp.tileSize, gp.tileSize);
         down2 = setup("/res/player/boy_down_2",gp.tileSize, gp.tileSize);
+
+        downLeft1 = setup("/res/player/boy_down_1",gp.tileSize, gp.tileSize);
+        downLeft2 = setup("/res/player/boy_down_2",gp.tileSize, gp.tileSize);
+
+        downRight1 = setup("/res/player/boy_down_1",gp.tileSize, gp.tileSize);
+        downRight2 = setup("/res/player/boy_down_2",gp.tileSize, gp.tileSize);
 
         left1 = setup("/res/player/boy_left_1",gp.tileSize, gp.tileSize);
         left2 = setup("/res/player/boy_left_2",gp.tileSize, gp.tileSize);
@@ -223,7 +236,18 @@ public class Player extends Entity {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed ||
                 keyH.rightPressed) {
             isMoving = true;
-            if (keyH.upPressed)  {direction = "up";
+
+
+            // Диагональные направления
+            if (keyH.upPressed && keyH.leftPressed) {
+                direction = "upLeft";
+            } else if (keyH.upPressed && keyH.rightPressed) {
+                direction = "upRight";
+            } else if (keyH.downPressed && keyH.leftPressed) {
+                direction = "downLeft";
+            } else if (keyH.downPressed && keyH.rightPressed) {
+                direction = "downRight";
+            } else if (keyH.upPressed)  {direction = "up";
             } else if (keyH.downPressed) {direction = "down";
             } else if (keyH.leftPressed) {direction = "left";
             } else if (keyH.rightPressed) {direction = "right";}
@@ -257,6 +281,23 @@ public class Player extends Entity {
                     case "down":worldY += speed;break;
                     case "left":worldX -= speed;break;
                     case "right":worldX += speed;break;
+
+                    case "upLeft":
+                        worldY -= speed / Math.sqrt(2);
+                        worldX -= speed / Math.sqrt(2);
+                        break;
+                    case "upRight":
+                        worldY -= speed / Math.sqrt(2);
+                        worldX += speed / Math.sqrt(2);
+                        break;
+                    case "downLeft":
+                        worldY += speed / Math.sqrt(1.7);
+                        worldX -= speed / Math.sqrt(1.7);
+                        break;
+                    case "downRight":
+                        worldY += speed / Math.sqrt(1.7);
+                        worldX += speed / Math.sqrt(1.7);
+                        break;
                 }
             }
         }
@@ -649,6 +690,7 @@ public class Player extends Entity {
                 }
                 if(attacking == true){
                     tempScreenX = screenX - gp.tileSize;
+
                     if(spriteNum == 1) {image = attackLeft1;}
                     if(spriteNum == 2) {image = attackLeft2;}
 
@@ -665,9 +707,61 @@ public class Player extends Entity {
                     if(spriteNum == 2) {image = attackRight2;}
 
                 }
+                break;
+            // Добавление диагональных направлений
+            case "upLeft":
+                if (attacking == false) {
+                    if (spriteNum == 1) { image = upLeft1; }
+                    if (spriteNum == 2) { image = upLeft2; }
+                }
+                if (attacking == true) {
+                   // tempScreenX = screenX - gp.tileSize; // Уменьшаем X для диагональной атаки
+                    tempScreenY = screenY - gp.tileSize;
+                    if (spriteNum == 1) { image = attackUp1; }
+                    if (spriteNum == 2) { image = attackUp2; }
+                }
+                break;
 
+            case "upRight":
+                if (attacking == false) {
+                    if (spriteNum == 1) { image = upRight1; }
+                    if (spriteNum == 2) { image = upRight2; }
+                }
+                if (attacking == true) {
+                    tempScreenY = screenY - gp.tileSize;
+                    //tempScreenX = screenX + gp.tileSize; // Увеличиваем X для диагональной атаки
+                    if (spriteNum == 1) { image = attackUp1; }
+                    if (spriteNum == 2) { image = attackUp2; }
+                }
+                break;
+
+            case "downLeft":
+                if (attacking == false) {
+                    if (spriteNum == 1) { image = downLeft1; }
+                    if (spriteNum == 2) { image = downLeft2; }
+                }
+                if (attacking == true) {
+//                    tempScreenY = screenY + gp.tileSize; // Увеличиваем Y для диагональной атаки
+//                    tempScreenX = screenX - gp.tileSize; // Уменьшаем X для диагональной атаки
+                    if (spriteNum == 1) { image = attackDown1; }
+                    if (spriteNum == 2) { image = attackDown2; }
+                }
+                break;
+
+            case "downRight":
+                if (attacking == false) {
+                    if (spriteNum == 1) { image = downRight1; }
+                    if (spriteNum == 2) { image = downRight2; }
+                }
+                if (attacking == true) {
+                   // tempScreenY = screenY + gp.tileSize; // Увеличиваем Y для диагональной атаки
+                   // tempScreenX = screenX + gp.tileSize; // Увеличиваем X для диагональной атаки
+                    if (spriteNum == 1) { image = attackDown1; }
+                    if (spriteNum == 2) { image = attackDown2; }
+                }
                 break;
         }
+
 
         if(invincible == true){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));

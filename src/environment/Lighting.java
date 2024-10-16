@@ -91,7 +91,7 @@ public class Lighting {
 
             dayCounter++;
 
-            if(dayCounter == 36000){
+            if(dayCounter == 18000){
                 dayState = dusk;
                 dayCounter = 0;
             }

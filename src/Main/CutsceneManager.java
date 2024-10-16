@@ -1,6 +1,7 @@
 package Main;
 
 import entity.PlayerDummy;
+import monster.MON_CrystalKnight;
 import monster.MON_SkeletonLord;
 import object.OBJ_BlueHeart;
 import object.OBJ_Door_Iron;
@@ -22,7 +23,9 @@ public class CutsceneManager {
     //Номер сцены
     public final int NA = 0;
     public final int skeletonLord = 1;
-    public final int ending = 2;
+    public final int crystalknight = 2;
+    public final int ending = 3;
+
 
 
     public CutsceneManager(GamePanel gp) {
@@ -39,6 +42,7 @@ public class CutsceneManager {
 
         switch (sceneNum) {
             case skeletonLord: scene_skeletonLord(); break;
+            case crystalknight: scene_crystalknight(); break;
             case ending: scene_ending(); break;
         }
     }
@@ -51,7 +55,7 @@ public class CutsceneManager {
             //Поставить жел дверь
             for(int i = 0; i < gp.obj[1].length; i++){
 
-                if(gp.obj[gp.currentMap][i] == null){
+                if( gp.obj[gp.currentMap][i] == null){
                     gp.obj[gp.currentMap][i] = new OBJ_Door_Iron(gp);
                     gp.obj[gp.currentMap][i].worldX = gp.tileSize*25;
                     gp.obj[gp.currentMap][i].worldY = gp.tileSize*28;
@@ -90,6 +94,86 @@ public class CutsceneManager {
 
                 if(gp.monster[gp.currentMap][i] != null &&
                         gp.monster[gp.currentMap][i].name == MON_SkeletonLord.monName){
+
+                    gp.monster[gp.currentMap][i].sleep = false;
+                    gp.ui.npc = gp.monster[gp.currentMap][i];
+                    scenePhase++;
+                    break;
+                }
+            }
+        }
+        if(scenePhase == 3){
+
+            //Диалог босса
+            gp.ui.drawDialogScreen();
+        }
+        if(scenePhase == 4){
+
+            //Возвращение камеры к игроку
+
+            //Скан манекена
+            for(int i = 0; i < gp.npc[1].length; i++){
+
+                if(gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].name.equals(PlayerDummy.npcName)){
+                    //Возвращение позиции игрока
+                    gp.player.worldX = gp.npc[gp.currentMap][i].worldX;
+                    gp.player.worldY = gp.npc[gp.currentMap][i].worldY;
+
+                    //Удаление манекена
+                    gp.npc[gp.currentMap][i] = null;
+                    break;
+                }
+            }
+
+            //Рисовка персонажа
+            gp.player.drawing = true;
+
+            //Сбросить
+            sceneNum = NA;
+            scenePhase = 0;
+            gp.gameState = gp.playState;
+
+            //Смена музыки
+            gp.stopMusic();
+            gp.playMusic(20);
+        }
+    }
+    public void scene_crystalknight (){
+
+        if(scenePhase == 0){
+
+            gp.bossBattleOn = true;
+
+            //Поиск места для манекена "Dummy"
+            for(int i = 0; i < gp.npc[1].length; i++){
+
+                if(gp.npc[gp.currentMap][i] == null){
+                    gp.npc[gp.currentMap][i] = new PlayerDummy(gp);
+                    gp.npc[gp.currentMap][i].worldX = gp.player.worldX;
+                    gp.npc[gp.currentMap][i].worldY = gp.player.worldY;
+                    gp.npc[gp.currentMap][i].direction = gp.player.direction;
+                    break;
+                }
+            }
+            gp.player.drawing = false;
+            scenePhase++;
+        }
+        if(scenePhase == 1){
+
+            gp.player.worldY -= 6;
+            gp.player.worldX += 6;
+            if(gp.player.worldX >= gp.tileSize * 75 && gp.player.worldY < gp.tileSize * 25 ){
+
+                scenePhase++;
+            }
+        }
+        if(scenePhase == 2){
+
+            //Поиск босса
+            for(int i = 0; i < gp.monster[1].length; i++){
+
+                if(gp.monster[gp.currentMap][i] != null &&
+                        gp.monster[gp.currentMap][i].name == MON_CrystalKnight.monName){
 
                     gp.monster[gp.currentMap][i].sleep = false;
                     gp.ui.npc = gp.monster[gp.currentMap][i];

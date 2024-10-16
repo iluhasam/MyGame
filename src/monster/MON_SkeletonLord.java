@@ -142,8 +142,6 @@ public class MON_SkeletonLord extends Entity {
                 moveTowardPlayer(30);
             }
             else {
-
-
                 //Рандои направление
                 getRandomDirection(90);
             }

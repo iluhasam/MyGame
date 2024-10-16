@@ -26,7 +26,7 @@ public class Main {
     }
     public void setIcon(){
 
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/boy_down_1.png"));
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/boy_down_2.png"));
         window.setIconImage(icon.getImage());
     }
 }

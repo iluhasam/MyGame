@@ -20,13 +20,13 @@ public class MON_GreenSlime extends Entity {
 
         type = type_monster;
         name = "Зеленый Слизень";
-        defaultSpeed = 1;
+        defaultSpeed = 2;
         speed = defaultSpeed;
         maxLife = 1;
         life = maxLife;
         attack = 0;
         defense = 0;
-        exp = 10;
+        exp = 1;
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;
@@ -56,7 +56,7 @@ public class MON_GreenSlime extends Entity {
                 //STOP CHASING
                 checkStopChasingOrNot(gp.player, 10, 100);
 
-                //НЕПИСЬ СЛЕДУЕТ ЗА ТОБОЙ( НАДО В ENTITY УБИРАТЬ, КАК ТОЛЬКО ПОГОВОРИЛ СРАЗУ ББ)
+                //НЕПИСЬ СЛЕДУЕТ ЗА ТОБОЙ(НАДО В ENTITY УБИРАТЬ, КАК ТОЛЬКО ПОГОВОРИЛ СРАЗУ ББ)
                 searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
                 //Проверка выстрела projectile

@@ -62,6 +62,42 @@ public class CollisionCheker {
                     entity.collisionOn = true;
                 }
                 break;
+            case "upLeft": // Обработка движения влево-вверх
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
+                if (gp.tileM.tile[tileNum1].collission || gp.tileM.tile[tileNum2].collission) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case "upRight": // Обработка движения вправо-вверх
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
+                if (gp.tileM.tile[tileNum1].collission || gp.tileM.tile[tileNum2].collission) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case "downLeft": // Обработка движения влево-вниз
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
+                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+                if (gp.tileM.tile[tileNum1].collission || gp.tileM.tile[tileNum2].collission) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case "downRight": // Обработка движения вправо-вниз
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
+                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
+                if (gp.tileM.tile[tileNum1].collission || gp.tileM.tile[tileNum2].collission) {
+                    entity.collisionOn = true;
+                }
+                break;
         }
     }
 

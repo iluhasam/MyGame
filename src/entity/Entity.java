@@ -16,7 +16,9 @@ public class Entity {
     public BufferedImage  up1, up2, up3,up4,
             down1, down2, down3,down4,
              left1, left2, left3, left4,
-            right, right1, right2, right3, right4;
+            right, right1, right2, right3, right4,
+            upLeft1,upLeft2,upRight1,upRight2,
+            downLeft1, downLeft2, downRight1, downRight2;
     public BufferedImage attackUp1, attackUp2, attackUp3, attackUp4,
             attackDown1, attackDown2, attackDown3, attackDown4,
             attackLeft1, attackLeft2, attackLeft3, attackLeft4,
@@ -80,6 +82,8 @@ public class Entity {
     public int coin;
     public int motion1_duration;
     public int motion2_duration;
+    public int motion3_duration;
+    public int motion4_duration;
     public Entity currentWeapon;
     public Entity currentShield;
     public Entity currentArmor;
@@ -262,7 +266,6 @@ public class Entity {
     }
     public void update(){
 
-
         if(sleep == false){
             if(knockBack == true){
 
@@ -280,7 +283,6 @@ public class Entity {
                         case "right":worldX += speed;break;
                     }
                 }
-
                 knockBackCounter++;
                 if(knockBackCounter == 10){
                     knockBackCounter = 0;
@@ -304,7 +306,7 @@ public class Entity {
                     }
                 }
                 //Обновление анимации
-                boolean isMoving = up1 != null || down1 != null || left1 != null || right != null;
+                boolean isMoving = up1 != null || down1 != null || left1 != null || right1 != null;
 
                 if (isMoving) {
                     spriteCounter++;
@@ -319,8 +321,6 @@ public class Entity {
                     spriteNum = 1; // Останавливаем анимацию на первом спрайте
                 }
             }
-
-
             if(invincible == true){
                 invicibleCounter++;
                 if(invicibleCounter > 40){
@@ -488,7 +488,7 @@ public class Entity {
             } else {
 
                 //PLAYER
-                //Check monster collision with the updated worldX, worldY and solidArea
+                //Проверка коллизии монстров после обновления worldX, worldY и solidArea
                 int monsterIndex = gp.cCheker.checkEntity(this, gp.monster);
                 gp.player.damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
 
@@ -499,7 +499,7 @@ public class Entity {
                 gp.player.damageProjectile(projectileIndex);
             }
 
-            //After checking collision
+            //После проверки коллизии
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidht;
@@ -550,9 +550,9 @@ public class Entity {
     }
     public boolean inCamera(){
         boolean inCamera = false;
-        if (worldX + gp.tileSize * 6> gp.player.worldX - gp.player.screenX &&
+        if (worldX + gp.tileSize * 6 > gp.player.worldX - gp.player.screenX &&
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize * 6> gp.player.worldY - gp.player.screenY &&
+                worldY + gp.tileSize * 6 > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
             inCamera = true;
         }
