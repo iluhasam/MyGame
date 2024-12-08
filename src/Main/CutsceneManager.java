@@ -1,7 +1,7 @@
 package Main;
 
 import entity.PlayerDummy;
-import monster.MON_CrystalKnight;
+import monster.MON_Devil;
 import monster.MON_SkeletonLord;
 import object.OBJ_BlueHeart;
 import object.OBJ_Door_Iron;
@@ -23,7 +23,7 @@ public class CutsceneManager {
     //Номер сцены
     public final int NA = 0;
     public final int skeletonLord = 1;
-    public final int crystalknight = 2;
+    public final int devil = 2;
     public final int ending = 3;
 
 
@@ -42,7 +42,7 @@ public class CutsceneManager {
 
         switch (sceneNum) {
             case skeletonLord: scene_skeletonLord(); break;
-            case crystalknight: scene_crystalknight(); break;
+            case devil: scene_devil(); break;
             case ending: scene_ending(); break;
         }
     }
@@ -138,7 +138,7 @@ public class CutsceneManager {
             gp.playMusic(20);
         }
     }
-    public void scene_crystalknight (){
+    public void scene_devil (){
 
         if(scenePhase == 0){
 
@@ -162,7 +162,7 @@ public class CutsceneManager {
 
             gp.player.worldY -= 6;
             gp.player.worldX += 6;
-            if(gp.player.worldX >= gp.tileSize * 75 && gp.player.worldY < gp.tileSize * 25 ){
+            if(gp.player.worldX >= gp.tileSize * 76 && gp.player.worldY < gp.tileSize * 37){
 
                 scenePhase++;
             }
@@ -173,7 +173,7 @@ public class CutsceneManager {
             for(int i = 0; i < gp.monster[1].length; i++){
 
                 if(gp.monster[gp.currentMap][i] != null &&
-                        gp.monster[gp.currentMap][i].name == MON_CrystalKnight.monName){
+                        gp.monster[gp.currentMap][i].name == MON_Devil.monName){
 
                     gp.monster[gp.currentMap][i].sleep = false;
                     gp.ui.npc = gp.monster[gp.currentMap][i];
@@ -267,7 +267,7 @@ public class CutsceneManager {
                 alpha = 1f;
             }
 
-            String text = "После победы над Королём Скелетов,\n"
+            String text = "После победы над Демоном,\n"
                     + "Главный герой закончил поиски легендарного сокровища\n"
                     + "Но это не конец истории,\n"
                     + "Приключение только началось.";

@@ -58,13 +58,13 @@ public class Player extends Entity {
         direction = "down";
 
         //PLAYER STATUS
-        level =1;
+        level = 1;
         maxLife = 9;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
         ammo = 10;
-        strength = 40;
+        strength = 1;
         agility = 1;
         exp = 0;
         nextLevelExp = 4;
@@ -239,15 +239,16 @@ public class Player extends Entity {
 
 
             // Диагональные направления
-            if (keyH.upPressed && keyH.leftPressed) {
-                direction = "upLeft";
-            } else if (keyH.upPressed && keyH.rightPressed) {
-                direction = "upRight";
-            } else if (keyH.downPressed && keyH.leftPressed) {
-                direction = "downLeft";
-            } else if (keyH.downPressed && keyH.rightPressed) {
-                direction = "downRight";
-            } else if (keyH.upPressed)  {direction = "up";
+//            if (keyH.upPressed && keyH.leftPressed) {
+//                direction = "upLeft";
+//            } else if (keyH.upPressed && keyH.rightPressed) {
+//                direction = "upRight";
+//            } else if (keyH.downPressed && keyH.leftPressed) {
+//                direction = "downLeft";
+//            } else if (keyH.downPressed && keyH.rightPressed) {
+//                direction = "downRight";
+//            }
+            if (keyH.upPressed)  {direction = "up";
             } else if (keyH.downPressed) {direction = "down";
             } else if (keyH.leftPressed) {direction = "left";
             } else if (keyH.rightPressed) {direction = "right";}
@@ -282,22 +283,22 @@ public class Player extends Entity {
                     case "left":worldX -= speed;break;
                     case "right":worldX += speed;break;
 
-                    case "upLeft":
-                        worldY -= speed / Math.sqrt(2);
-                        worldX -= speed / Math.sqrt(2);
-                        break;
-                    case "upRight":
-                        worldY -= speed / Math.sqrt(2);
-                        worldX += speed / Math.sqrt(2);
-                        break;
-                    case "downLeft":
-                        worldY += speed / Math.sqrt(1.7);
-                        worldX -= speed / Math.sqrt(1.7);
-                        break;
-                    case "downRight":
-                        worldY += speed / Math.sqrt(1.7);
-                        worldX += speed / Math.sqrt(1.7);
-                        break;
+//                    case "upLeft":
+//                        worldY -= speed / Math.sqrt(2);
+//                        worldX -= speed / Math.sqrt(2);
+//                        break;
+//                    case "upRight":
+//                        worldY -= speed / Math.sqrt(2);
+//                        worldX += speed / Math.sqrt(2);
+//                        break;
+//                    case "downLeft":
+//                        worldY += speed / Math.sqrt(1.7);
+//                        worldX -= speed / Math.sqrt(1.7);
+//                        break;
+//                    case "downRight":
+//                        worldY += speed / Math.sqrt(1.7);
+//                        worldX += speed / Math.sqrt(1.7);
+//                        break;
                 }
             }
         }

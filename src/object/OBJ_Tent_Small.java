@@ -11,7 +11,7 @@ public class OBJ_Tent_Small extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = "tent small";
+        name = "Маленькая Палатка";
         down1 = setup("/objects/Tent_Small",gp.tileSize*3,gp.tileSize*6);
         collision = true;
 

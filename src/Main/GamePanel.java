@@ -24,8 +24,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 4;
 
     public final int tileSize = originalTileSize * scale;// 66x66 плитка
-    public final int maxScreenCol = 20;
-    public final int maxScreenRow = 12;
+    public final int maxScreenCol = 30;
+    public final int maxScreenRow = 17;
     public final int screenWidth = tileSize * maxScreenCol;  //1792px
     public final int screenHeight = tileSize * maxScreenRow;    // 1064 px
 
@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
     Graphics2D g2;
-    public boolean fullScreenOn = false;
+    public boolean fullScreenOn = true;
 
     //SYSTEM
     public TileManager tileM = new TileManager(this);
@@ -64,11 +64,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     //ENTITY AND OBJ
     public Player player = new Player(this,keyH);
-    public Entity obj[][] = new Entity[maxMap][100];
+    public Entity obj[][] = new Entity[maxMap][1000];
     public Entity npc[][] = new Entity[maxMap][100];
-    public Entity monster[][] = new Entity[maxMap][100];
+    public Entity monster[][] = new Entity[maxMap][1000];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
-    public Entity projectile[][] = new Entity[maxMap][100];
+    public Entity projectile[][] = new Entity[maxMap][1000];
     //public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();

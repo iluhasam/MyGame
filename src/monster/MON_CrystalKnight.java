@@ -2,6 +2,7 @@ package monster;
 
 import Main.GamePanel;
 import entity.Entity;
+import object.OBJ_PurpleFireball;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,7 +28,7 @@ public class MON_CrystalKnight extends Entity {
         attack = 10;
         defense = 4;
         exp = 50;
-        //projectile = new OBJ_PurpleFireball(gp);
+        projectile = new OBJ_PurpleFireball(gp);
 
         motion1_duration = 10;
         motion2_duration = 25;
@@ -99,8 +100,7 @@ public class MON_CrystalKnight extends Entity {
             attack *= 2;
 
         }
-
-        checkShootOrNot(50, 20);
+        checkShootOrNot(200, 30);
         if (getTileDistance(gp.player) < 10) {
             moveTowardPlayer(30);
         } else {

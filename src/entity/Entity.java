@@ -377,7 +377,8 @@ public class Entity {
 
         int i = new Random().nextInt(rate);
         if(i == 0 && projectile.alive == false && shotAvaliableCounter == shotInterval){
-            projectile.set(worldX,worldY, direction, true, this);
+            projectile.set(worldX,worldY, direction, true,
+                    this);
             //gp.projectileList.add(projectile);
             //CHECK PROJECTILE
             for(int ii = 0; ii < gp.projectile[1].length; ii++){

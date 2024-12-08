@@ -96,7 +96,37 @@ public class EventHandler  {
                 //BOSS CUTSCENE
                 else if(hit(3,25,27,"up") == true){skeletonLord();}
 
-                else if(hit(6,64,36, "any") == true){crystalknight();}
+                else if(hit(8,76,37, "any") == true){devil();}
+
+                //WITCHMAP
+                else if(hit(4, 89,43, "right") == true){teleport(7,14,48, gp.outside);}
+                else if(hit(4, 89,44, "right") == true){teleport(7,14,48, gp.outside);}
+                else if(hit(4, 89,45, "right") == true){teleport(7,14,48, gp.outside);}
+                else if(hit(4, 89,42, "right") == true){teleport(7,14,48, gp.outside);}
+                else if(hit(4, 89,46, "right") == true){teleport(7,14,48, gp.outside);}
+
+                else if(hit(7, 12,46, "left") == true){teleport(4,87,44, gp.outside);}
+                else if(hit(7, 12,47, "left") == true){teleport(4,87,44, gp.outside);}
+                else if(hit(7, 12,48, "left") == true){teleport(4,87,44, gp.outside);}
+                else if(hit(7, 12,49, "left") == true){teleport(4,87,44, gp.outside);}
+                else if(hit(7, 12,50, "left") == true){teleport(4,87,44, gp.outside);}
+
+                //dung
+                else if(hit(4,39, 36, "up") == true ){teleport(8,26,90, gp.dungeon);}
+                else if(hit(4,40, 36, "up") == true ){teleport(8,26,90, gp.dungeon);}
+
+                else if(hit(8,45,50,"up")== true){teleport(8,76,40, gp.dungeon);}
+                else if(hit(8,46,50,"up")== true){teleport(8,76,40, gp.dungeon);}
+
+                else if(hit(8,35,63,"up")== true){teleport(8,15,12, gp.dungeon);}
+                else if(hit(8,36,63,"up")== true){teleport(8,15,12, gp.dungeon);}
+
+                else if(hit(8,14,10,"up")== true){teleport(8,35,64, gp.dungeon);}
+                else if(hit(8,15,10,"up")== true){teleport(8,35,64, gp.dungeon);}
+
+                else if(hit(8,60,27,"up")== true){teleport(4,39,38, gp.outside);}
+                else if(hit(8,61,27,"up")== true){teleport(4,39,38, gp.outside);}
+
             }
 
         }
@@ -180,11 +210,11 @@ public class EventHandler  {
                 gp.csManager.sceneNum = gp.csManager.skeletonLord;
             }
         }
-        public void crystalknight(){
+        public void devil(){
 
-            if(gp.bossBattleOn == false && Progress.crystalknightDefeated == false){
+            if(gp.bossBattleOn == false && Progress.devilDeafeated == false){
                 gp.gameState = gp.cutsceneState;
-                gp.csManager.sceneNum = gp.csManager.crystalknight;
+                gp.csManager.sceneNum = gp.csManager.devil;
             }
         }
 

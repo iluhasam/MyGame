@@ -71,6 +71,8 @@ public class TileManager {
     loadMap("/maps/worldmap2.txt",4);
     loadMap("/maps/maphouse01.txt",5);
     loadMap("/maps/cave.txt",6);
+    loadMap("/maps/witchmap.txt", 7);
+    loadMap("/maps/dung.txt", 8);
     }
     public void getTileImage(){
 

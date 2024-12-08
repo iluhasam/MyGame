@@ -34,8 +34,7 @@ public class OBJ_Chest extends Entity {
     public void setDialogue(){
 
         dialogues[0][0] = "Ты открыл сундук и нашёл " + loot.name + "!";
-        dialogues[1][0] = "\n... Ты не можешь нести больше";
-        dialogues[2][0] = "\nТы получил " + loot.name + "!";
+        dialogues[1][0] = "\nТы получил " + loot.name + "!";
     }
     public void interact(){
 
